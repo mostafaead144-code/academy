@@ -1,0 +1,11 @@
+{
+  "name": "egtaz-academy",
+  "private": true,
+  "description": "Egtaz Academy front-end build tooling",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.24.0"
+  }
+}
