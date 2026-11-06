@@ -1,0 +1,1120 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="theme-color" content="#f2f9ff">
+  <title>إدارة الأكاديمية</title>
+  <link rel="stylesheet" href="./assets/student-base.css?v=20261010.1">
+  <link rel="stylesheet" href="./assets/student-learning.css?v=20261010.1">
+  <link rel="stylesheet" href="./assets/academy-admin.css?v=20261010.4">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <script src="./assets/academy-utils.js"></script>
+
+  <link rel="stylesheet" href="./assets/admin-intelligence.css?v=1">
+
+  <link rel="stylesheet" href="./assets/communications.css?v=1">
+  <link rel="stylesheet" href="./assets/support.css?v=1">
+  <link rel="stylesheet" href="./assets/admin-content-ops.css?v=1">
+  <link rel="stylesheet" href="./assets/subscription.css?v=1">
+  <link rel="stylesheet" href="./assets/rich-editor.css?v=1">
+  <link rel="stylesheet" href="./assets/v5-upgrades.css?v=20261004.7">
+  <link rel="stylesheet" href="./assets/platform-v6.css?v=20261010.2">
+<link rel="stylesheet" href="./assets/admin-components.css?v=20261010.5">
+<link rel="stylesheet" href="./assets/student-design.css?v=20261010.2">
+<link rel="stylesheet" href="./assets/academy-suite.css?v=20261010.5">
+  <link rel="stylesheet" href="./assets/dashboard-polish.css?v=20261010.5">
+<style>.v23-back-link{display:inline-flex;align-items:center;justify-content:center;gap:9px;position:fixed;bottom:16px;left:16px;z-index:99999;padding:13px 18px;border-radius:16px;background:linear-gradient(120deg,#315cf0,#6751e8);color:white!important;font-family:Cairo,Tahoma,sans-serif;font-size:14px;font-weight:800;box-shadow:0 12px 29px #223a725c;text-decoration:none!important;border:1px solid #ffffff66}</style></head>
+<body class="admin-v3-body academy-design academy-suite academy-suite-rest" data-academy-role="admin" data-academy-page="admin">
+  <div id="toast" class="toast"></div>
+
+  <section id="adminLogin" class="admin-login-page">
+    <div class="admin-login-shell">
+      <div class="admin-login-brand">
+        <span class="admin-login-mark"><i class="fa-solid fa-shield-halved"></i></span>
+        <span class="section-kicker">لوحة إدارة آمنة</span>
+        <h1>إدارة الأكاديمية</h1>
+        <p>مركز واحد لإدارة الطلاب والمدرسين والمحتوى والمناهج.</p>
+        <div class="admin-login-points">
+          <span><i class="fa-solid fa-check"></i> صلاحيات مدير مستقلة</span>
+          <span><i class="fa-solid fa-check"></i> صلاحيات نشر مرنة ومراجعة عند الحاجة</span>
+          <span><i class="fa-solid fa-check"></i> إدارة مباشرة لبيانات Hostinger</span>
+        </div>
+      </div>
+      <form id="adminLoginForm" class="admin-login-card" action="javascript:void(0)">
+        <span class="admin-mini-logo"><i class="fa-solid fa-crown"></i></span>
+        <h2>تسجيل دخول الإدارة</h2>
+        <p>استخدم بريد وكلمة مرور حساب المدير الأصلي. حساب المدرس الذي أنشأته لا يفتح لوحة الإدارة.</p>
+        <label><span>البريد الإلكتروني</span><div class="input-wrap"><i class="fa-regular fa-envelope"></i><input id="adminEmail" type="email" required autocomplete="username" placeholder="admin@example.com"></div></label>
+        <label><span>كلمة المرور</span><div class="input-wrap"><i class="fa-solid fa-lock"></i><input id="adminPassword" type="password" required minlength="6" autocomplete="current-password" placeholder="••••••••"></div></label>
+        <button class="btn btn-primary btn-block btn-lg" id="adminLoginBtn" type="submit">دخول لوحة الإدارة</button>
+        <button class="link-btn admin-reset-link" id="adminResetPassword" type="button">نسيت كلمة المرور؟</button><a href="./setup-admin.html" class="admin-login-help" style="display:block;margin-top:10px;text-align:center">تهيئة أول حساب مدير على Hostinger</a>
+      </form>
+    </div>
+  </section>
+
+  <section id="adminApp" class="admin-shell hidden">
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="admin-brand-row">
+        <a class="brand brand-light admin-brand" href="./index.html">
+          <span class="brand-mark"><i class="fa-solid fa-book-open"></i></span>
+          <span><strong>الأكاديمية</strong><small>لوحة الإدارة</small></span>
+        </a>
+        <button class="admin-collapse-btn" id="adminCollapseBtn" title="طي القائمة"><i class="fa-solid fa-angles-right"></i></button>
+      </div>
+
+      <div class="admin-user-mini">
+        <span class="avatar" id="adminAvatar">م</span>
+        <div><strong id="adminName">مدير المنصة</strong><small id="adminEmailMini">Administrator</small></div>
+      </div>
+
+      <nav class="admin-nav" aria-label="أقسام لوحة الإدارة">
+        <span class="admin-nav-label">نظرة عامة</span>
+        <button class="active" data-admin-tab="overview"><i class="fa-solid fa-grid-2"></i> لوحة المعلومات</button>
+        <button data-admin-tab="analytics"><i class="fa-solid fa-chart-line"></i> التحليلات ومركز المشكلات <span id="analyticsAlertBadge" class="nav-badge hidden">0</span></button>
+
+        <span class="admin-nav-label">المحتوى التعليمي</span>
+        <button data-admin-tab="curriculum"><i class="fa-solid fa-layer-group"></i> المواد والوحدات</button>
+        <button data-admin-tab="lessons"><i class="fa-solid fa-circle-play"></i> الدروس</button>
+        <button data-admin-tab="quizzes"><i class="fa-solid fa-file-circle-question"></i> الاختبارات</button>
+        <button data-admin-tab="simulations"><i class="fa-solid fa-stopwatch"></i> المحاكيات</button>
+        <button data-admin-tab="files"><i class="fa-solid fa-folder-open"></i> الملفات والمكتبة</button>
+        <button data-admin-tab="live"><i class="fa-solid fa-tower-broadcast"></i> البث المباشر</button>
+        <button data-admin-tab="schedule"><i class="fa-regular fa-calendar-days"></i> جدول الحصص</button>
+        <button data-admin-tab="content-ops"><i class="fa-solid fa-boxes-stacked"></i> عمليات المحتوى <span id="contentOpsBadge" class="nav-badge hidden">0</span></button>
+
+        <span class="admin-nav-label">المستخدمون</span>
+        <button data-admin-tab="teachers"><i class="fa-solid fa-chalkboard-user"></i> المدرسون والمراجعات <span id="pendingBadge" class="nav-badge hidden">0</span></button>
+        <button data-admin-tab="students"><i class="fa-solid fa-user-graduate"></i> الطلاب</button>
+        <button data-admin-tab="subscriptions"><i class="fa-solid fa-crown"></i> الاشتراكات والباقات <span id="subscriptionAdminBadge" class="nav-badge hidden">0</span></button>
+
+        <span class="admin-nav-label">المنصة</span>
+        <button data-admin-tab="news"><i class="fa-regular fa-newspaper"></i> الأخبار والتحديثات</button>
+        <button data-admin-tab="community"><i class="fa-solid fa-users"></i> المجتمع والبلاغات <span id="communityReportBadge" class="nav-badge hidden">0</span></button>
+        <button data-admin-tab="communications"><i class="fa-regular fa-comments"></i> مراجعة التواصل <span id="communicationAlertBadge" class="nav-badge hidden">0</span></button>
+        <button data-admin-tab="support"><i class="fa-solid fa-headset"></i> الدعم والشكاوى <span id="supportAlertBadge" class="nav-badge hidden">0</span></button>
+        <button data-admin-tab="notifications"><i class="fa-regular fa-bell"></i> الإشعارات الموجهة</button>
+        <button data-admin-tab="announcements"><i class="fa-solid fa-bullhorn"></i> الإعلانات</button>
+        <button data-admin-tab="readiness"><i class="fa-solid fa-clipboard-check"></i> جاهزية الإطلاق <span id="releaseReadinessBadge" class="nav-badge hidden">0</span></button>
+        <button data-admin-tab="settings"><i class="fa-solid fa-sliders"></i> الإعدادات</button>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <a href="./admin-pro.html"><i class="fa-solid fa-wand-magic-sparkles"></i> المركز الاحترافي</a>
+        <a href="./index.html" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> عرض المنصة</a>
+        <button id="adminLogout"><i class="fa-solid fa-arrow-right-from-bracket"></i> تسجيل الخروج</button>
+      </div>
+    </aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <div class="admin-topbar-title">
+          <button id="adminMenuBtn" class="admin-menu-btn" aria-label="فتح قائمة الإدارة" aria-controls="adminSidebar"><i class="fa-solid fa-bars"></i></button>
+          <div><span id="adminSectionKicker">لوحة المعلومات</span><h1 id="adminSectionTitle">صباح الخير 👋</h1></div>
+        </div>
+        <div class="admin-top-actions">
+          <div class="admin-global-search-wrap">
+            <label class="admin-global-search"><i class="fa-solid fa-magnifying-glass"></i><input id="adminGlobalSearch" type="search" autocomplete="off" aria-label="بحث سريع في لوحة الإدارة" placeholder="ابحث في الدروس والطلاب..."></label>
+            <div class="admin-search-results hidden" id="adminGlobalSearchResults" role="listbox" aria-label="نتائج البحث السريع"></div>
+          </div>
+          <button class="icon-btn" id="adminRefreshBtn" title="تحديث البيانات" aria-label="تحديث بيانات القسم الحالي"><i class="fa-solid fa-rotate"></i></button>
+        </div>
+      </header>
+
+      <main class="admin-page">
+        <section class="admin-tab active" id="admin-tab-overview">
+          <div class="admin-hero mix-admin-command-hero">
+            <div class="mix-admin-command-copy">
+              <span class="section-kicker">مركز القيادة</span>
+              <h2>كل الأكاديمية تحت عينك</h2>
+              <p id="adminOverviewGreeting">تابع الطلاب والمدرسين والمحتوى والمراجعات من لوحة واحدة.</p>
+              <div class="mix-admin-live-status">
+                <span class="online"><i></i> النظام يعمل</span>
+                <span id="adminOverviewAttention"><i class="fa-solid fa-bell"></i> لا توجد مهام عاجلة</span>
+              </div>
+              <div class="admin-hero-actions">
+                <button class="btn admin-hero-primary" type="button" data-admin-quick="lesson"><i class="fa-solid fa-circle-plus"></i> درس جديد</button>
+                <button class="btn admin-hero-secondary" type="button" data-admin-quick="quiz"><i class="fa-solid fa-file-circle-question"></i> اختبار جديد</button>
+                <button class="btn admin-hero-secondary" type="button" data-admin-quick="teachers"><i class="fa-solid fa-user-check"></i> مراجعات المدرسين</button>
+                <button class="btn admin-hero-secondary" type="button" data-jump-tab="analytics"><i class="fa-solid fa-chart-line"></i> مركز التحليلات</button>
+              </div>
+            </div>
+            <div class="mix-admin-command-art">
+              <span class="mix-admin-command-ring"><strong id="adminOverviewHealth">100%</strong><small>جاهزية المحتوى</small></span>
+              <div><i class="fa-solid fa-shield-halved"></i><span>إدارة آمنة</span></div>
+            </div>
+          </div>
+          <div class="admin-stat-grid" id="overviewStats"></div>
+
+          <section class="mix-admin-quick-grid" aria-label="إجراءات الإدارة السريعة">
+            <button type="button" data-admin-quick="lesson"><span class="blue"><i class="fa-solid fa-circle-play"></i></span><div><strong>إضافة درس</strong><small>محتوى جديد مباشرة</small></div><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" data-admin-quick="quiz"><span class="violet"><i class="fa-solid fa-file-circle-question"></i></span><div><strong>إنشاء اختبار</strong><small>تقييم جديد للطلاب</small></div><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" data-jump-tab="students"><span class="green"><i class="fa-solid fa-user-graduate"></i></span><div><strong>إدارة الطلاب</strong><small>بحث وتعديل الحسابات</small></div><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" data-jump-tab="teachers"><span class="orange"><i class="fa-solid fa-chalkboard-user"></i></span><div><strong>فريق التدريس</strong><small>الصلاحيات والمراجعات</small></div><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" data-jump-tab="analytics"><span class="violet"><i class="fa-solid fa-chart-line"></i></span><div><strong>التحليلات الذكية</strong><small>مشكلات وأداء المنصة</small></div><i class="fa-solid fa-chevron-left"></i></button>
+          </section>
+
+          <div class="admin-overview-grid mix-admin-overview-grid">
+            <article class="admin-card mix-admin-attention-card">
+              <div class="admin-card-head"><div><span class="section-kicker">مركز العمليات</span><h3>ما يحتاج تدخلك الآن</h3></div><span>⚡</span></div>
+              <div class="mix-admin-attention-list" id="adminAttentionList"></div>
+            </article>
+            <article class="admin-card mix-admin-health-card">
+              <div class="admin-card-head"><div><span class="section-kicker">صحة الأكاديمية</span><h3>توزيع المحتوى والحسابات</h3></div><span>🛡️</span></div>
+              <div class="mix-admin-health-bars" id="adminHealthBars"></div>
+            </article>
+          </div>
+
+          <div class="admin-overview-grid">
+            <article class="admin-card">
+              <div class="admin-card-head"><div><span class="section-kicker">آخر النشاطات</span><h3>أحدث المحتوى</h3></div><span>🕘</span></div>
+              <div id="latestContentList" class="admin-list"></div>
+            </article>
+            <article class="admin-card">
+              <div class="admin-card-head"><div><span class="section-kicker">يحتاج تدخلك</span><h3>مراجعات المدرسين</h3></div><span>📝</span></div>
+              <div id="overviewPendingList" class="admin-list"></div>
+              <button class="btn btn-soft btn-block" data-jump-tab="teachers">فتح كل المراجعات</button>
+            </article>
+          </div>
+        </section>
+
+        <section class="admin-tab" id="admin-tab-analytics">
+          <section class="admin-intel-hero">
+            <div>
+              <span class="section-kicker">ذكاء تشغيلي للأكاديمية</span>
+              <h2>اعرف ما يحدث قبل أن تتحول المشكلة إلى أزمة</h2>
+              <p>نحلل نشاط الطلاب، نتائج الاختبارات، إكمال الدروس، أداء المحتوى، مراجعات المدرسين والتسليمات المتأخرة ثم نحولها إلى إجراءات واضحة.</p>
+            </div>
+            <div class="admin-intel-hero-side">
+              <article><strong id="adminIntelHeroIssues">0</strong><small>عناصر تحتاج متابعة</small></article>
+              <article><strong id="adminIntelHeroActive">0</strong><small>طالب نشط خلال 7 أيام</small></article>
+            </div>
+          </section>
+
+          <div class="admin-intel-toolbar">
+            <div class="admin-intel-periods" aria-label="فترة التحليل">
+              <button type="button" class="active" data-intel-period="7">7 أيام</button>
+              <button type="button" data-intel-period="14">14 يومًا</button>
+              <button type="button" data-intel-period="30">30 يومًا</button>
+            </div>
+            <span class="admin-intel-toolbar-meta" id="adminIntelPeriodText">آخر 7 أيام</span>
+            <button type="button" id="adminIntelRefresh"><i class="fa-solid fa-rotate"></i> تحديث التحليل</button>
+            <button type="button" id="adminIntelExport"><i class="fa-solid fa-file-export"></i> تصدير التقرير CSV</button>
+          </div>
+
+          <section class="admin-intel-kpis" id="adminIntelKpis"></section>
+
+          <div class="admin-intel-grid">
+            <article class="admin-intel-card">
+              <div class="admin-intel-head"><div><span class="section-kicker">النشاط اليومي</span><h3>دقائق المذاكرة داخل المنصة</h3><p>إجمالي وقت الدراسة المسجل يوميًا لكل الطلاب.</p></div><span>📈</span></div>
+              <div class="admin-trend-bars" id="adminIntelTrend"></div>
+            </article>
+            <article class="admin-intel-card">
+              <div class="admin-intel-head"><div><span class="section-kicker">الطلاب المعرضون للتوقف</span><h3>من يحتاج تدخلك أولًا؟</h3><p>عدم النشاط والنتائج المنخفضة والمهام المتأخرة.</p></div><span>🧭</span></div>
+              <div class="admin-risk-summary">
+                <div><strong id="adminIntelRiskHigh">0</strong><small>خطر مرتفع</small></div>
+                <div><strong id="adminIntelRiskMedium">0</strong><small>يحتاج متابعة</small></div>
+                <div><strong id="adminIntelRiskTotal">0</strong><small>إجمالي التنبيهات</small></div>
+              </div>
+              <div class="admin-intel-list" id="adminIntelRisks"></div>
+            </article>
+          </div>
+
+          <div class="admin-intel-grid equal">
+            <article class="admin-intel-card">
+              <div class="admin-intel-head"><div><span class="section-kicker">أداء المحتوى</span><h3>الدروس الأكثر استخدامًا</h3><p>المشاهدة والإكمال ومتوسط التدريب لكل درس.</p></div><span>🎬</span></div>
+              <div class="admin-intel-list" id="adminIntelContent"></div>
+            </article>
+            <article class="admin-intel-card">
+              <div class="admin-intel-head"><div><span class="section-kicker">مركز اكتشاف المشكلات</span><h3>ما الذي يحتاج إصلاحًا؟</h3><p>يفحص المحتوى والتفاعل والطلاب وعمليات المعلمين تلقائيًا.</p></div><span>🛠️</span></div>
+              <div class="admin-issue-filter">
+                <button type="button" class="active" data-issue-filter="all">الكل</button>
+                <button type="button" data-issue-filter="high">عاجل</button>
+                <button type="button" data-issue-filter="medium">مهم</button>
+                <button type="button" data-issue-filter="low">متابعة</button>
+              </div>
+              <div class="admin-intel-list" id="adminIntelIssues"></div>
+              <div class="admin-intel-note"><i class="fa-solid fa-circle-info"></i><span>هذه المؤشرات أدوات مساعدة للإدارة؛ استخدمها لتحديد الأولويات ثم راجع العنصر نفسه قبل اتخاذ قرار.</span></div>
+            </article>
+          </div>
+
+          <article class="admin-intel-card">
+            <div class="admin-intel-head"><div><span class="section-kicker">خريطة أداء المواد</span><h3>المواد من حيث المحتوى والنتائج والتفاعل</h3><p>تساعدك على معرفة المادة التي تحتاج محتوى أكثر أو دعمًا للطلاب.</p></div><span>📚</span></div>
+            <div class="admin-subject-performance" id="adminIntelSubjects"></div>
+          </article>
+        </section>
+
+        <section class="admin-tab" id="admin-tab-curriculum">
+          <div class="admin-section-head"><div><span class="section-kicker">هيكل المنهج</span><h2>المواد والوحدات</h2><p>أضف مواد مخصصة ونظّم وحداتها لكل صف ومسار.</p></div><button class="btn btn-primary" id="openSubjectModal"><i class="fa-solid fa-plus"></i> إضافة مادة</button></div>
+          <section class="mix-admin-section-stats mix-content-stats" aria-label="ملخص المنهج الحالي">
+            <article><span class="blue"><i class="fa-solid fa-book-open"></i></span><div><strong id="curriculumSubjectCount">0</strong><small>مادة</small></div></article>
+            <article><span class="violet"><i class="fa-solid fa-layer-group"></i></span><div><strong id="curriculumUnitCount">0</strong><small>وحدة</small></div></article>
+            <article><span class="green"><i class="fa-solid fa-circle-play"></i></span><div><strong id="curriculumLessonCount">0</strong><small>درس في الصف</small></div></article>
+            <article><span class="orange"><i class="fa-solid fa-brain"></i></span><div><strong id="curriculumQuizCount">0</strong><small>اختبار</small></div></article>
+          </section>
+          <div class="admin-filter-bar mix-content-filter-bar">
+            <div class="mix-filter-label"><i class="fa-solid fa-filter"></i><span>اعرض منهج</span></div>
+            <select id="curriculumType"><option value="public">تعليم عام</option><option value="azhar">أزهر</option></select>
+            <select id="curriculumStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select>
+            <select id="curriculumGrade"></select>
+            <span class="mix-filter-result" id="curriculumScopeLabel">—</span>
+          </div>
+          <div class="admin-content-view-switch" role="tablist" aria-label="طريقة عرض المنهج">
+            <button type="button" class="active" data-curriculum-view="tree"><i class="fa-solid fa-sitemap"></i> هيكل المحتوى</button>
+            <button type="button" data-curriculum-view="cards"><i class="fa-solid fa-table-cells-large"></i> بطاقات المواد</button>
+          </div>
+          <div id="curriculumTreeWrap" class="admin-curriculum-tree-wrap"></div>
+          <div id="curriculumAdminGrid" class="admin-subject-grid mix-curriculum-grid hidden"></div>
+        </section>
+
+        <section class="admin-tab" id="admin-tab-lessons">
+          <div class="admin-section-head"><div><span class="section-kicker">المحتوى الأساسي</span><h2>إدارة الدروس</h2><p>إنشاء وتعديل الدروس وربطها بالفيديوهات والمدرسين.</p></div><button class="btn btn-primary" id="openLessonModal"><i class="fa-solid fa-plus"></i> درس جديد</button></div>
+          <section class="mix-admin-section-stats mix-content-stats" aria-label="ملخص الدروس">
+            <article><span class="blue"><i class="fa-solid fa-circle-play"></i></span><div><strong id="adminLessonTotal">0</strong><small>إجمالي الدروس</small></div></article>
+            <article><span class="green"><i class="fa-solid fa-eye"></i></span><div><strong id="adminLessonPublished">0</strong><small>منشور</small></div></article>
+            <article><span class="gray"><i class="fa-solid fa-eye-slash"></i></span><div><strong id="adminLessonHidden">0</strong><small>مخفي</small></div></article>
+            <article><span class="violet"><i class="fa-solid fa-video"></i></span><div><strong id="adminLessonVideos">0</strong><small>فيديو شرح</small></div></article>
+          </section>
+          <div class="admin-filter-bar mix-content-filter-bar">
+            <div class="mix-search-field"><i class="fa-solid fa-magnifying-glass"></i><input id="lessonSearch" placeholder="ابحث باسم الدرس أو المادة أو المدرس..."></div>
+            <select id="lessonFilterStage"><option value="">كل المراحل</option><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select>
+            <select id="lessonFilterType"><option value="">كل المسارات</option><option value="public">عام</option><option value="azhar">أزهر</option></select>
+            <select id="lessonFilterStatus"><option value="">كل الحالات</option><option value="published">منشور</option><option value="scheduled">مجدول</option><option value="draft">مسودة</option><option value="hidden">مخفي</option></select>
+            <span class="mix-filter-result" id="lessonResultCount">0 نتيجة</span>
+          </div>
+          <div class="admin-bulk-action-bar" id="lessonBulkBar">
+            <label class="admin-bulk-select-all"><input type="checkbox" id="selectVisibleLessons"><span><i class="fa-solid fa-check"></i></span><strong>تحديد الظاهر</strong></label>
+            <div class="admin-bulk-count"><b id="selectedLessonCount">0</b><span>درس محدد</span></div>
+            <div class="admin-bulk-actions">
+              <button type="button" data-bulk-lessons="publish"><i class="fa-solid fa-eye"></i> نشر</button>
+              <button type="button" data-bulk-lessons="hide"><i class="fa-solid fa-eye-slash"></i> إخفاء</button>
+              <div class="admin-bulk-unit-move"><input id="bulkLessonUnit" type="number" min="1" value="1" aria-label="رقم الوحدة"><button type="button" data-bulk-lessons="move"><i class="fa-solid fa-right-left"></i> نقل</button></div>
+              <button type="button" data-bulk-lessons="duplicate"><i class="fa-regular fa-copy"></i> نسخ</button>
+              <button type="button" class="danger" data-bulk-lessons="delete"><i class="fa-solid fa-trash"></i> حذف</button>
+            </div>
+          </div>
+          <div id="lessonsAdminList" class="admin-content-card-grid"></div>
+        </section>
+
+        <section class="admin-tab" id="admin-tab-quizzes">
+          <div class="admin-section-head"><div><span class="section-kicker">القياس والتقييم</span><h2>إدارة الاختبارات</h2><p>أنشئ اختبارات للوحدات أو اختبارات شاملة.</p></div><button class="btn btn-primary" id="openQuizModal"><i class="fa-solid fa-plus"></i> اختبار جديد</button></div>
+          <section class="mix-admin-section-stats mix-content-stats" aria-label="ملخص الاختبارات">
+            <article><span class="violet"><i class="fa-solid fa-brain"></i></span><div><strong id="adminQuizTotal">0</strong><small>إجمالي الاختبارات</small></div></article>
+            <article><span class="green"><i class="fa-solid fa-eye"></i></span><div><strong id="adminQuizPublished">0</strong><small>منشور</small></div></article>
+            <article><span class="blue"><i class="fa-solid fa-link"></i></span><div><strong id="adminQuizLinked">0</strong><small>مرتبط بدروس</small></div></article>
+            <article><span class="orange"><i class="fa-solid fa-list-check"></i></span><div><strong id="adminQuizQuestions">0</strong><small>سؤال</small></div></article>
+          </section>
+          <div class="admin-filter-bar mix-content-filter-bar">
+            <div class="mix-search-field"><i class="fa-solid fa-magnifying-glass"></i><input id="quizSearch" placeholder="ابحث باسم الاختبار أو المادة..."></div>
+            <select id="quizFilterStage"><option value="">كل المراحل</option><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select>
+            <select id="quizFilterType"><option value="">كل المسارات</option><option value="public">عام</option><option value="azhar">أزهر</option></select>
+            <select id="quizFilterMode"><option value="">كل الأنواع</option><option value="lesson">مرتبط بدرس</option><option value="unit">اختبار وحدة</option><option value="comprehensive">اختبار شامل</option></select>
+            <select id="quizFilterStatus"><option value="">كل الحالات</option><option value="published">منشور</option><option value="scheduled">مجدول</option><option value="draft">مسودة</option><option value="hidden">مخفي</option></select>
+            <span class="mix-filter-result" id="quizResultCount">0 نتيجة</span>
+          </div>
+          <div class="admin-bulk-action-bar" id="quizBulkBar">
+            <label class="admin-bulk-select-all"><input type="checkbox" id="selectVisibleQuizzes"><span><i class="fa-solid fa-check"></i></span><strong>تحديد الظاهر</strong></label>
+            <div class="admin-bulk-count"><b id="selectedQuizCount">0</b><span>اختبار محدد</span></div>
+            <div class="admin-bulk-actions">
+              <button type="button" data-bulk-quizzes="publish"><i class="fa-solid fa-eye"></i> نشر</button>
+              <button type="button" data-bulk-quizzes="hide"><i class="fa-solid fa-eye-slash"></i> إخفاء</button>
+              <button type="button" data-bulk-quizzes="duplicate"><i class="fa-regular fa-copy"></i> نسخ</button>
+              <button type="button" class="danger" data-bulk-quizzes="delete"><i class="fa-solid fa-trash"></i> حذف</button>
+            </div>
+          </div>
+          <div id="quizzesAdminList" class="admin-content-card-grid"></div>
+        </section>
+
+        <section class="admin-tab" id="admin-tab-simulations">
+          <div class="admin-section-head"><div><span class="section-kicker">امتحان متعدد المواد</span><h2>المحاكيات</h2><p>حدد الزمن وعدد أسئلة كل مادة لكل مرحلة وصف.</p></div><button class="btn btn-primary" id="openSimulationModal"><i class="fa-solid fa-plus"></i> محاكي جديد</button></div>
+          <div id="simulationsAdminGrid" class="admin-subject-grid"></div>
+        </section>
+
+        <section class="admin-tab" id="admin-tab-files">
+          <div class="admin-section-head"><div><span class="section-kicker">المكتبة</span><h2>الملفات والمراجع</h2><p>أضف روابط PDF والمذكرات والملفات المساعدة.</p></div><button class="btn btn-primary" id="openFileModal"><i class="fa-solid fa-plus"></i> ملف جديد</button></div>
+          <div id="filesAdminGrid" class="admin-file-grid"></div>
+        </section>
+
+        <section class="admin-tab" id="admin-tab-live">
+          <div class="admin-section-head"><div><span class="section-kicker">الجلسات</span><h2>البث المباشر</h2><p>أضف جلسات YouTube أو Zoom وحدد حالتها وموعدها.</p></div><button class="btn btn-primary" id="openLiveModal"><i class="fa-solid fa-plus"></i> جلسة جديدة</button></div>
+          <div id="liveAdminGrid" class="admin-subject-grid"></div>
+        </section>
+
+        <section class="admin-tab" id="admin-tab-schedule">
+          <div class="admin-section-head"><div><span class="section-kicker">المواعيد الأسبوعية</span><h2>جدول الحصص</h2><p>أنشئ حصة أسبوعية ثابتة تظهر تلقائيًا للطلاب المناسبين.</p></div><a class="btn btn-soft" href="./schedule.html" target="_blank"><i class="fa-solid fa-eye"></i> معاينة جدول الطالب</a></div>
+          <div class="admin-teacher-grid">
+            <article class="admin-card admin-form-card">
+              <div class="admin-card-head"><div><span class="section-kicker">حصة جديدة</span><h3>إضافة موعد أسبوعي</h3></div><span>📅</span></div>
+              <form id="scheduleEventForm" class="admin-form">
+                <label><span>نوع التعليم</span><select id="scheduleType"><option value="public">تعليم عام</option><option value="azhar">أزهر</option></select></label>
+                <label><span>المرحلة</span><select id="scheduleStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+                <label><span>الصف</span><select id="scheduleGrade"></select></label>
+                <label><span>المادة</span><select id="scheduleSubject"></select></label>
+                <label class="full"><span>عنوان الحصة</span><input id="scheduleTitle" required maxlength="120" placeholder="مثال: مراجعة الوحدة الثانية"></label>
+                <label><span>المدرس</span><input id="scheduleTeacher" maxlength="100" placeholder="أ/ ..."></label>
+                <label><span>اليوم</span><select id="scheduleDay"><option value="6">السبت</option><option value="0">الأحد</option><option value="1">الاثنين</option><option value="2">الثلاثاء</option><option value="3">الأربعاء</option><option value="4">الخميس</option><option value="5">الجمعة</option></select></label>
+                <label><span>الوقت</span><input id="scheduleTime" type="time" required value="18:00"></label>
+                <label><span>المدة بالدقائق</span><input id="scheduleDuration" type="number" min="10" max="240" value="60"></label>
+                <label class="full"><span>رابط الحصة — اختياري</span><input id="scheduleUrl" type="url" dir="ltr" placeholder="https://..."></label>
+                <label class="switch-field full"><span>الحالة</span><div><input id="scheduleActive" type="checkbox" checked><strong>نشطة</strong></div></label>
+                <button class="btn btn-primary full" type="submit"><i class="fa-solid fa-plus"></i> إضافة للجدول</button>
+              </form>
+            </article>
+            <article class="admin-card">
+              <div class="admin-card-head"><div><span class="section-kicker">الحصص الحالية</span><h3>المواعيد الأسبوعية</h3></div><span>🗓️</span></div>
+              <div id="scheduleAdminList" class="admin-list admin-scroll-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="admin-tab" id="admin-tab-community">
+          <div class="admin-section-head"><div><span class="section-kicker">الإشراف والمراجعة</span><h2>المجتمع ومجموعات الدراسة</h2><p>راجع المنشورات والبلاغات وأنشئ مجموعات دراسة آمنة.</p></div></div>
+          <div class="admin-teacher-grid">
+            <article class="admin-card">
+              <div class="admin-card-head"><div><span class="section-kicker">المنتدى</span><h3>المنشورات والبلاغات</h3></div><span>💬</span></div>
+              <div id="communityPostsAdminList" class="admin-list admin-scroll-list"></div>
+            </article>
+            <article class="admin-card">
+              <div class="admin-card-head"><div><span class="section-kicker">مجموعات الدراسة</span><h3>المجموعات الحالية</h3></div><span>👥</span></div>
+              <form id="studyGroupForm" class="admin-mini-form">
+                <input id="studyGroupName" required maxlength="80" placeholder="اسم المجموعة">
+                <select id="studyGroupStage"><option value="">كل المراحل</option><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select>
+                <input id="studyGroupSubject" maxlength="80" placeholder="اسم المادة (اختياري)">
+                <button class="btn btn-primary" type="submit">إنشاء مجموعة</button>
+              </form>
+              <div id="communityGroupsAdminList" class="admin-list admin-scroll-list admin-spaced-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="admin-tab" id="admin-tab-teachers">
+          <div class="admin-section-head"><div><span class="section-kicker">فريق التدريس</span><h2>المدرسون والمراجعات</h2><p>فعّل المدرسين، اسند لهم المواد، وحدد من ينشر مباشرة ومن يحتاج مراجعة، مع أرشفة واستعادة كاملة.</p></div><a class="btn btn-soft" href="./teacher.html" target="_blank"><i class="fa-solid fa-eye"></i> معاينة بوابة المدرس</a></div>
+          <section class="mix-admin-section-stats" id="adminTeacherStats">
+            <article><span class="green"><i class="fa-solid fa-user-check"></i></span><div><strong id="adminTeacherActiveCount">0</strong><small>مدرس نشط</small></div></article>
+            <article><span class="gray"><i class="fa-solid fa-user-slash"></i></span><div><strong id="adminTeacherInactiveCount">0</strong><small>مدرس موقوف</small></div></article>
+            <article><span class="orange"><i class="fa-solid fa-clock"></i></span><div><strong id="adminTeacherPendingContent">0</strong><small>محتوى للمراجعة</small></div></article>
+            <article><span class="violet"><i class="fa-solid fa-id-card"></i></span><div><strong id="adminTeacherPendingProfiles">0</strong><small>ملفات للمراجعة</small></div></article>
+          </section>
+          <article class="admin-card admin-teacher-create">
+            <div class="admin-card-head"><div><span class="section-kicker">حساب مستقل</span><h3>إضافة مدرس جديد</h3><p>حدّد بيانات دخول المدرس، ثم أسند له المادة والصف من النموذج أدناه. كلمة المرور لا تُحفظ في قاعدة البيانات.</p></div><span>🔑</span></div>
+            <form id="createTeacherForm" class="admin-teacher-create-form">
+              <label><span>اسم المدرس</span><input id="newTeacherName" type="text" required maxlength="80" autocomplete="off" placeholder="اسم المدرس"></label>
+              <label><span>البريد الإلكتروني</span><input id="newTeacherEmail" type="email" required autocomplete="off" dir="ltr" placeholder="teacher@example.com"></label>
+              <label><span>كلمة مرور أولية</span><input id="newTeacherPassword" type="password" required minlength="8" autocomplete="new-password" placeholder="ثمانية أحرف على الأقل"></label>
+              <label><span>الدور والصلاحية</span><select id="newTeacherRole"><option value="teacher">معلم</option><option value="assistant">مساعد معلم</option><option value="supervisor">مشرف مادة</option></select></label>
+              <button class="btn btn-primary" id="createTeacherBtn" type="submit"><i class="fa-solid fa-user-plus"></i> إنشاء حساب المدرس</button>
+            </form>
+            <p id="createTeacherStatus" class="teacher-form-status" role="status" aria-live="polite"></p>
+            <p class="teacher-form-tip">أرسل بيانات الدخول للمدرس بطريقة خاصة، واطلب منه تغيير كلمة المرور عبر «نسيت كلمة المرور؟» عند أول دخول.</p>
+          </article>
+          <div class="admin-teacher-grid admin-spaced-card">
+            <article class="admin-card admin-form-card">
+              <div class="admin-card-head"><div><span class="section-kicker">ملف عام</span><h3>ملف المدرس الظاهر للطلاب</h3><p>تحكم في الاسم والصورة والتخصص والسيرة، ثم انشرها.</p></div><span>👤</span></div>
+              <form id="adminTeacherProfileForm" class="admin-form">
+                <label class="full"><span>المدرس</span><select id="profileTeacherId" required></select></label>
+                <label><span>الاسم المعروض</span><input id="profileTeacherName" required maxlength="80"></label>
+                <label><span>التخصص</span><input id="profileTeacherTitle" required maxlength="100" placeholder="مثال: مدرس اللغة العربية"></label>
+                <label><span>رابط صورة المدرس</span><input id="profileTeacherPhoto" type="url" dir="ltr" placeholder="https://..."></label>
+                <label><span>رابط صورة الغلاف</span><input id="profileTeacherCover" type="url" dir="ltr" placeholder="https://... — اختياري"></label>
+                <label class="full"><span>نبذة عن المدرس</span><textarea id="profileTeacherBio" maxlength="1200" rows="4"></textarea></label>
+                <label><span>المؤهلات</span><input id="profileTeacherQualifications" maxlength="200"></label>
+                <label><span>الخبرة</span><input id="profileTeacherExperience" maxlength="200"></label>
+                <label class="full"><span>طريقة الشرح</span><textarea id="profileTeacherStyle" maxlength="450" rows="2"></textarea></label>
+                <button class="btn btn-primary full" type="submit">حفظ ونشر الملف</button>
+              </form>
+            </article>
+            <article class="admin-card">
+              <div class="admin-card-head"><div><span class="section-kicker">موافقتك مطلوبة</span><h3>طلبات تحديث الملفات</h3></div><span>📨</span></div>
+              <div id="teacherProfileRequestsList" class="admin-list"></div>
+            </article>
+          </div>
+          <div class="admin-teacher-grid">
+            <article class="admin-card"><div class="admin-card-head"><div><span class="section-kicker">المدرسون</span><h3>الحسابات الحالية</h3></div><span>👨‍🏫</span></div><div id="teachersAdminList" class="admin-list"></div></article>
+            <article class="admin-card"><div class="admin-card-head"><div><span class="section-kicker">ترقية حساب</span><h3>طلاب يمكن تحويلهم لمدرسين</h3></div><span>➕</span></div><div id="teacherCandidates" class="admin-list admin-scroll-list"></div></article>
+          </div>
+          <article class="admin-card admin-spaced-card">
+            <div class="admin-card-head"><div><span class="section-kicker">الصلاحيات</span><h3>إسناد مادة وصف</h3></div><span>🔐</span></div>
+            <div class="assignment-form">
+              <select id="assignTeacher"></select><select id="assignType"><option value="public">تعليم عام</option><option value="azhar">أزهر</option></select>
+              <select id="assignStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select>
+              <select id="assignGrade"></select><select id="assignSubject"></select>
+              <button class="btn btn-primary" id="addAssignmentBtn">إسناد</button>
+            </div>
+          </article>
+          <article class="admin-card admin-spaced-card">
+            <div class="admin-card-head"><div><span class="section-kicker">المراجعات عند الحاجة</span><h3>محتوى المدرسين</h3></div><span id="pendingCountText" class="status-pill pending">0 قيد المراجعة</span></div>
+            <div id="teacherSubmissionsList" class="admin-list"></div>
+          </article>
+        </section>
+
+        <section class="admin-tab" id="admin-tab-students">
+          <div class="admin-section-head"><div><span class="section-kicker">المتعلمون</span><h2>الطلاب</h2><p>متابعة الحسابات والمراحل والتقدم بدون تخزين كلمات المرور.</p></div></div>
+          <section class="mix-admin-section-stats" id="adminStudentStats">
+            <article><span class="blue"><i class="fa-solid fa-users"></i></span><div><strong id="adminStudentTotalCount">0</strong><small>إجمالي الطلاب</small></div></article>
+            <article><span class="green"><i class="fa-solid fa-bolt"></i></span><div><strong id="adminStudentActiveCount">0</strong><small>نشط آخر 7 أيام</small></div></article>
+            <article><span class="violet"><i class="fa-solid fa-phone"></i></span><div><strong id="adminStudentPhoneCount">0</strong><small>مسجل برقم هاتف</small></div></article>
+            <article><span class="orange"><i class="fa-solid fa-graduation-cap"></i></span><div><strong id="adminStudentProfiledCount">0</strong><small>بياناتهم مكتملة</small></div></article>
+          </section>
+          <div class="admin-filter-bar mix-admin-student-filters">
+            <input id="studentSearch" placeholder="ابحث باسم الطالب أو رقم الهاتف أو البريد...">
+            <select id="studentFilterType"><option value="">كل المسارات</option><option value="public">تعليم عام</option><option value="azhar">أزهر</option></select>
+            <select id="studentFilterStage"><option value="">كل المراحل</option><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select>
+          </div>
+          <div class="mix-admin-results-meta"><span id="studentResultsCount">0 طالب ظاهر</span><small>يمكنك البحث بالاسم أو الهاتف أو البريد.</small></div>
+          <div id="studentsAdminList" class="admin-table-wrap"></div>
+        </section>
+
+        <section class="admin-tab hidden" id="admin-tab-subscriptions">
+          <section class="subscription-admin-hero">
+            <div><span class="section-kicker">إدارة الوصول</span><h2>الباقات والاشتراكات من مكان واحد</h2><p>أنشئ الباقات، حدد المواد المشمولة، فعّل اشتراك الطلاب يدويًا، وتابع الطلبات والانتهاء قبل ربط بوابة الدفع النهائية.</p></div>
+            <div class="subscription-admin-hero-side"><article><strong id="subscriptionAdminHeroActive">0</strong><small>اشتراك نشط</small></article><article><strong id="subscriptionAdminHeroRequests">0</strong><small>طلب ينتظر</small></article></div>
+          </section>
+          <article class="subscription-admin-card" style="margin-bottom:14px">
+            <div class="subscription-admin-head"><div><span class="section-kicker">مفتاح الحماية</span><h3>تفعيل صلاحيات الاشتراك على المحتوى</h3><p>اتركه متوقفًا أثناء إعداد الباقات. عند تفعيله سيظل المحتوى المحدد «مجاني» متاحًا، وباقي المحتوى يحتاج اشتراكًا مناسبًا.</p></div><span>🛡️</span></div>
+            <label class="switch-field full"><span>حماية المحتوى</span><div><input id="subscriptionEnforceAccess" type="checkbox"><strong id="subscriptionEnforceLabel">غير مفعلة</strong></div></label>
+          </article>
+          <section class="subscription-admin-stats">
+            <article><strong id="subscriptionAdminActive">0</strong><small>اشتراكات نشطة</small></article>
+            <article><strong id="subscriptionAdminSoon">0</strong><small>تنتهي خلال 7 أيام</small></article>
+            <article><strong id="subscriptionAdminExpired">0</strong><small>منتهية</small></article>
+            <article><strong id="subscriptionAdminRequests">0</strong><small>طلبات معلقة</small></article>
+          </section>
+          <section class="subscription-admin-grid">
+            <article class="subscription-admin-card">
+              <div class="subscription-admin-head"><div><span class="section-kicker">الباقات</span><h3>إنشاء أو تعديل باقة</h3><p>يمكن للباقة فتح كل المواد أو مواد محددة فقط.</p></div><span>👑</span></div>
+              <form id="subscriptionPlanForm" class="subscription-admin-form">
+                <label><span>اسم الباقة</span><input id="planName" required maxlength="80" placeholder="مثال: الباقة الشاملة"></label>
+                <label><span>السعر بالجنيه</span><input id="planPrice" type="number" min="0" step="1" value="0"></label>
+                <label><span>مدة الاشتراك بالأيام</span><input id="planDurationDays" type="number" min="1" max="730" value="30"></label>
+                <label><span>ترتيب الظهور</span><input id="planSortOrder" type="number" min="0" value="100"></label>
+                <label><span>شارة الباقة</span><input id="planBadge" maxlength="30" placeholder="الأكثر اختيارًا"></label>
+                <label><span>الأيقونة</span><input id="planIcon" maxlength="8" value="👑"></label>
+                <label><span>نوع الوصول</span><select id="planAccessMode"><option value="all">كل المواد</option><option value="subjects">مواد محددة</option></select></label>
+                <label><span>المسار المستهدف</span><select id="planTargetType"><option value="">كل المسارات</option><option value="public">تعليم عام</option><option value="azhar">أزهر</option></select></label>
+                <label><span>المرحلة المستهدفة</span><select id="planTargetStage"><option value="">كل المراحل</option><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+                <label><span>الصف المستهدف</span><select id="planTargetGrade"><option value="">كل الصفوف</option><option value="1">الصف 1</option><option value="2">الصف 2</option><option value="3">الصف 3</option><option value="4">الصف 4</option><option value="5">الصف 5</option><option value="6">الصف 6</option></select></label>
+                <label class="full"><span>وصف الباقة</span><textarea id="planDescription" maxlength="400" placeholder="اشرح للطالب ما الذي يحصل عليه..."></textarea></label>
+                <div class="full"><span style="font-size:10px;font-weight:900;color:#405570;display:block;margin-bottom:6px">المواد المشمولة عند اختيار «مواد محددة»</span><div id="planSubjects" class="subscription-subject-checks"></div></div>
+                <label class="switch-field full"><span>حالة الباقة</span><div><input id="planActive" type="checkbox" checked><strong>متاحة للطلاب</strong></div></label>
+                <div class="full subscription-admin-actions"><button class="btn btn-primary" id="planSaveBtn" type="submit"><i class="fa-solid fa-plus"></i> إنشاء الباقة</button><button class="btn btn-soft hidden" id="planCancelEdit" type="button">إلغاء التعديل</button></div>
+              </form>
+            </article>
+            <article class="subscription-admin-card">
+              <div class="subscription-admin-head"><div><span class="section-kicker">الباقات الحالية</span><h3>كل الباقات</h3><p>أوقف الباقة بدل حذفها إذا كانت مستخدمة.</p></div><span>📦</span></div>
+              <div id="subscriptionAdminPlans" class="subscription-admin-list"></div>
+            </article>
+
+            <article class="subscription-admin-card">
+              <div class="subscription-admin-head"><div><span class="section-kicker">الطلاب</span><h3>اختر طالبًا لإدارة اشتراكه</h3><p>ابحث بالاسم أو الهاتف أو البريد.</p></div><span>🎓</span></div>
+              <div class="subscription-toolbar"><input id="subscriptionStudentSearch" type="search" placeholder="ابحث عن طالب..."></div>
+              <div id="subscriptionStudentList" class="subscription-admin-list"></div>
+            </article>
+            <article class="subscription-admin-card">
+              <div class="subscription-admin-head"><div><span class="section-kicker">اشتراك الطالب</span><h3 id="selectedSubscriptionStudent">لم يتم اختيار طالب</h3><p id="selectedSubscriptionContact">اختر طالبًا من القائمة.</p></div><span>🔐</span></div>
+              <form id="studentSubscriptionForm" class="subscription-admin-form hidden">
+                <label class="full"><span>الباقة</span><select id="studentPlanId"></select></label>
+                <label><span>الحالة</span><select id="studentSubStatus"><option value="active">نشط</option><option value="pending">قيد الانتظار</option><option value="suspended">موقوف</option><option value="expired">منتهي</option><option value="cancelled">ملغي</option></select></label>
+                <label><span>تاريخ البداية</span><input id="studentSubStart" type="datetime-local"></label>
+                <label><span>تاريخ الانتهاء</span><input id="studentSubEnd" type="datetime-local"></label>
+                <label class="full"><span>ملاحظات داخلية</span><textarea id="studentSubNotes" maxlength="500" placeholder="مثال: تم التحويل يدويًا..."></textarea></label>
+                <button class="btn btn-primary full" type="submit"><i class="fa-solid fa-floppy-disk"></i> حفظ الاشتراك</button>
+                <div class="full subscription-admin-actions"><button class="sub-action-good" type="button" data-sub-quick="extend30">+30 يوم</button><button class="sub-action-main" type="button" data-sub-quick="activate">تفعيل</button><button class="sub-action-warn" type="button" data-sub-quick="suspend">إيقاف مؤقت</button><button class="sub-action-danger" type="button" data-sub-quick="cancel">إلغاء</button></div>
+              </form>
+            </article>
+
+            <article class="subscription-admin-card full v5-admin-coupons">
+              <div class="subscription-admin-head"><div><span class="section-kicker">الخصومات</span><h3>أكواد الخصم والكوبونات</h3><p>أنشئ كودًا بنسبة خصم، حد أقصى للخصم، تاريخ انتهاء وعدد استخدامات.</p></div><span>🎟️</span></div>
+              <form id="adminCouponForm" class="subscription-admin-form v5-coupon-admin-form">
+                <label><span>الكود</span><input id="adminCouponCode" maxlength="30" dir="ltr" required placeholder="WELCOME20"></label>
+                <label><span>نسبة الخصم %</span><input id="adminCouponPercent" type="number" min="1" max="100" value="10" required></label>
+                <label><span>أقصى خصم بالجنيه</span><input id="adminCouponMaxDiscount" type="number" min="0" value="0"></label>
+                <label><span>أقصى عدد استخدامات</span><input id="adminCouponMaxUses" type="number" min="0" value="0"></label>
+                <label><span>تاريخ الانتهاء</span><input id="adminCouponExpires" type="datetime-local"></label>
+                <label class="switch-field"><span>الحالة</span><div><input id="adminCouponActive" type="checkbox" checked><strong>نشط</strong></div></label>
+                <button class="btn btn-primary full" id="adminCouponSave" type="submit"><i class="fa-solid fa-ticket"></i> حفظ الكوبون</button>
+              </form>
+              <div id="adminCouponList" class="subscription-admin-list" style="margin-top:14px"></div>
+            </article>
+
+            <article class="subscription-admin-card full">
+              <div class="subscription-admin-head"><div><span class="section-kicker">طلبات الاشتراك</span><h3>طلبات تنتظر قرار الإدارة</h3><p>الاعتماد يفعّل الباقة مباشرة حسب مدتها المحددة.</p></div><span>📨</span></div>
+              <div id="subscriptionRequestList" class="subscription-admin-list"></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="admin-tab hidden" id="admin-tab-communications">
+          <section class="admin-intel-hero">
+            <div><span class="section-kicker">بوابة الموافقة المركزية</span><h2>كل تواصل يمر من هنا أولًا</h2><p>أسئلة الطلاب، ردود المعلمين، الرسائل، الإعلانات وطلبات تثبيت الأسئلة لا تظهر للطرف الآخر قبل قرار الإدارة.</p></div>
+            <div class="admin-intel-hero-side"><article><strong id="adminCommHeroPending">0</strong><small>قيد المراجعة</small></article><article><strong id="adminCommHeroQuestions">0</strong><small>أسئلة طلاب</small></article></div>
+          </section>
+          <section class="comm-admin-stats">
+            <article><strong id="adminCommQuestions">0</strong><small>أسئلة تنتظر قرارًا</small></article>
+            <article><strong id="adminCommReplies">0</strong><small>ردود معلمين</small></article>
+            <article><strong id="adminCommBroadcasts">0</strong><small>رسائل وإعلانات</small></article>
+            <article><strong id="adminCommPending">0</strong><small>الإجمالي المعلق</small></article>
+          </section>
+          <div class="admin-intel-toolbar">
+            <label class="admin-global-search" style="flex:1;max-width:520px"><i class="fa-solid fa-magnifying-glass"></i><input id="adminCommunicationSearch" type="search" placeholder="ابحث باسم الطالب أو المعلم أو نص الرسالة..."></label>
+            <button type="button" id="adminCommunicationRefresh"><i class="fa-solid fa-rotate"></i> تحديث</button>
+          </div>
+          <div class="comm-admin-layout">
+            <aside class="comm-admin-filters" aria-label="تصفية طلبات التواصل">
+              <button class="active" type="button" data-comm-filter="pending">قيد المراجعة <span>0</span></button>
+              <button type="button" data-comm-filter="questions">أسئلة الطلاب <span>0</span></button>
+              <button type="button" data-comm-filter="replies">ردود المعلمين <span>0</span></button>
+              <button type="button" data-comm-filter="broadcasts">الرسائل والإعلانات <span>0</span></button>
+              <button type="button" data-comm-filter="community">منشورات المجتمع <span>0</span></button>
+              <button type="button" data-comm-filter="pins">طلبات التثبيت <span>0</span></button>
+              <button type="button" data-comm-filter="reviewed">تمت مراجعتها <span>0</span></button>
+              <button type="button" data-comm-filter="all">كل السجل <span>0</span></button>
+            </aside>
+            <main><div id="adminCommunicationList" class="comm-list"></div></main>
+          </div>
+        </section>
+
+        <section class="admin-tab hidden" id="admin-tab-support">
+          <section class="support-admin-hero">
+            <div><span class="section-kicker">مركز الدعم التشغيلي</span><h2>اعرف المشكلة، صاحبها، ومكانها مباشرة</h2><p>كل تذاكر الطلاب والمعلمين في مكان واحد، مع سياق الدرس أو السؤال، الأولوية، المحادثة، والحالة حتى الإغلاق.</p></div>
+            <div class="admin-intel-hero-side"><article><strong id="supportAdminHeroOpen">0</strong><small>تذكرة مفتوحة</small></article><article><strong id="supportAdminHeroUrgent">0</strong><small>عاجلة الآن</small></article></div>
+          </section>
+          <section class="support-admin-stats">
+            <article><strong id="supportAdminOpen">0</strong><small>مفتوحة</small></article>
+            <article><strong id="supportAdminUrgent">0</strong><small>عاجلة</small></article>
+            <article><strong id="supportAdminWaiting">0</strong><small>بانتظار المستخدم</small></article>
+            <article><strong id="supportAdminStale">0</strong><small>متأخرة +48 ساعة</small></article>
+          </section>
+          <section id="supportAdminInsights" class="support-insights"></section>
+          <div class="admin-intel-toolbar">
+            <label class="admin-global-search" style="flex:1;max-width:560px"><i class="fa-solid fa-magnifying-glass"></i><input id="supportAdminSearch" type="search" placeholder="ابحث بالتذكرة أو الطالب أو المعلم أو الدرس أو السؤال..."></label>
+            <button type="button" id="supportAdminRefresh"><i class="fa-solid fa-rotate"></i> تحديث</button>
+          </div>
+          <div class="support-admin-layout">
+            <aside class="support-admin-filters">
+              <button class="active" type="button" data-support-admin-filter="open">المفتوحة <span>0</span></button>
+              <button type="button" data-support-admin-filter="new">الجديدة <span>0</span></button>
+              <button type="button" data-support-admin-filter="urgent">العاجلة <span>0</span></button>
+              <button type="button" data-support-admin-filter="waiting">مطلوب رد المستخدم <span>0</span></button>
+              <button type="button" data-support-admin-filter="stale">متأخرة +48 ساعة <span>0</span></button>
+              <button type="button" data-support-admin-filter="students">تذاكر الطلاب <span>0</span></button>
+              <button type="button" data-support-admin-filter="teachers">تذاكر المعلمين <span>0</span></button>
+              <button type="button" data-support-admin-filter="resolved">تم الحل <span>0</span></button>
+              <button type="button" data-support-admin-filter="all">كل السجل <span>0</span></button>
+            </aside>
+            <main><div id="supportAdminList" class="support-list"></div></main>
+          </div>
+        </section>
+
+        <section class="admin-tab hidden" id="admin-tab-content-ops">
+          <section class="content-ops-hero">
+            <div><span class="section-kicker">استوديو إدارة المحتوى</span><h2>نقل، نسخ، أرشفة واستيراد المحتوى بأمان</h2><p>نفّذ العمليات الكبيرة من مكان واحد مع الاحتفاظ بسجل التغييرات وإمكانية استرجاع المحتوى المؤرشف.</p></div>
+            <div class="content-ops-hero-side"><article><strong id="contentOpsHeroDrafts">0</strong><small>مسودة</small></article><article><strong id="contentOpsHeroArchive">0</strong><small>في الأرشيف</small></article></div>
+          </section>
+          <section class="content-ops-stats">
+            <article><strong id="contentOpsDraftCount">0</strong><small>مسودات</small></article>
+            <article><strong id="contentOpsScheduledCount">0</strong><small>مجدول للنشر</small></article>
+            <article><strong id="contentOpsArchiveCount">0</strong><small>مؤرشف</small></article>
+            <article><strong id="contentOpsAuditCount">0</strong><small>عملية مسجلة</small></article>
+          </section>
+          <section class="content-ops-grid">
+            <article class="content-ops-card">
+              <div class="content-ops-head"><div><span class="section-kicker">وحدة كاملة</span><h3>نسخ أو نقل وحدة بين المواد والصفوف</h3><p>يشمل الدروس والاختبارات، ويحافظ على ربط اختبارات الدرس عند النسخ.</p></div><span>🧩</span></div>
+              <form id="unitOperationForm" class="content-ops-form">
+                <label><span>المسار المصدر</span><select id="unitSourceType"><option value="public">عام</option><option value="azhar">أزهر</option></select></label>
+                <label><span>المرحلة المصدر</span><select id="unitSourceStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+                <label><span>الصف المصدر</span><select id="unitSourceGrade"></select></label>
+                <label><span>المادة المصدر</span><select id="unitSourceSubject"></select></label>
+                <label><span>الوحدة المصدر</span><input id="unitSourceNumber" type="number" min="1" value="1"></label>
+                <label><span>العملية</span><select id="unitOperationMode"><option value="copy">نسخ</option><option value="move">نقل</option></select></label>
+                <label><span>المسار الهدف</span><select id="unitTargetType"><option value="public">عام</option><option value="azhar">أزهر</option></select></label>
+                <label><span>المرحلة الهدف</span><select id="unitTargetStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+                <label><span>الصف الهدف</span><select id="unitTargetGrade"></select></label>
+                <label><span>المادة الهدف</span><select id="unitTargetSubject"></select></label>
+                <label><span>رقم الوحدة الهدف</span><input id="unitTargetNumber" type="number" min="1" value="1"></label>
+                <label class="switch-field"><span>الاختبارات</span><div><input id="unitIncludeQuizzes" type="checkbox" checked><strong>تضمين الاختبارات</strong></div></label>
+                <div class="full content-ops-note"><i class="fa-solid fa-shield-halved"></i><span>النسخ ينشئ المحتوى الجديد كمسودات مخفية للمراجعة قبل النشر. النقل يحتفظ بحالة النشر الحالية.</span></div>
+                <button class="btn btn-primary full" id="unitOperationSubmit" type="submit"><i class="fa-solid fa-arrow-right-arrow-left"></i> تنفيذ العملية</button>
+              </form>
+            </article>
+            <article class="content-ops-card">
+              <div class="content-ops-head"><div><span class="section-kicker">نسخة احتياطية ومشاركة</span><h3>تصدير محتوى JSON</h3><p>صدّر مادة كاملة أو وحدة محددة ثم احتفظ بها أو استوردها في صف آخر.</p></div><span>📤</span></div>
+              <form id="contentExportForm" class="content-ops-form">
+                <label><span>المسار</span><select id="exportType"><option value="public">عام</option><option value="azhar">أزهر</option></select></label>
+                <label><span>المرحلة</span><select id="exportStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+                <label><span>الصف</span><select id="exportGrade"></select></label>
+                <label><span>المادة</span><select id="exportSubject"></select></label>
+                <label class="full"><span>الوحدة — اتركها فارغة لكل المادة</span><input id="exportUnit" type="number" min="1" placeholder="كل الوحدات"></label>
+                <div class="full content-ops-actions"><button class="btn btn-primary" type="submit"><i class="fa-solid fa-download"></i> تنزيل JSON</button><button class="btn btn-soft" id="copyExportJson" type="button"><i class="fa-regular fa-copy"></i> نسخ JSON</button></div>
+              </form>
+              <pre class="content-ops-preview" id="contentExportPreview">اختر النطاق وسيظهر ملخص التصدير هنا.</pre>
+            </article>
+            <article class="content-ops-card">
+              <div class="content-ops-head"><div><span class="section-kicker">استيراد جماعي</span><h3>استيراد حزمة محتوى</h3><p>استورد ملف JSON صادر من الأكاديمية. المحتوى المستورد يدخل كمسودة تلقائيًا.</p></div><span>📥</span></div>
+              <form id="contentImportForm" class="content-ops-form">
+                <label class="full"><span>ملف JSON</span><input id="contentImportFile" type="file" accept="application/json,.json"></label>
+                <label class="full"><span>أو الصق JSON</span><textarea id="contentImportJson" dir="ltr" placeholder='{"version":1,"lessons":[],"quizzes":[]}'></textarea></label>
+                <label><span>المسار الهدف</span><select id="importType"><option value="public">عام</option><option value="azhar">أزهر</option></select></label>
+                <label><span>المرحلة الهدف</span><select id="importStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+                <label><span>الصف الهدف</span><select id="importGrade"></select></label>
+                <label><span>المادة الهدف</span><select id="importSubject"></select></label>
+                <div class="full content-ops-note"><i class="fa-solid fa-file-shield"></i><span>لن يُنشر أي محتوى مستورد مباشرة. كل الدروس والاختبارات تدخل كمسودات مخفية.</span></div>
+                <button class="btn btn-primary full" id="contentImportSubmit" type="submit"><i class="fa-solid fa-file-import"></i> استيراد كمسودات</button>
+              </form>
+            </article>
+            <article class="content-ops-card full v5-question-bank-card">
+              <div class="content-ops-head"><div><span class="section-kicker">بنك الأسئلة المركزي</span><h3>إدارة الأسئلة والمهارات</h3><p>بحث وفلترة ومراجعة الأسئلة حسب المادة والمهارة والصعوبة والحالة، مع تعديل المهارة دون الحاجة لفتح الاختبار الأصلي.</p></div><span>🧠</span></div>
+              <div class="v5-bank-toolbar">
+                <label><span>بحث</span><input id="v5BankSearch" placeholder="نص السؤال أو المهارة أو المادة"></label>
+                <label><span>الحالة</span><select id="v5BankStatus"><option value="all">الكل</option><option value="approved">معتمد</option><option value="pending">قيد المراجعة</option><option value="hidden">مخفي</option></select></label>
+                <label><span>الصعوبة</span><select id="v5BankDifficulty"><option value="all">الكل</option><option value="1">سهل</option><option value="2">متوسط</option><option value="3">صعب</option></select></label>
+                <label><span>المادة</span><input id="v5BankSubject" placeholder="arabic أو اللغة العربية"></label>
+              </div>
+              <div class="v5-bank-stats" id="v5BankStats"></div>
+              <div class="v5-bank-list" id="v5BankList"><div class="content-ops-empty">جاري تحميل بنك الأسئلة…</div></div>
+            </article>
+            <article class="content-ops-card">
+              <div class="content-ops-head"><div><span class="section-kicker">الأرشيف</span><h3>محتوى يمكن استرجاعه</h3><p>العناصر المحذوفة من الإدارة تنتقل هنا بدل الحذف النهائي.</p></div><span>🗄️</span></div>
+              <div class="content-ops-tabs"><button class="active" type="button" data-archive-filter="all">الكل</button><button type="button" data-archive-filter="lesson">الدروس</button><button type="button" data-archive-filter="quiz">الاختبارات</button></div>
+              <div id="contentArchiveList" class="content-ops-list"></div>
+            </article>
+            <article class="content-ops-card full">
+              <div class="content-ops-head"><div><span class="section-kicker">سجل التعديلات</span><h3>آخر عمليات إدارة المحتوى</h3><p>يعرض الإنشاء والتعديل والنقل والنسخ والأرشفة والاسترجاع والاستيراد.</p></div><span>🧾</span></div>
+              <div id="contentAuditList" class="content-ops-list"></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="admin-tab" id="admin-tab-news">
+          <div class="admin-section-head"><div><span class="section-kicker">تحديثات المنصة</span><h2>الأخبار والإعلانات المطولة</h2><p>انشر تحديثات تظهر في الصفحة العامة وصفحة الأخبار.</p></div></div>
+          <div class="admin-teacher-grid">
+            <article class="admin-card admin-form-card">
+              <div class="admin-card-head"><div><span class="section-kicker">المحرر</span><h3 id="newsEditorTitle">خبر جديد</h3></div><span>📰</span></div>
+              <form id="newsForm" class="admin-form">
+                <label class="full"><span>عنوان الخبر</span><input id="newsTitle" required maxlength="160"></label>
+                <label class="full"><span>المحتوى</span><textarea id="newsContent" required rows="7" maxlength="5000"></textarea></label>
+                <label class="full"><span>رابط صورة — اختياري</span><input id="newsImage" type="url" dir="ltr" placeholder="https://..."></label>
+                <div class="full admin-form-actions">
+                  <button class="btn btn-primary" id="newsSaveBtn" type="submit">نشر الخبر</button>
+                  <button class="btn btn-soft hidden" id="newsCancelEdit" type="button">إلغاء التعديل</button>
+                </div>
+              </form>
+            </article>
+            <article class="admin-card">
+              <div class="admin-card-head"><div><span class="section-kicker">المنشور</span><h3>الأخبار الحالية</h3></div><span>📣</span></div>
+              <div id="newsAdminList" class="admin-list admin-scroll-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="admin-tab" id="admin-tab-notifications">
+          <div class="admin-section-head"><div><span class="section-kicker">تواصل ذكي</span><h2>الإشعارات الموجهة</h2><p>أرسل إشعارًا لمسار أو مرحلة أو صف محدد مع رابط إجراء اختياري.</p></div><a class="btn btn-soft" href="./notifications.html" target="_blank"><i class="fa-solid fa-eye"></i> معاينة مركز الطالب</a></div>
+          <div class="admin-teacher-grid">
+            <article class="admin-card admin-form-card">
+              <div class="admin-card-head"><div><span class="section-kicker">إشعار جديد</span><h3>إنشاء إشعار موجه</h3></div><span>🔔</span></div>
+              <form id="broadcastForm" class="admin-form">
+                <label class="full"><span>عنوان الإشعار</span><input id="broadcastTitle" required maxlength="120" placeholder="مثال: مراجعة مهمة قبل الاختبار"></label>
+                <label class="full"><span>نص الإشعار</span><textarea id="broadcastText" required maxlength="800" placeholder="اكتب الرسالة بوضوح..."></textarea></label>
+                <label><span>المسار</span><select id="broadcastType"><option value="">كل المسارات</option><option value="public">تعليم عام</option><option value="azhar">أزهر</option></select></label>
+                <label><span>المرحلة</span><select id="broadcastStage"><option value="">كل المراحل</option><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+                <label><span>الصف</span><select id="broadcastGrade"><option value="">كل الصفوف</option></select></label>
+                <label><span>الأولوية</span><select id="broadcastPriority"><option value="normal">عادي</option><option value="high">مهم</option><option value="urgent">عاجل</option></select></label>
+                <label><span>مدة الإشعار بالأيام</span><input id="broadcastDays" type="number" min="1" max="30" value="7"></label>
+                <label><span>رابط الإجراء — اختياري</span><input id="broadcastHref" placeholder="./exam-center.html أو https://..."></label>
+                <label class="switch-field full"><span>الحالة</span><div><input id="broadcastActive" type="checkbox" checked><strong>نشط</strong></div></label>
+                <button class="btn btn-primary full" id="broadcastSubmitBtn" type="submit"><i class="fa-solid fa-paper-plane"></i> نشر الإشعار</button>
+              </form>
+            </article>
+            <article class="admin-card">
+              <div class="admin-card-head"><div><span class="section-kicker">السجل</span><h3>الإشعارات الحالية</h3></div><span>📨</span></div>
+              <div id="broadcastAdminList" class="admin-list admin-scroll-list"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="admin-tab" id="admin-tab-announcements">
+          <div class="admin-section-head"><div><span class="section-kicker">التواصل</span><h2>الإعلانات</h2><p>رسالة مهمة تظهر للطلاب داخل إشعاراتهم.</p></div></div>
+          <article class="admin-card admin-form-card">
+            <form id="announcementForm" class="admin-form">
+              <label class="full"><span>نص الإعلان</span><textarea id="announcementText" required placeholder="اكتب الإعلان هنا..."></textarea></label>
+              <label><span>مدة الإعلان بالأيام</span><input id="announcementDays" type="number" min="1" value="3"></label>
+              <label class="switch-field"><span>حالة الإعلان</span><div><input id="announcementActive" type="checkbox"><strong>نشط</strong></div></label>
+              <button class="btn btn-primary full" type="submit">حفظ الإعلان</button>
+            </form>
+          </article>
+        </section>
+
+        <section class="admin-tab" id="admin-tab-readiness">
+          <div class="admin-section-head">
+            <div><span class="section-kicker">Phase 11</span><h2>مركز جاهزية الإطلاق</h2><p>فحص تشغيلي حي لمسارات المنصة، جودة المحتوى، وطوابير المراجعة قبل الانتقال إلى QA النهائي.</p></div>
+            <button class="btn btn-soft" id="releaseReadinessRefresh" type="button"><i class="fa-solid fa-rotate"></i> إعادة الفحص</button>
+          </div>
+          <section class="release-readiness-hero">
+            <div>
+              <span class="section-kicker">Release Readiness</span>
+              <h3>هل المنصة جاهزة للانتقال إلى الاختبار النهائي؟</h3>
+              <p id="releaseReadinessSummary">جاري فحص المسارات والبيانات التشغيلية...</p>
+            </div>
+            <div class="release-readiness-score"><strong id="releaseReadinessScore">0%</strong><span>جاهزية الفحوص الحالية</span></div>
+          </section>
+          <section class="release-readiness-stats">
+            <article><span class="rr-stat-icon danger"><i class="fa-solid fa-triangle-exclamation"></i></span><div><strong id="releaseCriticalCount">0</strong><small>مشكلات حرجة</small></div></article>
+            <article><span class="rr-stat-icon warning"><i class="fa-regular fa-clock"></i></span><div><strong id="releaseAttentionCount">0</strong><small>تحتاج متابعة</small></div></article>
+            <article><span class="rr-stat-icon success"><i class="fa-solid fa-circle-check"></i></span><div><strong id="releaseReadyCount">0</strong><small>فحوص ناجحة</small></div></article>
+            <article><span class="rr-stat-icon info"><i class="fa-solid fa-list-check"></i></span><div><strong id="releaseQueueCount">0</strong><small>عناصر في الطوابير</small></div></article>
+          </section>
+          <section class="release-readiness-grid">
+            <article class="admin-card">
+              <div class="admin-card-head"><div><span class="section-kicker">الفحوص الأساسية</span><h3>المسارات المطلوبة للإطلاق</h3></div><span>🧭</span></div>
+              <div id="releaseReadinessChecks" class="release-check-list"></div>
+            </article>
+            <article class="admin-card">
+              <div class="admin-card-head"><div><span class="section-kicker">مركز العمليات</span><h3>ما يحتاج تدخل الإدارة الآن</h3></div><span>🚦</span></div>
+              <div id="releaseReadinessQueues" class="release-queue-list"></div>
+            </article>
+            <article class="admin-card release-readiness-full">
+              <div class="admin-card-head"><div><span class="section-kicker">سلامة المحتوى</span><h3>العناصر الناقصة أو غير المكتملة</h3></div><span>🧪</span></div>
+              <div id="releaseReadinessIntegrity" class="release-integrity-list"></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="admin-tab" id="admin-tab-settings">
+          <div class="admin-section-head"><div><span class="section-kicker">هوية المنصة</span><h2>الإعدادات</h2><p>بيانات عامة لا تحتوي أسرارًا أو مفاتيح API.</p></div></div>
+          <article class="admin-card admin-form-card">
+            <form id="settingsForm" class="admin-form">
+              <label><span>اسم المنصة</span><input id="settingSiteName" placeholder="الأكاديمية"></label>
+              <label><span>رقم واتساب للدعم</span><input id="settingWhatsapp" dir="ltr" placeholder="201xxxxxxxxx"></label>
+              <label class="full"><span>رابط الشعار</span><input id="settingLogo" dir="ltr" placeholder="https://..."></label>
+
+              <div class="full admin-dashboard-cover-settings">
+                <div class="admin-cover-settings-head">
+                  <div>
+                    <span class="section-kicker">الهوية البصرية الجديدة</span>
+                    <h3>صور واجهات المنصة</h3>
+                    <p>اترك أي رابط فارغًا ليبقى التصميم الافتراضي. بمجرد وضع رابط جديد يتم تطبيقه مباشرة.</p>
+                  </div>
+                  <button class="btn btn-soft" type="button" id="resetDashboardHero"><i class="fa-solid fa-rotate-left"></i> استعادة كل الصور الافتراضية</button>
+                </div>
+
+                <div class="admin-cover-preview" id="settingPublicHeroPreview" role="img" aria-label="معاينة صورة الصفحة قبل التسجيل"><span>صورة الصفحة قبل تسجيل الدخول</span></div>
+                <label><span>صورة الصفحة الرئيسية قبل تسجيل الدخول</span><input id="settingPublicHero" type="url" dir="ltr" placeholder="اتركه فارغًا للصورة الافتراضية"></label>
+
+                <div class="admin-cover-preview" id="settingAuthVisualPreview" role="img" aria-label="معاينة صورة تسجيل الدخول"><span>صورة تسجيل الدخول</span></div>
+                <label><span>صورة جانب تسجيل الدخول / إنشاء الحساب</span><input id="settingAuthVisual" type="url" dir="ltr" placeholder="اتركه فارغًا للصورة الافتراضية"></label>
+
+                <div class="admin-cover-preview" id="settingDashboardHeroPreview" role="img" aria-label="معاينة غلاف لوحة الطالب"><span>غلاف لوحة الطالب</span></div>
+                <label><span>صورة غلاف لوحة الطالب</span><input id="settingDashboardHero" type="url" dir="ltr" placeholder="اتركه فارغًا للغلاف الافتراضي"></label>
+
+                <div class="admin-stage-image-grid">
+                  <label><span>صورة المرحلة الابتدائية</span><input id="settingStagePrimary" type="url" dir="ltr" placeholder="افتراضي"></label>
+                  <label><span>صورة المرحلة الإعدادية</span><input id="settingStagePrep" type="url" dir="ltr" placeholder="افتراضي"></label>
+                  <label><span>صورة المرحلة الثانوية</span><input id="settingStageSec" type="url" dir="ltr" placeholder="افتراضي"></label>
+                  <label><span>صورة التعليم الأزهري</span><input id="settingStageAzhar" type="url" dir="ltr" placeholder="افتراضي"></label>
+                </div>
+              </div>
+
+              <label class="full"><span>النص أسفل الترحيب في الغلاف</span><input id="settingDashboardHeroSubtitle" maxlength="140" placeholder="كل يوم هو فرصة جديدة للتعلم وتقترب من أهدافك"></label>
+              <label class="full"><span>نبذة عن المنصة</span><textarea id="settingAbout"></textarea></label>
+              <button class="btn btn-primary full" type="submit">حفظ الإعدادات</button>
+            </form>
+          </article>
+        </section>
+      </main>
+    </div>
+    <nav class="admin-mobile-bottom-nav" id="adminMobileBottomNav" aria-label="التنقل السريع للإدارة">
+      <button type="button" class="active" data-admin-tab="overview"><i class="fa-solid fa-grid-2"></i><span>الرئيسية</span></button>
+      <button type="button" data-admin-tab="teachers"><i class="fa-solid fa-chalkboard-user"></i><span>المدرسون</span></button>
+      <button type="button" class="admin-mobile-add" data-admin-quick="lesson"><i class="fa-solid fa-plus"></i><span>إضافة</span></button>
+      <button type="button" data-admin-tab="students"><i class="fa-solid fa-user-graduate"></i><span>الطلاب</span></button>
+      <button type="button" data-admin-tab="settings"><i class="fa-solid fa-sliders"></i><span>الإعدادات</span></button>
+    </nav>
+  </section>
+
+  <div id="adminOverlay" class="admin-mobile-overlay hidden"></div>
+
+  <div class="modal-backdrop hidden" id="subjectModal" aria-hidden="true">
+    <div class="modal-panel admin-modal" role="dialog" aria-modal="true" aria-labelledby="subjectModalTitle" tabindex="-1">
+      <button class="modal-close" data-close-admin-modal="subjectModal" aria-label="إغلاق نافذة المادة"><i class="fa-solid fa-xmark"></i></button>
+      <span class="section-kicker">المناهج</span><h2 id="subjectModalTitle">إضافة مادة ووحداتها</h2>
+      <div class="admin-editor-progress" aria-label="خطوات إعداد المادة">
+        <span class="active"><b>1</b> بيانات المادة</span><i class="fa-solid fa-chevron-left"></i><span><b>2</b> الصورة</span><i class="fa-solid fa-chevron-left"></i><span><b>3</b> الوحدات</span>
+      </div>
+      <form id="subjectForm" class="admin-form admin-content-editor-form">
+        <label><span>نوع التعليم</span><select id="subjectType"><option value="public">تعليم عام</option><option value="azhar">أزهر</option></select></label>
+        <label><span>المرحلة</span><select id="subjectStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+        <label><span>الصف</span><select id="subjectGrade"></select></label>
+        <label class="full"><span>اختر المادة</span><select id="subjectName" required aria-describedby="subjectPickHelp"><option value="">اختر المادة من القائمة</option></select><small id="subjectPickHelp">اختر اسم المادة فقط؛ تربط الأكاديمية الدروس والاختبارات بالمادة تلقائيًا دون إدخال أي رمز.</small></label>
+        <input type="hidden" id="subjectId" value="">
+        <label><span>الإيموجي الافتراضي</span><input id="subjectEmoji" value="📚"></label>
+        <label class="full"><span>صورة المادة — اختياري</span><input id="subjectImageUrl" type="url" dir="ltr" placeholder="https://example.com/subject-cover.jpg"></label>
+        <div class="full admin-subject-image-preview" id="subjectImagePreview" role="img" aria-label="معاينة صورة المادة"><span>سيظهر التصميم التلقائي عند عدم إضافة صورة</span></div>
+        <div class="full admin-editor-live-preview" id="subjectEditorPreview">
+          <div class="admin-editor-preview-art" id="subjectEditorPreviewArt"><span>📚</span></div>
+          <div><small id="subjectEditorPreviewMeta">معاينة بطاقة المادة</small><strong id="subjectEditorPreviewTitle">اسم المادة سيظهر هنا</strong><p id="subjectEditorPreviewText">0 وحدة • ستظهر للطلاب في الصف المحدد.</p></div>
+          <span class="status-pill approved">جاهزة</span>
+        </div>
+        <div class="full admin-subject-units-editor admin-editor-section">
+          <div class="admin-editor-section-title"><span><i class="fa-solid fa-layer-group"></i></span><div><strong>وحدات المادة</strong><small>رتّب وحدات المنهج بالترتيب الذي سيظهر للطالب.</small></div></div>
+          <div class="admin-question-editor-head"><span><b id="subjectUnitCountEditor">0</b> وحدة</span><button class="btn btn-soft" type="button" id="addSubjectUnit"><i class="fa-solid fa-plus"></i> وحدة جديدة</button></div>
+          <div id="subjectUnitsBuilder" class="admin-subject-units-builder"></div>
+          <details class="admin-bulk-question-box">
+            <summary><i class="fa-solid fa-align-justify"></i> إدخال الوحدات دفعة واحدة</summary>
+            <label class="full"><span>كل وحدة في سطر</span><textarea id="subjectUnits" placeholder="الوحدة الأولى&#10;الوحدة الثانية"></textarea></label>
+            <button class="btn btn-soft" type="button" id="importSubjectUnitsLines"><i class="fa-solid fa-file-import"></i> تحميل السطور إلى المحرر</button>
+          </details>
+        </div>
+        <button class="btn btn-primary full" type="submit">حفظ المادة</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop hidden" id="lessonModal" aria-hidden="true">
+    <div class="modal-panel admin-modal admin-modal-wide" role="dialog" aria-modal="true" aria-labelledby="lessonModalTitle" tabindex="-1">
+      <button class="modal-close" data-close-admin-modal="lessonModal" aria-label="إغلاق نافذة الدرس"><i class="fa-solid fa-xmark"></i></button>
+      <span class="section-kicker">محتوى تعليمي</span><h2 id="lessonModalTitle">إضافة درس جديد</h2>
+      <div class="admin-editor-progress" aria-label="خطوات إعداد الدرس">
+        <span class="active"><b>1</b> البيانات</span><i class="fa-solid fa-chevron-left"></i><span><b>2</b> الشروحات</span><i class="fa-solid fa-chevron-left"></i><span><b>3</b> الشرح</span><i class="fa-solid fa-chevron-left"></i><span><b>4</b> التدريب</span>
+      </div>
+      <form id="lessonForm" class="admin-form admin-content-editor-form">
+        <label><span>نوع التعليم</span><select id="newLessonType"><option value="public">عام</option><option value="azhar">أزهر</option></select></label>
+        <label><span>المرحلة</span><select id="newLessonStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+        <label><span>الصف</span><select id="newLessonGrade"></select></label>
+        <label><span>المادة</span><select id="newLessonSubject"></select></label>
+        <label><span>الوحدة</span><input id="newLessonUnit" type="number" min="1" value="1"></label>
+        <label><span>عنوان الدرس</span><input id="newLessonTitle" required></label>
+        <div class="full admin-editor-live-preview" id="lessonEditorPreview">
+          <div class="admin-editor-preview-art" id="lessonEditorPreviewArt"><span>📚</span></div>
+          <div><small id="lessonEditorPreviewMeta">معاينة الدرس</small><strong id="lessonEditorPreviewTitle">عنوان الدرس سيظهر هنا</strong><p id="lessonEditorPreviewText">اختر المادة والوحدة وأضف فيديو أو شرحًا مكتوبًا.</p></div>
+          <span class="status-pill approved" id="lessonEditorPreviewStatus">منشور</span>
+        </div>
+        <div class="full admin-video-editor-wrap admin-editor-section">
+          <div class="admin-editor-section-title"><span><i class="fa-solid fa-chalkboard-user"></i></span><div><strong>شروحات المدرسين</strong><small>يمكن أن يحتوي الدرس على أكثر من شرح لنفس الدرس.</small></div></div>
+          <div class="admin-video-editor-head"><span><b id="lessonVideoEditorCount">0</b> فيديو مضاف</span><button class="btn btn-soft" type="button" id="addLessonVideoRow"><i class="fa-solid fa-plus"></i> إضافة مدرس/فيديو</button></div>
+          <div id="lessonVideosEditor" class="admin-video-editor"></div>
+        </div>
+        <label><span>صورة غلاف/صورة مستقلة للدرس — اختياري</span><input id="newLessonImage" type="url" dir="ltr" placeholder="https://..."></label>
+        <label><span>مكان الصورة</span><select id="newLessonImagePosition"><option value="top">أعلى الشرح</option><option value="bottom">أسفل الشرح</option></select></label>
+        <div class="full admin-inline-image-preview" id="lessonImagePreview"><span><i class="fa-regular fa-image"></i></span><div><strong>معاينة صورة الدرس</strong><small>إذا لم تضف صورة سيستخدم تصميم المادة تلقائيًا.</small></div></div>
+        <div class="full"><div class="admin-editor-section-title"><span><i class="fa-solid fa-pen-ruler"></i></span><div><strong>الشرح المكتوب الاحترافي</strong><small>نسّق المقال وأدرج الصور والروابط مباشرة داخل الشرح في المكان المطلوب.</small></div></div><textarea id="newLessonContent" rows="7" placeholder="اكتب شرح الدرس هنا..."></textarea></div>
+        <div class="full admin-question-editor-wrap admin-editor-section">
+          <div class="admin-editor-section-title"><span><i class="fa-solid fa-bullseye"></i></span><div><strong>تدريب الدرس</strong><small>أضف الأسئلة واحدًا واحدًا، أو استورد مجموعة JSON دفعة واحدة.</small></div></div>
+          <div class="admin-question-editor-head"><span><b id="lessonQuestionCountEditor">0</b> سؤال</span><button class="btn btn-soft" type="button" id="addLessonQuestion"><i class="fa-solid fa-plus"></i> سؤال جديد</button></div>
+          <div id="lessonQuestionBuilder" class="admin-question-builder"></div>
+          <details class="admin-bulk-question-box">
+            <summary><i class="fa-solid fa-code"></i> إدخال أو استيراد JSON دفعة واحدة</summary>
+            <label class="full"><span>JSON الأسئلة</span><textarea id="newLessonQuestions" rows="8" dir="ltr" placeholder='[{"text":"السؤال","opts":["أ","ب","ج","د"],"correctAnswer":0}]'></textarea></label>
+            <button class="btn btn-soft" type="button" id="importLessonQuestionsJson"><i class="fa-solid fa-file-import"></i> تحميل JSON إلى المحرر</button>
+          </details>
+        </div>
+        <label class="switch-field"><span>الوصول</span><div><input id="newLessonFree" type="checkbox"><strong>محتوى مجاني</strong></div></label>
+        <label class="switch-field"><span>مسودة</span><div><input id="newLessonDraft" type="checkbox"><strong>حفظ كمسودة</strong></div></label>
+              <label class="switch-field"><span>مخفي عن الطلاب</span><div><input id="newLessonHidden" type="checkbox"><strong>مخفي</strong></div></label>
+        <button class="btn btn-primary full" type="submit">نشر الدرس</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop hidden" id="quizModal" aria-hidden="true">
+    <div class="modal-panel admin-modal admin-modal-wide" role="dialog" aria-modal="true" aria-labelledby="quizModalTitle" tabindex="-1">
+      <button class="modal-close" data-close-admin-modal="quizModal" aria-label="إغلاق نافذة الاختبار"><i class="fa-solid fa-xmark"></i></button>
+      <span class="section-kicker">اختبار جديد</span><h2 id="quizModalTitle">إنشاء اختبار</h2>
+      <div class="admin-editor-progress" aria-label="خطوات إعداد الاختبار">
+        <span class="active"><b>1</b> البيانات</span><i class="fa-solid fa-chevron-left"></i><span><b>2</b> الأسئلة</span><i class="fa-solid fa-chevron-left"></i><span><b>3</b> المراجعة</span>
+      </div>
+      <form id="quizForm" class="admin-form admin-content-editor-form">
+        <label><span>نوع التعليم</span><select id="newQuizType"><option value="public">عام</option><option value="azhar">أزهر</option></select></label>
+        <label><span>المرحلة</span><select id="newQuizStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+        <label><span>الصف</span><select id="newQuizGrade"></select></label>
+        <label><span>المادة</span><select id="newQuizSubject"></select></label>
+        <label><span>الوحدة — 0 للشامل</span><input id="newQuizUnit" type="number" min="0" value="1"></label>
+        <label><span>اسم الاختبار</span><input id="newQuizName" required></label>
+        <label><span>مدة الاختبار بالدقائق — 0 بدون حد</span><input id="newQuizDuration" type="number" min="0" value="0"></label>
+        <label class="switch-field"><span>الوصول</span><div><input id="newQuizFree" type="checkbox"><strong>اختبار مجاني</strong></div></label>
+        <label class="switch-field"><span>مسودة</span><div><input id="newQuizDraft" type="checkbox"><strong>حفظ كمسودة</strong></div></label>
+              <label class="switch-field"><span>مخفي عن الطلاب</span><div><input id="newQuizHidden" type="checkbox"><strong>مخفي</strong></div></label>
+        <div class="full admin-editor-live-preview quiz-preview" id="quizEditorPreview">
+          <div class="admin-editor-preview-art"><span>🧠</span></div>
+          <div><small id="quizEditorPreviewMeta">معاينة الاختبار</small><strong id="quizEditorPreviewTitle">اسم الاختبار سيظهر هنا</strong><p id="quizEditorPreviewText">0 سؤال • اختبار وحدة</p></div>
+          <span class="status-pill approved" id="quizEditorPreviewStatus">منشور</span>
+        </div>
+        <div class="full admin-question-editor-wrap admin-editor-section">
+          <div class="admin-editor-section-title"><span><i class="fa-solid fa-list-check"></i></span><div><strong>أسئلة الاختبار</strong><small>حدد الإجابة الصحيحة والشرح بعد الإجابة لكل سؤال.</small></div></div>
+          <div class="admin-question-editor-head"><span><b id="quizQuestionCountEditor">0</b> سؤال</span><button class="btn btn-soft" type="button" id="addQuizQuestion"><i class="fa-solid fa-plus"></i> سؤال جديد</button></div>
+          <div id="quizQuestionBuilder" class="admin-question-builder"></div>
+          <details class="admin-bulk-question-box">
+            <summary><i class="fa-solid fa-code"></i> إدخال أو استيراد JSON دفعة واحدة</summary>
+            <label class="full"><span>JSON الأسئلة</span><textarea id="newQuizQuestions" rows="10" dir="ltr" placeholder='[{"text":"السؤال","opts":["أ","ب","ج","د"],"correctAnswer":0}]'></textarea></label>
+            <button class="btn btn-soft" type="button" id="importQuizQuestionsJson"><i class="fa-solid fa-file-import"></i> تحميل JSON إلى المحرر</button>
+          </details>
+        </div>
+        <button class="btn btn-primary full" type="submit">حفظ الاختبار</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop hidden" id="contentReviewModal" aria-hidden="true">
+    <div class="modal-panel admin-modal admin-review-modal" role="dialog" aria-modal="true" aria-labelledby="contentReviewModalTitle" tabindex="-1">
+      <button class="modal-close" data-close-admin-modal="contentReviewModal" aria-label="إغلاق المعاينة"><i class="fa-solid fa-xmark"></i></button>
+      <div class="admin-review-head">
+        <div>
+          <span class="section-kicker">مراجعة قبل النشر</span>
+          <h2 id="contentReviewModalTitle">معاينة المحتوى</h2>
+          <p id="contentReviewMeta">—</p>
+        </div>
+        <div class="admin-review-state">
+          <span class="status-pill" id="contentReviewStatus">—</span>
+          <span class="admin-review-approval" id="contentReviewApproval"><i class="fa-regular fa-circle-check"></i> غير معتمد</span>
+        </div>
+      </div>
+      <div class="admin-review-toolbar">
+        <button type="button" class="btn btn-soft" id="contentReviewEdit"><i class="fa-solid fa-pen"></i> تعديل</button>
+        <button type="button" class="btn btn-soft" id="contentReviewApprove"><i class="fa-solid fa-circle-check"></i> اعتماد</button>
+        <button type="button" class="btn btn-primary" id="contentReviewPublish"><i class="fa-solid fa-paper-plane"></i> نشر الآن</button>
+        <button type="button" class="btn btn-soft" id="contentReviewHide"><i class="fa-solid fa-eye-slash"></i> إخفاء</button>
+        <div class="admin-review-schedule">
+          <input id="contentReviewScheduleAt" type="datetime-local" aria-label="موعد النشر">
+          <button type="button" class="btn btn-soft" id="contentReviewSchedule"><i class="fa-regular fa-clock"></i> جدولة النشر</button>
+          <button type="button" class="btn btn-soft hidden" id="contentReviewCancelSchedule"><i class="fa-solid fa-xmark"></i> إلغاء الجدولة</button>
+        </div>
+      </div>
+      <div class="admin-review-schedule-note hidden" id="contentReviewScheduleNote"></div>
+      <div class="admin-review-preview-shell">
+        <div class="admin-review-browser-bar"><span></span><span></span><span></span><strong>معاينة الطالب</strong><button type="button" id="contentReviewReload" title="إعادة تحميل المعاينة"><i class="fa-solid fa-rotate-right"></i></button><a id="contentReviewOpenNew" href="#" target="_blank" rel="noopener" title="فتح في تبويب جديد"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+        <iframe id="contentReviewFrame" title="معاينة المحتوى كما يراه الطالب" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop hidden" id="contentCopyModal" aria-hidden="true">
+    <div class="modal-panel admin-modal" role="dialog" aria-modal="true" aria-labelledby="contentCopyModalTitle" tabindex="-1">
+      <button class="modal-close" data-close-admin-modal="contentCopyModal" aria-label="إغلاق نافذة النسخ"><i class="fa-solid fa-xmark"></i></button>
+      <span class="section-kicker">نسخ المحتوى</span><h2 id="contentCopyModalTitle">نسخ المحتوى إلى صف آخر</h2>
+      <div class="admin-copy-source-card" id="contentCopySourceCard">
+        <span><i class="fa-regular fa-copy"></i></span><div><small>سيتم نسخ</small><strong id="contentCopySourceTitle">—</strong><p id="contentCopySourceMeta">—</p></div>
+      </div>
+      <form id="contentCopyForm" class="admin-form">
+        <input type="hidden" id="contentCopyKind">
+        <input type="hidden" id="contentCopySubject">
+        <input type="hidden" id="contentCopySourceUnit">
+        <label><span>نوع التعليم الهدف</span><select id="contentCopyType"><option value="public">تعليم عام</option><option value="azhar">أزهر</option></select></label>
+        <label><span>المرحلة الهدف</span><select id="contentCopyStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+        <label><span>الصف الهدف</span><select id="contentCopyGrade"></select></label>
+        <label id="contentCopyUnitField"><span>رقم الوحدة في الهدف</span><input id="contentCopyTargetUnit" type="number" min="1" value="1"></label>
+        <label class="switch-field"><span>نسخ الدروس</span><div><input id="contentCopyLessons" type="checkbox" checked><strong>نعم</strong></div></label>
+        <label class="switch-field"><span>نسخ الاختبارات</span><div><input id="contentCopyQuizzes" type="checkbox" checked><strong>نعم</strong></div></label>
+        <div class="full admin-copy-warning"><i class="fa-solid fa-shield-halved"></i><p>النسخ الجديدة ستُنشأ مخفية. الاختبارات المرتبطة بدروس سيتم ربطها تلقائيًا بنسخ الدروس الجديدة.</p></div>
+        <button class="btn btn-primary full" type="submit"><i class="fa-regular fa-copy"></i> بدء النسخ</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop hidden" id="fileModal" aria-hidden="true">
+    <div class="modal-panel admin-modal" role="dialog" aria-modal="true" aria-labelledby="fileModalTitle" tabindex="-1">
+      <button class="modal-close" data-close-admin-modal="fileModal" aria-label="إغلاق نافذة الملف"><i class="fa-solid fa-xmark"></i></button>
+      <span class="section-kicker">المكتبة</span><h2 id="fileModalTitle">إضافة ملف</h2>
+      <form id="fileForm" class="admin-form">
+        <label><span>العنوان</span><input id="newFileTitle" required></label>
+        <label><span>نوع الملف</span><select id="newFileKind"><option value="pdf">PDF</option><option value="note">مذكرة</option><option value="review">مراجعة</option><option value="reference">مرجع</option></select></label>
+        <label class="full"><span>الرابط</span><input id="newFileUrl" required type="url" dir="ltr" placeholder="https://..."></label>
+        <label><span>نوع التعليم</span><select id="newFileType"><option value="public">عام</option><option value="azhar">أزهر</option></select></label>
+        <label><span>المرحلة</span><select id="newFileStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+        <label><span>الصف</span><select id="newFileGrade"></select></label>
+        <label><span>المادة</span><select id="newFileSubject"></select></label>
+        <label class="full"><span>ربط بدرس — اختياري</span><select id="newFileLesson"><option value="">بدون ربط بدرس</option></select></label>
+        <label class="full"><span>وصف مختصر</span><textarea id="newFileDescription" rows="3" maxlength="400" placeholder="مثال: مراجعة شاملة على الوحدة الأولى مع أهم الأسئلة."></textarea></label>
+        <label class="switch-field"><span>تمييز الملف</span><div><input id="newFileFeatured" type="checkbox"><strong>ملف مهم / موصى به</strong></div></label>
+        <label class="switch-field"><span>الوصول</span><div><input id="newFileFree" type="checkbox"><strong>ملف مجاني</strong></div></label>
+        <button class="btn btn-primary full" type="submit">حفظ الملف</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop hidden" id="simulationModal" aria-hidden="true">
+    <div class="modal-panel admin-modal admin-modal-wide" role="dialog" aria-modal="true" aria-labelledby="simulationModalTitle" tabindex="-1">
+      <button class="modal-close" data-close-admin-modal="simulationModal" aria-label="إغلاق نافذة المحاكي"><i class="fa-solid fa-xmark"></i></button>
+      <span class="section-kicker">محاكاة امتحان</span><h2 id="simulationModalTitle">إنشاء محاكي جديد</h2>
+      <form id="simulationForm" class="admin-form">
+        <label><span>اسم المحاكي</span><input id="simName" required></label>
+        <label><span>المدة بالدقائق</span><input id="simTime" type="number" min="5" max="300" value="60"></label>
+        <label><span>نوع التعليم</span><select id="simType"><option value="public">عام</option><option value="azhar">أزهر</option></select></label>
+        <label><span>المرحلة</span><select id="simStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+        <label><span>الصف</span><select id="simGrade"></select></label>
+        <label><span>عربي</span><input id="simAr" type="number" min="0" value="5"></label>
+        <label><span>رياضيات</span><input id="simMa" type="number" min="0" value="5"></label>
+        <label><span>علوم</span><input id="simSc" type="number" min="0" value="5"></label>
+        <label><span>إنجليزي</span><input id="simEn" type="number" min="0" value="5"></label>
+        <label class="switch-field"><span>الوصول</span><div><input id="simFree" type="checkbox"><strong>محاكي مجاني</strong></div></label>
+        <label class="switch-field"><span>مخفي</span><div><input id="simHidden" type="checkbox"><strong>إخفاء عن الطلاب</strong></div></label>
+        <button class="btn btn-primary full" type="submit">حفظ المحاكي</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop hidden" id="liveModal" aria-hidden="true">
+    <div class="modal-panel admin-modal admin-modal-wide" role="dialog" aria-modal="true" aria-labelledby="liveModalTitle" tabindex="-1">
+      <button class="modal-close" data-close-admin-modal="liveModal" aria-label="إغلاق نافذة الجلسة"><i class="fa-solid fa-xmark"></i></button>
+      <span class="section-kicker">جلسة مباشرة</span><h2 id="liveModalTitle">إضافة جلسة بث</h2>
+      <form id="liveForm" class="admin-form">
+        <label><span>عنوان الجلسة</span><input id="liveTitle" required></label>
+        <label><span>اسم المدرس</span><input id="liveTeacher"></label>
+        <label><span>نوع التعليم</span><select id="liveType"><option value="">كل الأنواع</option><option value="public">عام</option><option value="azhar">أزهر</option></select></label>
+        <label><span>المرحلة</span><select id="liveStage"><option value="">كل المراحل</option><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+        <label><span>الصف</span><select id="liveGrade"><option value="">كل الصفوف</option></select></label>
+        <label><span>المادة</span><select id="liveSubject"><option value="">كل المواد</option></select></label>
+        <label><span>الحالة</span><select id="liveStatus"><option value="upcoming">قادم</option><option value="live">مباشر</option><option value="ended">منتهي</option></select></label>
+        <label><span>موعد الجلسة</span><input id="liveTime" type="datetime-local"></label>
+        <label><span>المدة بالدقائق</span><input id="liveDuration" type="number" min="10" value="60"></label>
+        <label class="full"><span>رابط YouTube للبث</span><input id="liveYoutube" type="url" dir="ltr" placeholder="https://youtube.com/..."></label>
+        <label class="full"><span>رابط Zoom — اختياري</span><input id="liveZoom" type="url" dir="ltr" placeholder="https://zoom.us/..."></label>
+        <label class="full"><span>رابط إعادة المشاهدة — اختياري</span><input id="liveRecording" type="url" dir="ltr" placeholder="رابط YouTube أو أي رابط تسجيل متاح"></label>
+        <label class="switch-field full"><span>الوصول</span><div><input id="liveFree" type="checkbox"><strong>جلسة مجانية</strong></div></label>
+        <button class="btn btn-primary full" type="submit">حفظ الجلسة</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop hidden" id="contentTransferModal" aria-hidden="true">
+    <div class="modal-panel admin-modal content-transfer-modal" role="dialog" aria-modal="true" aria-labelledby="contentTransferTitle" tabindex="-1">
+      <button class="modal-close" type="button" id="closeContentTransferModal" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+      <span class="section-kicker">نقل ونسخ متقدم</span><h2 id="contentTransferTitle">نقل المحتوى المحدد</h2>
+      <div id="contentTransferSummary" class="content-transfer-summary"></div>
+      <form id="contentTransferForm" class="content-ops-form">
+        <label><span>العملية</span><select id="contentTransferMode"><option value="copy">نسخ كمسودة</option><option value="move">نقل</option></select></label>
+        <label><span>نوع المحتوى</span><input id="contentTransferKind" disabled></label>
+        <label><span>المسار الهدف</span><select id="contentTransferType"><option value="public">عام</option><option value="azhar">أزهر</option></select></label>
+        <label><span>المرحلة الهدف</span><select id="contentTransferStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+        <label><span>الصف الهدف</span><select id="contentTransferGrade"></select></label>
+        <label><span>المادة الهدف</span><select id="contentTransferSubject"></select></label>
+        <label><span>الوحدة الهدف</span><input id="contentTransferUnit" type="number" min="0" value="1"></label>
+        <label class="switch-field" id="contentTransferLinkedWrap"><span>اختبارات الدرس</span><div><input id="contentTransferLinked" type="checkbox" checked><strong>تضمين المرتبط</strong></div></label>
+        <button class="btn btn-primary full" id="contentTransferSubmit" type="submit"><i class="fa-solid fa-arrow-right-arrow-left"></i> تنفيذ</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./assets/student-design.js?v=20261010.2"></script>
+<script src="./assets/academy-suite.js?v=20261010.5"></script>
+<script src="./assets/ui-kit.js?v=20261010.5"></script>
+
+  <script src="./assets/backend-config.js?v=20261004.4"></script><script src="./assets/hostinger-backend.js?v=20261010.2"></script>
+  <script src="./assets/role-session.js?v=20261004.4"></script>
+  <script src="./assets/admin-auth-flow.js?v=20261004.4"></script>
+  <script src="./assets/admin-intelligence.js?v=1"></script>
+  <script src="./assets/admin-communications.js?v=2"></script>
+  <script src="./assets/admin-support.js?v=2"></script>
+  <script src="./assets/admin-content-ops.js?v=20261004.7"></script>
+  <script src="./assets/admin-question-bank-v5.js?v=20261004.7"></script>
+  <script src="./assets/admin-subscriptions.js?v=20261004.7"></script>
+  <script src="./assets/admin-subscriptions-v5.js?v=20261004.7"></script>
+  <script src="./assets/rich-editor.js?v=1"></script>
+  <script src="./assets/admin.js?v=subject-select-1"></script>
+  <script src="./assets/admin-notifications.js"></script>
+
+  <script src="./assets/admin-teacher-v6.js?v=20261005.1"></script>
+<a class="v23-back-link" href="./admin.html">↩ العودة إلى تصميم V20</a></body>
+</html>

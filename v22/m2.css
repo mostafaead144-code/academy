@@ -1,0 +1,42 @@
+/* Egtaz M2 — scoped question-bank + verified analytics, preserves V20. */
+.v22 .m2-error{background:#fff5f4;color:#a32e3f;border:1px solid #f2c0c6;border-radius:14px;padding:13px 17px;margin:12px 0;line-height:1.9}
+.v22 .m2-top-actions{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 18px}
+.v22 .m2-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:18px 0}
+.v22 .m2-kpis>div{background:linear-gradient(145deg,#fff,#f4f6ff);border:1px solid #dfe6f8;border-radius:20px;padding:19px;display:grid;gap:8px;box-shadow:0 12px 28px #233d8420}
+.v22 .m2-kpis strong{font-size:29px;font-weight:950;color:#233e8e;line-height:1}
+.v22 .m2-kpis span{font-size:12px;font-weight:750;color:#62779c}
+.v22 .m2-panel-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:16px}
+.v22 .m2-panel-head h3{margin:0 0 6px;font-size:21px;color:#192e5c}
+.v22 .m2-panel-head p,.v22 .m2-caption{margin:0;color:#6b7da1;font-size:12px;line-height:1.9}
+.v22 .m2-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.v22 .m2-form{margin-bottom:18px;padding:24px}
+.v22 .m2-form label,.v22 .m2-toolbar label{display:grid;gap:8px;color:#2a426e;font-size:13px;font-weight:800;min-width:0}
+.v22 .m2-form input,.v22 .m2-form select,.v22 .m2-form textarea,.v22 .m2-toolbar input,.v22 .m2-toolbar select{border:1px solid #d7e1f4;border-radius:13px;min-height:46px;background:#fff;padding:11px 13px;color:#243960;width:100%;max-width:100%;font:inherit;box-sizing:border-box}
+.v22 .m2-form textarea{resize:vertical;font:12px/1.8 ui-monospace,monospace;direction:ltr;min-height:155px;text-align:left;overflow-wrap:anywhere}
+.v22 .m2-toolbar{display:grid;grid-template-columns:1.3fr .7fr;gap:14px;margin-bottom:20px}
+.v22 .m2-question{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;background:#f9fbff;border:1px solid #e0e8fa;border-radius:18px;padding:17px;margin:10px 0}
+.v22 .m2-question[hidden]{display:none!important}
+.v22 .m2-question-main{flex:1;min-width:180px}
+.v22 .m2-question-main>strong{display:block;font-size:15px;color:#173467;font-weight:900;line-height:1.9;overflow-wrap:anywhere}
+.v22 .m2-question-main>small{display:block;color:#65799d;font-size:12px;margin-top:8px;line-height:1.8}
+.v22 .m2-badges{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.v22 .m2-tag{background:#edf2ff;color:#395699;border-radius:999px;padding:5px 10px;font-size:11px;font-weight:800}
+.v22 .m2-status-approved{color:#136b61;background:#e4f8f2}
+.v22 .m2-status-pending{color:#925f12;background:#fff5dc}
+.v22 .m2-status-rejected,.v22 .m2-status-archived{color:#8d4051;background:#fff0f0}
+.v22 .m2-qa{display:flex;gap:7px;flex-wrap:wrap}
+.v22 .m2-qa .v22-btn{min-height:38px;padding:8px 12px}
+.v22 .m2-legacy{margin:25px 0 0;padding:17px;border-radius:15px;background:#f1f5ff;color:#344f84}
+.v22 .m2-legacy summary{font-weight:900;cursor:pointer}
+.v22 .m2-legacy-row{border-bottom:1px solid #dce6f7;padding:9px;line-height:1.7}
+.v22 .m2-legacy-row small{color:#6d81a3;margin-inline-start:8px}
+.v22 .m2-rows{display:grid;gap:8px;margin:17px 0}
+.v22 .m2-rows>div{display:grid;grid-template-columns:minmax(0,1fr) 115px 90px;gap:10px;align-items:center;padding:14px;border:1px solid #e4ebf8;background:#fbfcff;border-radius:14px}
+.v22 .m2-rows strong{color:#1f3c75;font-size:13px;line-height:1.8;overflow-wrap:anywhere}
+.v22 .m2-rows span{color:#6981a5;font-size:12px}
+.v22 .m2-rows b{color:#4260c2;font-size:15px;text-align:center}
+@media(max-width:760px){.v22 .m2-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.v22 .m2-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}.v22 .m2-question{align-items:stretch}.v22 .m2-qa{width:100%}.v22 .m2-qa .v22-btn{flex:1}}
+@media(max-width:480px){.v22 .m2-form{padding:16px}.v22 .m2-grid,.v22 .m2-toolbar{grid-template-columns:1fr}.v22 .m2-kpis{gap:8px}.v22 .m2-kpis>div{padding:12px;border-radius:14px}.v22 .m2-kpis strong{font-size:21px}.v22 .m2-kpis span{font-size:10px}.v22 .m2-rows>div{grid-template-columns:minmax(0,1fr) 70px;gap:5px}.v22 .m2-rows>div span{grid-column:1}.v22 .m2-rows>div b{grid-column:2;grid-row:1 / 3}}
+.v22 .m2-bulk-details{margin-bottom:18px;padding:16px}
+.v22 .m2-bulk-details>summary{cursor:pointer;color:#3659b5;font-weight:900;padding:10px}
+.v22 .m2-bulk-details>.m2-form{margin:10px 0 0;padding:16px;background:#f9fbff;border-radius:16px}

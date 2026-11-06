@@ -1,0 +1,14 @@
+/* V48 advanced challenges and season rankings. Scoped to existing V20/V22 shell. */
+.v22 .v48-builder{margin-top:15px;border:1px solid #d7e5fb;border-radius:21px;padding:19px;background:linear-gradient(135deg,#f7faff,#eef4ff)}
+.v22 .v48-builder h4{margin:0 0 7px;font-size:17px;font-weight:950;color:#233e76}
+.v22 .v48-builder p{line-height:1.8;font-size:13px;color:#65799c;margin:0 0 12px}
+.v22 .v48-sources{display:grid;gap:8px;margin:12px 0;padding:12px;border:1px dashed #b5c9ed;border-radius:15px;background:#fff;max-height:220px;overflow:auto}
+.v22 .v48-source{display:flex!important;flex-direction:row!important;align-items:center;gap:12px;cursor:pointer;border-radius:12px;padding:10px;background:#f4f7ff;font-size:13px}
+.v22 .v48-source input{width:18px!important;flex:none;accent-color:#4f68e6}.v22 .v48-source small{color:#677fa4}
+.v22 .v48-config{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:17px 0;background:#fff;border:1px solid #dde5f6;padding:16px;border-radius:18px}
+.v22 .v48-config>label{display:grid;gap:7px;min-width:0}.v22 .v48-config .v48-check,.v22 .v48-check{display:flex!important;align-items:center;flex-direction:row!important;gap:10px;font-size:13px;line-height:1.7;color:#304a82}
+.v22 .v48-check input[type=checkbox]{width:18px!important;height:18px;flex:none;accent-color:#506de4}
+.v22 .v48-manual-row{border:1px solid #bdd0ed;border-radius:15px;padding:14px;margin:13px 0;background:#fff}.v22 .v48-manual-row legend{color:#3357a5;font-weight:900;padding:0 7px}.v22 .v48-option-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.v22 .v48-ranking{margin-top:16px;padding:22px;border:1px solid #e2e7f5;border-radius:22px;background:linear-gradient(170deg,#fff,#f7f9ff)}.v22 .v48-ranking h3{font-size:21px;color:#253e75;margin:0 0 14px}.v22 .v48-rank-line{display:flex;align-items:center;gap:15px;padding:12px 9px;border-bottom:1px solid #ecf1fa}.v22 .v48-rank-line:last-child{border-bottom:0}.v22 .v48-rank-line>b{width:38px;font-size:20px}.v22 .v48-rank-line>span{flex:1;color:#254271;min-width:0;overflow-wrap:anywhere;font-weight:700}.v22 .v48-rank-line>strong{color:#445ec7;white-space:nowrap}
+.v22 .v48-completed{padding:25px;display:grid;gap:12px;border-radius:22px}.v22 .v48-completed h3{color:#224480}.v22 .v48-completed>p{line-height:1.9;color:#4c658f}
+@media(max-width:720px){.v22 .v48-config,.v22 .v48-option-grid{grid-template-columns:1fr}.v22 .v48-ranking{padding:15px}.v22 .v48-rank-line{flex-wrap:wrap}.v22 .v48-rank-line>strong{width:100%;text-align:end}}

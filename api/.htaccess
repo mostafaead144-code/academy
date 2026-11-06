@@ -1,0 +1,9 @@
+Options -Indexes
+<FilesMatch "^(config\.local\.php|config\.example\.php|bootstrap\.php|quiz-v29\.php|.*\.(sql|sqlite|bak|log|zip))$">
+  Require all denied
+</FilesMatch>
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]

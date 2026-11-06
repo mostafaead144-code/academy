@@ -1,0 +1,18 @@
+{
+  "name":"الأكاديمية",
+  "short_name":"الأكاديمية",
+  "description":"منصة تعليمية عربية للدروس والاختبارات ومتابعة التقدم.",
+  "lang":"ar",
+  "dir":"rtl",
+  "start_url":"./index.html",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#f5f7fb",
+  "theme_color":"#0f172a",
+  "icons":[{"src":"./assets/app-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}],
+  "shortcuts":[
+    {"name":"مخطط المذاكرة","short_name":"خطتي","url":"./planner.html","icons":[{"src":"./assets/app-icon.svg","sizes":"any","type":"image/svg+xml"}]},
+    {"name":"مركز الاختبارات","short_name":"اختبارات","url":"./exam-center.html","icons":[{"src":"./assets/app-icon.svg","sizes":"any","type":"image/svg+xml"}]},
+    {"name":"متابعة التقدم","short_name":"تقدمي","url":"./progress.html","icons":[{"src":"./assets/app-icon.svg","sizes":"any","type":"image/svg+xml"}]}
+  ]
+}

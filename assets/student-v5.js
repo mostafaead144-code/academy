@@ -1,0 +1,8 @@
+(()=>{'use strict';
+const C=window.AcademyCore,$=id=>document.getElementById(id);if(!C||!$('studentGroupJoinCard')||!window.AcademyBackend)return;
+let user=null;
+async function request(route,opts={}){return AcademyBackend.request(route,{...opts,token:C.auth.currentUser?C.auth._token?.():undefined})}
+function renderGroups(items=[]){const box=$('studentGroupsList');if(!box)return;box.innerHTML=items.length?items.map(g=>'<div class="v5-group-item"><div><strong>'+C.esc(g.name||'مجموعة')+'</strong><small>'+C.esc(g.subjectName||g.subject||'')+' • '+C.esc(g.stage||'')+' '+C.esc(String(g.grade||''))+'</small></div><span class="pro-badge ok">'+C.esc(g.code||'عضو')+'</span></div>').join(''):'<div class="pro-empty">لم تنضم إلى فصل بكود بعد.</div>'}
+async function loadGroups(){try{const r=await AcademyBackend.request('student/groups',{token:C.auth._token()});renderGroups(r.groups||[])}catch(err){console.warn(err);renderGroups([])}}
+(async()=>{try{({user}=await C.requireStudent());await loadGroups();$('studentJoinGroup').onclick=async()=>{const code=$('studentGroupCode').value.trim().toUpperCase();if(!code)return C.toast('اكتب كود المجموعة.','error');const b=$('studentJoinGroup');window.AcademyUI?.setButtonLoading(b,true,'انضمام');try{const r=await AcademyBackend.request('student/groups/join',{method:'POST',token:C.auth._token(),body:{code}});C.toast('تم الانضمام إلى '+(r.group?.name||'المجموعة')+' ✅');$('studentGroupCode').value='';await loadGroups()}catch(e){C.toast(e.message||'تعذر الانضمام إلى المجموعة.','error')}finally{window.AcademyUI?.setButtonLoading(b,false)}}}catch(e){console.warn(e)}})();
+})();

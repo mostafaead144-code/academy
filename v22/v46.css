@@ -1,0 +1,13 @@
+/* V46: scoped to the existing v22 layout. */
+.v22 .v46-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:18px 0}
+.v22 .v46-grid .v22-card{min-width:0}
+.v22 .v46-grid textarea{width:100%;max-width:100%;padding:12px;border:1px solid #cad5ec;border-radius:12px;background:transparent;color:inherit}
+.v22 .v46-line{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 9px;border-bottom:1px solid var(--v22-line,#e7e9f3)}
+.v22 .v46-line>div{display:grid;gap:5px;min-width:0}
+.v22 .v46-line small{font-size:.82rem;opacity:.78}
+.v22 .v46-badge-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:16px}
+.v22 .v46-badge{border-radius:20px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:22px 12px;background:linear-gradient(145deg,rgba(101,99,241,.10),rgba(255,188,72,.13));box-shadow:0 8px 22px rgba(25,38,76,.07);min-height:155px}
+.v22 .v46-badge span{font-size:38px}
+.v22 .v46-badge small{opacity:.8}
+.v22 #v46-redeem-form{margin:20px 0}
+@media(max-width:720px){.v22 .v46-grid{grid-template-columns:1fr}.v22 .v46-line{flex-wrap:wrap}}

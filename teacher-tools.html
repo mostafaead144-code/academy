@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="theme-color" content="#f2f9ff">
+  <title>لوحة المدرس | الأكاديمية</title>
+  <link rel="stylesheet" href="./assets/student-base.css?v=20261010.1">
+  <link rel="stylesheet" href="./assets/student-learning.css?v=20261010.1">
+  <link rel="stylesheet" href="./assets/academy-portals.css?v=20261010.4">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <script src="./assets/academy-utils.js"></script>
+
+  <link rel="stylesheet" href="./assets/growth-pack.css?v=1">
+
+  <link rel="stylesheet" href="./assets/support.css?v=1">
+  <link rel="stylesheet" href="./assets/communications.css?v=1">
+  <link rel="stylesheet" href="./assets/rich-editor.css?v=1">
+  <link rel="stylesheet" href="./assets/v5-upgrades.css?v=20261004.7">
+  <link rel="stylesheet" href="./assets/platform-v6.css?v=20261010.2">
+<link rel="stylesheet" href="./assets/student-design.css?v=20261010.2">
+<link rel="stylesheet" href="./assets/academy-suite.css?v=20261010.5">
+<style>.v23-back-link{display:inline-flex;align-items:center;justify-content:center;gap:9px;position:fixed;bottom:16px;left:16px;z-index:99999;padding:13px 18px;border-radius:16px;background:linear-gradient(120deg,#315cf0,#6751e8);color:white!important;font-family:Cairo,Tahoma,sans-serif;font-size:14px;font-weight:800;box-shadow:0 12px 29px #223a725c;text-decoration:none!important;border:1px solid #ffffff66}</style></head>
+<body class="teacher-v3-body academy-design academy-suite academy-suite-rest" data-academy-role="teacher" data-academy-page="teacher">
+  <div id="toast" class="toast"></div>
+
+  <section id="teacherAccess" class="teacher-access hidden">
+    <span>👨‍🏫</span><h1>بوابة المدرس</h1>
+    <p id="teacherAccessText">يتم التحقق من حسابك وصلاحياتك...</p>
+    <form id="teacherLoginForm" class="teacher-login-form hidden">
+      <label><span>البريد الإلكتروني</span><input id="teacherLoginEmail" type="email" dir="ltr" required autocomplete="username" placeholder="teacher@example.com"></label>
+      <label><span>كلمة المرور</span><input id="teacherLoginPassword" type="password" required autocomplete="current-password" placeholder="كلمة المرور"></label>
+      <button id="teacherLoginBtn" class="btn btn-primary" type="submit">الدخول إلى بوابة المدرس</button>
+      <button id="teacherResetPassword" class="teacher-reset-link" type="button">نسيت كلمة المرور؟</button>
+    </form>
+    <div id="teacherAccessActions"><button id="teacherSwitchAccount" class="btn btn-soft hidden" type="button">الدخول بحساب مدرس آخر</button><a class="btn btn-soft" href="./index.html">العودة للمنصة</a></div>
+  </section>
+
+  <section id="teacherPortal" class="teacher-shell hidden">
+    <aside class="teacher-side" id="teacherSide">
+      <div class="teacher-brand-row"><a class="brand brand-light" href="./index.html"><span class="brand-mark"><i class="fa-solid fa-book-open"></i></span><span><strong>الأكاديمية</strong><small>بوابة المدرس</small></span></a><button class="teacher-collapse-btn" id="teacherCollapseBtn" title="طي القائمة"><i class="fa-solid fa-angles-right"></i></button></div>
+      <nav class="teacher-nav" role="tablist" aria-label="أقسام بوابة المدرس">
+        <button class="active" data-teacher-tab="home" role="tab" aria-selected="true" aria-controls="teacher-tab-home"><i class="fa-solid fa-house"></i> الرئيسية</button>
+        <button data-teacher-tab="content" role="tab" aria-selected="false" aria-controls="teacher-tab-content"><i class="fa-solid fa-book-open"></i> محتواي</button>
+        <button data-teacher-tab="submit" role="tab" aria-selected="false" aria-controls="teacher-tab-submit"><i class="fa-solid fa-circle-plus"></i> إضافة محتوى</button>
+        <button data-teacher-tab="quizzes" role="tab" aria-selected="false" aria-controls="teacher-tab-quizzes"><i class="fa-solid fa-file-circle-question"></i> إنشاء اختبار</button>
+        <button data-teacher-tab="assignments" role="tab" aria-selected="false" aria-controls="teacher-tab-assignments"><i class="fa-solid fa-clipboard-check"></i> الواجبات</button>
+        <button data-teacher-tab="notifications" role="tab" aria-selected="false" aria-controls="teacher-tab-notifications"><i class="fa-regular fa-bell"></i> إشعارات الطلاب</button>
+        <button data-teacher-tab="communications" role="tab" aria-selected="false" aria-controls="teacher-tab-communications"><i class="fa-regular fa-comments"></i> التواصل <span id="teacherCommNavBadge" class="nav-badge hidden">0</span></button>
+        <button data-teacher-tab="students" role="tab" aria-selected="false" aria-controls="teacher-tab-students"><i class="fa-solid fa-users"></i> الطلاب</button>
+        <button data-teacher-tab="classes" role="tab" aria-selected="false" aria-controls="teacher-tab-classes"><i class="fa-solid fa-people-group"></i> الفصول والمتابعة</button>
+        <button data-teacher-tab="analytics" role="tab" aria-selected="false" aria-controls="teacher-tab-analytics"><i class="fa-solid fa-chart-line"></i> الإحصائيات</button>
+        <button data-teacher-tab="profile" role="tab" aria-selected="false" aria-controls="teacher-tab-profile"><i class="fa-solid fa-id-card"></i> ملفي العام</button>
+        <button data-teacher-tab="support" role="tab" aria-selected="false" aria-controls="teacher-tab-support"><i class="fa-solid fa-headset"></i> الدعم <span id="teacherSupportNavBadge" class="nav-badge hidden">0</span></button>
+      </nav>
+    </aside>
+    <div class="teacher-mobile-overlay hidden" id="teacherOverlay"></div>
+
+    <main class="teacher-main">
+      <header class="teacher-top">
+        <div><button id="teacherMenuBtn" class="dash-mobile-menu" aria-label="فتح قائمة المدرس" aria-controls="teacherSide"><i class="fa-solid fa-bars"></i></button><h1 id="teacherTopName">أهلًا أستاذنا 👋</h1><p id="teacherTopRole">بوابة إدارة المحتوى التعليمي</p></div>
+        <div class="dashboard-actions"><a class="btn btn-soft" href="./teacher-insights.html"><i class="fa-solid fa-chart-column"></i> التحليلات المتقدمة</a><a class="btn btn-soft" href="./index.html"><i class="fa-solid fa-eye"></i> عرض المنصة</a><button id="teacherLogout" class="icon-btn" title="تسجيل الخروج" aria-label="تسجيل الخروج"><i class="fa-solid fa-arrow-right-from-bracket"></i></button></div>
+      </header>
+
+      <div class="teacher-page">
+        <section class="teacher-tab" id="teacher-tab-home" role="tabpanel">
+          <article class="teacher-welcome mix-teacher-home-hero" id="teacherHomeHero">
+            <div class="mix-teacher-home-avatar" id="teacherHomeAvatar">م</div>
+            <div class="mix-teacher-home-copy">
+              <span class="section-kicker">مساحتك التعليمية</span>
+              <h2>مرحبًا <span id="teacherWelcomeName">أستاذنا</span> 👋</h2>
+              <p id="teacherHomeSubtitle">أضف محتوى منظم، تابع ما تم اعتماده، وركّز على جودة الشرح.</p>
+              <div class="mix-teacher-home-badges">
+                <span id="teacherHomeRoleBadge"><i class="fa-solid fa-shield-halved"></i> معلم</span>
+                <span id="teacherHomeProfileStatus"><i class="fa-regular fa-id-card"></i> الملف العام</span>
+              </div>
+              <div class="teacher-welcome-actions"><button class="btn teacher-welcome-primary" data-open-teacher-submit><i class="fa-solid fa-circle-plus"></i> إضافة محتوى</button><button class="btn teacher-welcome-secondary" data-teacher-tab="assignments"><i class="fa-solid fa-clipboard-check"></i> إدارة الواجبات</button></div>
+            </div>
+            <div class="mix-teacher-home-art"><span class="academy-art art-world" aria-hidden="true"></span><small>اصنع شرحًا يترك أثرًا</small></div>
+          </article>
+
+          <section class="teacher-stat-grid">
+            <article><span class="stat-icon blue"><i class="fa-solid fa-video"></i></span><div><strong id="teacherApprovedCount">0</strong><small>محتوى معتمد</small></div></article>
+            <article><span class="stat-icon orange"><i class="fa-solid fa-clock"></i></span><div><strong id="teacherPendingCount">0</strong><small>قيد المراجعة</small></div></article>
+            <article><span class="stat-icon green"><i class="fa-solid fa-book-open"></i></span><div><strong id="teacherSubjectCount">0</strong><small>مواد مسندة</small></div></article>
+            <article><span class="stat-icon violet"><i class="fa-solid fa-layer-group"></i></span><div><strong id="teacherGradeCount">0</strong><small>صفوف مسندة</small></div></article>
+          </section>
+
+          <section class="mix-teacher-quick-actions" aria-label="إجراءات سريعة">
+            <button type="button" data-open-teacher-submit><span class="blue"><i class="fa-solid fa-video"></i></span><div><strong>درس جديد</strong><small>مقال + فيديو + تدريب</small></div><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" data-teacher-tab="quizzes"><span class="violet"><i class="fa-solid fa-file-circle-question"></i></span><div><strong>اختبار جديد</strong><small>اربطه بدرس معتمد</small></div><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" data-teacher-tab="assignments"><span class="green"><i class="fa-solid fa-clipboard-check"></i></span><div><strong>واجب جديد</strong><small>أرسله لطلابك</small></div><i class="fa-solid fa-chevron-left"></i></button>
+            <button type="button" data-teacher-tab="profile"><span class="orange"><i class="fa-solid fa-id-card"></i></span><div><strong>ملفي العام</strong><small>حدّث صورتك وبياناتك</small></div><i class="fa-solid fa-chevron-left"></i></button>
+          </section>
+
+          <section class="teacher-grid mix-teacher-home-grid">
+            <article class="teacher-card mix-teacher-pipeline-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">رحلة المحتوى</span><h3>حالة ما أرسلته للإدارة</h3></div><span>🚦</span></div>
+              <div class="mix-teacher-pipeline">
+                <div><span class="pending"><i class="fa-solid fa-clock"></i></span><strong id="teacherPipelinePending">0</strong><small>قيد المراجعة</small></div>
+                <i class="fa-solid fa-chevron-left"></i>
+                <div><span class="approved"><i class="fa-solid fa-circle-check"></i></span><strong id="teacherPipelineApproved">0</strong><small>تم اعتماده</small></div>
+                <i class="fa-solid fa-chevron-left"></i>
+                <div><span class="rejected"><i class="fa-solid fa-rotate"></i></span><strong id="teacherPipelineRejected">0</strong><small>يحتاج تعديل</small></div>
+              </div>
+              <p id="teacherPipelineHint" class="mix-teacher-pipeline-hint">أي محتوى جديد لن يظهر للطلاب قبل مراجعة الإدارة.</p>
+            </article>
+
+            <article class="teacher-card mix-teacher-performance-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">لمحة سريعة</span><h3>أداء محتواك</h3></div><button class="btn btn-soft" type="button" data-teacher-tab="analytics">التفاصيل</button></div>
+              <div class="mix-teacher-performance">
+                <div><span><i class="fa-solid fa-eye"></i></span><strong id="teacherHomeViews">0</strong><small>مشاهدة</small></div>
+                <div><span><i class="fa-solid fa-circle-check"></i></span><strong id="teacherHomeCompletions">0</strong><small>إكمال</small></div>
+                <div><span><i class="fa-solid fa-percent"></i></span><strong id="teacherHomeAverageQuiz">0%</strong><small>متوسط التدريب</small></div>
+              </div>
+              <div class="mix-teacher-top-lesson" id="teacherHomeTopLesson"><span>🏆</span><div><small>أكثر درس مشاهدة</small><strong>—</strong></div></div>
+            </article>
+          </section>
+
+          <section class="teacher-grid">
+            <article class="teacher-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">صلاحياتك</span><h3>المواد والصفوف المسندة</h3></div><span>🎓</span></div>
+              <div class="teacher-assignment-list" id="teacherAssignments"></div>
+            </article>
+            <article class="teacher-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">آخر التحديثات</span><h3>طلباتك الأخيرة</h3></div><span>📝</span></div>
+              <div class="submission-list" id="teacherRecentSubmissions"></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="teacher-tab hidden" id="teacher-tab-notifications" role="tabpanel">
+          <section class="teacher-grid teacher-notification-grid-v11">
+            <article class="teacher-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">بعد موافقة الإدارة</span><h3>إرسال إشعار لطلابك</h3></div><span>🔔</span></div>
+              <p class="profile-muted">اختر مادة وصفًا من المواد المسندة لك. لن يصل الإشعار للطلاب قبل اعتماد الإدارة.</p>
+              <form id="teacherNotificationForm" class="teacher-form">
+                <label><span>نوع التعليم</span><select id="teacherNotificationType"><option value="public">تعليم عام</option><option value="azhar">أزهر</option></select></label>
+                <label><span>المرحلة</span><select id="teacherNotificationStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+                <label><span>الصف</span><select id="teacherNotificationGrade"></select></label>
+                <label><span>المادة</span><select id="teacherNotificationSubject"></select></label>
+                <label class="full"><span>عنوان الإشعار</span><input id="teacherNotificationTitle" required maxlength="120" placeholder="مثال: راجع درس المفعول المطلق قبل اختبار الغد"></label>
+                <label class="full"><span>نص الرسالة</span><textarea id="teacherNotificationText" required maxlength="800" rows="4" placeholder="اكتب رسالة واضحة ومختصرة للطلاب..."></textarea></label>
+                <label><span>الأولوية</span><select id="teacherNotificationPriority"><option value="normal">عادي</option><option value="high">مهم</option><option value="urgent">عاجل</option></select></label>
+                <label><span>مدة الظهور بالأيام</span><input id="teacherNotificationDays" type="number" min="1" max="14" value="5"></label>
+                <label class="full"><span>رابط الإجراء — اختياري</span><input id="teacherNotificationHref" maxlength="500" placeholder="./subject.html أو اتركه فارغًا لفتح المادة"></label>
+                <button class="btn btn-primary full" id="teacherNotificationSubmitBtn" type="submit"><i class="fa-solid fa-paper-plane"></i> إرسال للإدارة</button>
+              </form>
+            </article>
+            <article class="teacher-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">المتابعة</span><h3>إشعاراتي المرسلة</h3></div><span>📨</span></div>
+              <div id="teacherNotificationRequests" class="submission-list"></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="teacher-tab hidden" id="teacher-tab-communications" role="tabpanel">
+          <section class="teacher-grid">
+            <article class="teacher-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">أسئلة الطلاب المعتمدة</span><h3>صندوق أسئلة الدروس <span id="teacherQuestionPendingCount" class="status-pill pending">0</span></h3><p>لن يظهر لك سؤال طالب قبل اعتماده من الإدارة، وردك أيضًا يمر على الإدارة قبل وصوله للطالب.</p></div><span>💬</span></div>
+              <div id="teacherQuestionInbox" class="comm-list"></div>
+            </article>
+            <article class="teacher-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">رسالة أو إعلان</span><h3>إرسال للطلاب بعد موافقة الإدارة</h3><p>حدد المادة والجمهور. يمكنك الاستهداف حسب الصف، المجموعة أو أرقام طلاب محددين.</p></div><span>📣</span></div>
+              <form id="teacherBroadcastForm" class="comm-form">
+                <label><span>المادة والصف</span><select id="teacherCommContext" required></select></label>
+                <label><span>نوع التواصل</span><select id="teacherCommType"><option value="announcement">إعلان</option><option value="message">رسالة</option></select></label>
+                <label><span>الجمهور</span><select id="teacherCommTargetMode"><option value="all">كل طلاب المادة والصف</option><option value="group">مجموعة محددة</option><option value="students">طلاب محددون بأرقام الهاتف</option></select></label>
+                <label id="teacherCommGroupWrap" class="hidden"><span>المجموعة</span><select id="teacherCommGroup"></select></label>
+                <label id="teacherCommStudentsWrap" class="full hidden"><span>أرقام الطلاب</span><input id="teacherCommStudents" placeholder="010...، 011...، 012..."></label>
+                <label><span>الأولوية</span><select id="teacherCommPriority"><option value="normal">عادي</option><option value="high">مهم</option><option value="urgent">عاجل</option></select></label>
+                <label><span>مدة الظهور</span><input id="teacherCommDays" type="number" min="1" max="14" value="5"></label>
+                <label class="full"><span>العنوان</span><input id="teacherCommTitle" maxlength="120" required placeholder="عنوان مختصر وواضح"></label>
+                <label class="full"><span>نص الرسالة</span><textarea id="teacherCommText" maxlength="1200" required placeholder="اكتب الرسالة التي تريد إرسالها..."></textarea></label>
+                <div class="full comm-note"><i class="fa-solid fa-shield-halved"></i><span>لا تصل الرسالة أو الإعلان لأي طالب قبل موافقة الإدارة. عند طلب تعديل سيظهر لك السبب ويمكنك تعديله وإعادة الإرسال.</span></div>
+                <button class="btn btn-primary full" id="teacherBroadcastSubmit" type="submit"><i class="fa-solid fa-paper-plane"></i> إرسال للإدارة</button>
+              </form>
+            </article>
+          </section>
+          <article class="teacher-card teacher-spaced-card">
+            <div class="teacher-card-head"><div><span class="section-kicker">طلبات التواصل</span><h3>كل ما أرسلته للمراجعة <span id="teacherCommPendingCount" class="status-pill pending">0</span></h3></div><span>🛡️</span></div>
+            <div id="teacherCommunicationRequests" class="comm-list"></div>
+          </article>
+        </section>
+
+        <section class="teacher-tab hidden" id="teacher-tab-profile" role="tabpanel">
+          <article class="teacher-card">
+            <div class="teacher-card-head"><div><span class="section-kicker">ملفك للطلاب</span><h3>معلومات المعلم وصورته</h3></div><span>👤</span></div>
+            <p class="profile-muted">اكتب المعلومات التي تريد عرضها للطلاب. يتم النشر مباشرة أو بعد مراجعة الإدارة حسب صلاحية حسابك.</p>
+            <p id="teacherProfileStatus" class="teacher-form-status" role="status"></p>
+            <a id="teacherProfilePublicLink" class="btn btn-soft hidden" target="_blank" rel="noopener">عرض الملف المنشور</a>
+            <form id="teacherProfileForm" class="teacher-form">
+              <label><span>الاسم المعروض</span><input id="teacherProfileName" required maxlength="80"></label>
+              <label><span>التخصص</span><input id="teacherProfileTitle" required maxlength="100" placeholder="مثال: مدرس اللغة العربية"></label>
+              <label><span>رابط الصورة الشخصية</span><input id="teacherProfilePhoto" type="url" dir="ltr" placeholder="https://..."></label>
+              <label><span>رابط صورة الغلاف</span><input id="teacherProfileCover" type="url" dir="ltr" placeholder="https://... — اختياري"></label>
+              <label class="full"><span>نبذة عنك</span><textarea id="teacherProfileBio" maxlength="1200" rows="4"></textarea></label>
+              <label><span>المؤهلات</span><input id="teacherProfileQualifications" maxlength="200"></label>
+              <label><span>الخبرة</span><input id="teacherProfileExperience" maxlength="200"></label>
+              <label class="full"><span>أسلوبك في الشرح</span><textarea id="teacherProfileStyle" maxlength="450" rows="2"></textarea></label>
+              <button class="btn btn-primary full" type="submit">حفظ / نشر التعديلات</button>
+            </form>
+          </article>
+        </section>
+
+        <section class="teacher-tab hidden" id="teacher-tab-content" role="tabpanel">
+          <article class="teacher-card">
+            <div class="teacher-card-head"><div><span class="section-kicker">محتواك</span><h3>دروسك وشروحاتك المنشورة</h3></div><button class="btn btn-primary" data-open-teacher-submit><i class="fa-solid fa-plus"></i> إضافة محتوى</button></div>
+            <div class="submission-list" id="teacherApprovedList"></div>
+          </article>
+        </section>
+
+        <section class="teacher-tab hidden" id="teacher-tab-submit" role="tabpanel">
+          <article class="teacher-card">
+            <div class="teacher-card-head"><div><span class="section-kicker">محتوى المدرس</span><h3>إضافة شرحك إلى درس أو إنشاء درس جديد</h3></div><span>➕</span></div>
+            <p class="profile-muted">النشر يتم مباشرة أو بعد مراجعة الإدارة حسب الصلاحيات التي منحها المدير لحسابك.</p>
+            <form id="teacherSubmissionForm" class="teacher-form">
+              <label><span>عنوان الدرس</span><input id="teacherLessonTitle" required maxlength="160" placeholder="مثال: المفعول المطلق"></label>
+              <label><span>رابط فيديو YouTube — اختياري</span><input id="teacherVideoUrl" type="url" dir="ltr" placeholder="https://youtube.com/..."></label>
+              <label class="full"><span>أسئلة تفاعلية داخل الفيديو — اختياري</span><textarea id="teacherVideoCheckpoints" dir="ltr" rows="4" placeholder='[{"time":60,"question":"سؤال؟","options":["أ","ب","ج","د"],"correctAnswer":0,"explanation":"التفسير"}]'></textarea><small>اكتب الوقت بالثواني. سيتوقف الفيديو للطالب عند السؤال.</small></label>
+              <label><span>نوع التعليم</span><select id="teacherEducationType"><option value="public">تربية وتعليم</option><option value="azhar">أزهر شريف</option></select></label>
+              <label><span>المرحلة</span><select id="teacherStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+              <label><span>الصف</span><select id="teacherGrade"></select></label>
+              <label><span>المادة</span><select id="teacherSubject"></select></label>
+              <label><span>الوحدة</span><select id="teacherUnit"><option value="1">الوحدة الأولى</option><option value="2">الوحدة الثانية</option><option value="3">الوحدة الثالثة</option><option value="4">الوحدة الرابعة</option><option value="5">الوحدة الخامسة</option><option value="6">الوحدة السادسة</option></select></label>
+              <label><span>صورة غلاف/صورة مستقلة — اختياري</span><input id="teacherLessonImage" type="url" dir="ltr" placeholder="https://..."></label>
+              <label><span>مكان الصورة</span><select id="teacherLessonImagePosition"><option value="top">أعلى الشرح</option><option value="bottom">أسفل الشرح</option></select></label>
+              <div class="full teacher-rich-explanation"><div class="teacher-card-head"><div><span class="section-kicker">شرح الدرس</span><h3>المحرر الاحترافي</h3><p class="profile-muted">اكتب المقال ونسّقه، وأدرج الصور داخل الشرح نفسه في أي موضع تريده.</p></div></div><textarea id="teacherLessonContent" rows="9" maxlength="60000" placeholder="اكتب شرح الدرس كاملًا هنا..."></textarea></div>
+              <div class="full teacher-quiz-editor">
+                <div class="teacher-card-head"><div><span class="section-kicker">تدريب الدرس</span><h3>أسئلة تظهر داخل الدرس</h3></div><button class="btn btn-soft" id="teacherAddLessonQuestion" type="button"><i class="fa-solid fa-plus"></i> إضافة سؤال</button></div>
+                <p class="profile-muted">اختياري: أضف تدريب الدرس يدويًا، أو الصق مجموعة أسئلة عادية، أو ارفع Excel/CSV. لا تحتاج إلى معرفة JSON.</p>
+                <div id="teacherLessonQuestionRows" class="teacher-question-rows"></div>
+              </div>
+              <details class="full teacher-quiz-import v6-json-advanced"><summary>خيار متقدم: استيراد JSON</summary><div class="v6-json-body">
+                <label for="teacherLessonQuestionsBulk"><span>إضافة أسئلة بصيغة JSON — اختياري</span></label>
+                <textarea id="teacherLessonQuestionsBulk" dir="ltr" rows="6" placeholder='[{"text":"نص السؤال","opts":["الأول","الثاني","الثالث","الرابع"],"correctAnswer":0,"explanation":"الشرح"}]'></textarea>
+                <small>يمكن دمج الأسئلة الفردية مع المجموعة المستوردة. رقم الإجابة يبدأ من 0.</small>
+                <button class="btn btn-soft" id="teacherImportLessonQuestions" type="button"><i class="fa-solid fa-file-import"></i> إضافة الأسئلة من JSON</button>
+              </div></details>
+              <label class="full"><span>ملاحظات للإدارة</span><textarea id="teacherNotes" maxlength="2000" placeholder="أي ملاحظات أو تفاصيل مهمة عن المحتوى..."></textarea></label>
+              <div class="full comm-note"><i class="fa-solid fa-shield-halved"></i><span>يمكنك إنشاء شرح مقالي أو فيديوهات أو ملفات وتدريب داخل نفس الدرس. صلاحية النشر المباشر أو المراجعة يحددها المدير لكل معلم.</span></div>
+              <button class="btn btn-primary full" type="submit" id="teacherSubmitBtn"><i class="fa-solid fa-paper-plane"></i> حفظ / نشر شرح الدرس</button>
+            </form>
+          </article>
+        </section>
+
+        <section class="teacher-tab hidden" id="teacher-tab-students" role="tabpanel">
+          <section class="teacher-stat-grid">
+            <article><span class="stat-icon blue"><i class="fa-solid fa-eye"></i></span><div><strong id="teacherTotalViews">0</strong><small>مشاهدة للمحتوى</small></div></article>
+            <article><span class="stat-icon green"><i class="fa-solid fa-circle-check"></i></span><div><strong id="teacherTotalCompletions">0</strong><small>إكمال للدروس</small></div></article>
+            <article><span class="stat-icon violet"><i class="fa-solid fa-file-circle-check"></i></span><div><strong id="teacherQuizAttempts">0</strong><small>محاولة تدريب</small></div></article>
+            <article><span class="stat-icon orange"><i class="fa-solid fa-percent"></i></span><div><strong id="teacherCompletionRate">0%</strong><small>نسبة الإكمال</small></div></article>
+          </section>
+          <article class="teacher-card teacher-spaced-card">
+            <div class="teacher-card-head"><div><span class="section-kicker">تفاعل مجمع</span><h3>أداء دروسك عند الطلاب</h3></div><span>👥</span></div>
+            <p class="profile-muted">الأرقام مجمعة فقط ولا تعرض أسماء الطلاب أو بياناتهم الشخصية.</p>
+            <div class="teacher-engagement-list" id="teacherEngagementList"></div>
+          </article>
+        </section>
+
+        <section class="teacher-tab hidden" id="teacher-tab-quizzes" role="tabpanel">
+          <article class="teacher-card teacher-spaced-card">
+            <div class="teacher-card-head"><div><span class="section-kicker">اختبار شرحك</span><h3>اختبار مستقل للمدرس داخل الدرس</h3></div><span>🧩</span></div>
+            <p class="profile-muted">اختر الدرس ثم أضف الأسئلة يدويًا، أو الصقها من Word/واتساب، أو ارفع Excel/CSV، أو اخترها من بنك الأسئلة. النشر حسب صلاحية حسابك.</p>
+            <form id="teacherQuizForm" class="teacher-form">
+              <label><span>نوع التعليم</span><select id="teacherQuizType"><option value="public">تعليم عام</option><option value="azhar">أزهر</option></select></label>
+              <label><span>المرحلة</span><select id="teacherQuizStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+              <label><span>الصف</span><select id="teacherQuizGrade"></select></label>
+              <label><span>المادة</span><select id="teacherQuizSubject"></select></label>
+              <label class="full"><span>الدرس المرتبط</span><select id="teacherQuizLesson" required><option value="">اختر الدرس المعتمد</option></select></label>
+              <label class="full"><span>اسم الاختبار</span><input id="teacherQuizTitle" required maxlength="120" placeholder="مثال: اختبار درس المبتدأ والخبر"></label>
+              <label><span>إرسال الاختبار إلى</span><select id="teacherQuizTargetMode"><option value="all">كل طلاب الصف</option><option value="students">طلاب محددون</option><option value="group">مجموعة / فصل محدد</option></select></label>
+              <label><span>معرّفات الطلاب أو رمز المجموعة</span><input id="teacherQuizTargetValue" placeholder="UID1, UID2 أو group-a"></label>
+              <div class="full teacher-quiz-editor"><div class="teacher-card-head"><div><span class="section-kicker">أسئلة الاختبار</span><h3>أضف سؤالًا في كل مرة</h3></div><button class="btn btn-soft" id="teacherAddQuestion" type="button"><i class="fa-solid fa-plus"></i> إضافة سؤال</button></div><div id="teacherQuizQuestionRows" class="teacher-question-rows"></div></div>
+              <div class="full teacher-quiz-generator">
+                <div class="teacher-card-head"><div><span class="section-kicker">من بنك الأسئلة</span><h3>توليد أسئلة تلقائيًا</h3></div><span>⚙️</span></div>
+                <div class="teacher-form-grid">
+                  <label><span>عدد الأسئلة</span><input id="teacherGeneratedCount" type="number" min="1" max="50" value="10"></label>
+                  <label><span>الصعوبة</span><select id="teacherGeneratedDifficulty"><option value="">متنوعة</option><option value="1">سهل</option><option value="2">متوسط</option><option value="3">صعب</option></select></label>
+                </div>
+                <button class="btn btn-soft" id="teacherGenerateQuestions" type="button"><i class="fa-solid fa-wand-magic-sparkles"></i> توليد من البنك</button>
+                <small>يتم اختيار أسئلة معتمدة مطابقة للمادة والصف، ويُفضّل أسئلة الدرس المرتبط عندما تكون متاحة.</small>
+              </div>
+              <details class="full teacher-quiz-import v6-json-advanced"><summary>خيار متقدم: استيراد JSON</summary><div class="v6-json-body"><label for="teacherQuizBulk"><span>إضافة مجموعة بصيغة JSON — اختياري</span></label><textarea id="teacherQuizBulk" dir="ltr" rows="5" placeholder='[{"text":"نص السؤال","opts":["الأول","الثاني","الثالث","الرابع"],"correctAnswer":0}]'></textarea><small>هذه الطريقة للمستخدم المتقدم فقط؛ يمكنك استخدام اللصق العادي أو Excel أو بنك الأسئلة بدلًا منها.</small><button class="btn btn-soft" id="teacherImportQuestions" type="button">إضافة الأسئلة من JSON</button></div></details>
+              <button class="btn btn-primary full" id="teacherQuizSubmitBtn" type="submit"><i class="fa-solid fa-paper-plane"></i> حفظ / نشر الاختبار</button>
+            </form>
+          </article>
+          <article class="teacher-card teacher-spaced-card"><div class="teacher-card-head"><div><span class="section-kicker">متابعة الطلبات</span><h3>اختباراتي المرسلة</h3></div><span>📋</span></div><div id="teacherQuizRequests" class="submission-list"></div></article>
+        </section>
+
+        <section class="teacher-tab hidden" id="teacher-tab-assignments" role="tabpanel">
+          <section class="teacher-grid">
+            <article class="teacher-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">واجب جديد</span><h3>إنشاء واجب للطلاب</h3></div><span>📝</span></div>
+              <form id="teacherAssignmentForm" class="teacher-submit-form">
+                <div class="teacher-form-grid">
+                  <label><span>نوع التعليم</span><select id="assignmentEducationType"><option value="public">تعليم عام</option><option value="azhar">أزهر</option></select></label>
+                  <label><span>المرحلة</span><select id="assignmentStage"><option value="primary">ابتدائي</option><option value="prep">إعدادي</option><option value="sec">ثانوي</option></select></label>
+                  <label><span>الصف</span><select id="assignmentGrade"></select></label>
+                  <label><span>المادة</span><select id="assignmentSubject"></select></label>
+                  <label class="full"><span>عنوان الواجب</span><input id="assignmentTitle" required maxlength="120" placeholder="مثال: حل تدريبات الوحدة الأولى"></label>
+                  <label class="full"><span>التعليمات</span><textarea id="assignmentInstructions" rows="5" maxlength="4000" placeholder="اكتب المطلوب بوضوح..."></textarea></label>
+                  <label><span>آخر موعد</span><input id="assignmentDueAt" type="datetime-local" required></label>
+                  <label><span>الدرجة النهائية</span><input id="assignmentMaxScore" type="number" min="1" max="1000" value="100"></label>
+                  <label><span>إرسال الواجب إلى</span><select id="assignmentTargetMode"><option value="all">كل طلاب الصف</option><option value="students">طلاب محددون</option><option value="group">مجموعة / فصل محدد</option></select></label>
+                  <label id="assignmentTargetValueWrap"><span>معرّفات الطلاب أو رمز المجموعة</span><input id="assignmentTargetValue" placeholder="للطلاب: UID1, UID2 — للمجموعة: group-a"><small>اتركه فارغًا عند اختيار كل طلاب الصف.</small></label>
+                </div>
+                <button class="btn btn-primary btn-block" id="teacherAssignmentSubmitBtn" type="submit"><i class="fa-solid fa-paper-plane"></i> إرسال الواجب للمراجعة</button>
+              </form>
+            </article>
+
+            <article class="teacher-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">واجباتك</span><h3>الواجبات المنشورة</h3></div><span>📚</span></div>
+              <div id="teacherAssignmentsList" class="teacher-engagement-list"></div>
+            </article>
+          </section>
+          <article class="teacher-card teacher-spaced-card"><div class="teacher-card-head"><div><span class="section-kicker">بانتظار الإدارة</span><h3>طلبات الواجبات</h3></div><span>⏳</span></div><div id="teacherAssignmentRequests" class="submission-list"></div></article>
+
+          <article class="teacher-card teacher-spaced-card">
+            <div class="teacher-card-head"><div><span class="section-kicker">التسليمات</span><h3>تصحيح واجبات الطلاب</h3></div><span>✅</span></div>
+            <div id="teacherAssignmentSubmissions" class="teacher-analytics-table"></div>
+          </article>
+        </section>
+
+        <section class="teacher-tab hidden" id="teacher-tab-support" role="tabpanel">
+          <section class="teacher-grid">
+            <article class="teacher-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">تذكرة دعم جديدة</span><h3>تواصل مع إدارة الأكاديمية</h3><p>للمشكلات التقنية، الصلاحيات، المحتوى أو أي مشكلة تحتاج تدخل الإدارة.</p></div><span>🎫</span></div>
+              <form id="teacherSupportForm" class="support-form">
+                <label><span>نوع المشكلة</span><select id="teacherSupportCategory"><option value="technical">مشكلة تقنية</option><option value="content">مشكلة محتوى</option><option value="students">مشكلة مع الطلاب</option><option value="assignment">واجب أو تصحيح</option><option value="account">الحساب والصلاحيات</option><option value="general">طلب أو مشكلة عامة</option></select></label>
+                <label><span>الأولوية</span><select id="teacherSupportPriority"><option value="normal">عادي</option><option value="high">مهم</option><option value="urgent">عاجل</option></select></label>
+                <label class="full"><span>العنوان</span><input id="teacherSupportTitle" required maxlength="140" placeholder="اكتب عنوانًا واضحًا للمشكلة"></label>
+                <label class="full"><span>التفاصيل</span><textarea id="teacherSupportDescription" required minlength="5" maxlength="2200" placeholder="اشرح المشكلة بالتفصيل..."></textarea></label>
+                <label class="full"><span>لقطة شاشة — اختياري</span><input id="teacherSupportScreenshotFile" type="file" accept="image/jpeg,image/png,image/webp"><small>JPG أو PNG أو WebP — سيتم ضغط الصورة تلقائيًا.</small></label><label class="full"><span>أو رابط صورة — اختياري</span><input id="teacherSupportScreenshot" type="url" dir="ltr" maxlength="700" placeholder="https://..."></label>
+                <button class="btn btn-primary full" id="teacherSupportSubmit" type="submit"><i class="fa-solid fa-paper-plane"></i> فتح التذكرة</button>
+              </form>
+            </article>
+            <article class="teacher-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">متابعة الدعم</span><h3>تذاكرك</h3><p><strong id="teacherSupportOpenCount">0</strong> مفتوحة • <strong id="teacherSupportWaitingCount">0</strong> تحتاج ردك.</p></div><span>🧭</span></div>
+              <div class="support-toolbar"><button class="active" data-teacher-support-filter="all">الكل</button><button data-teacher-support-filter="open">المفتوحة</button><button data-teacher-support-filter="waiting_user">مطلوب رد</button><button data-teacher-support-filter="resolved">تم الحل</button></div>
+              <div id="teacherSupportList" class="support-list"></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="teacher-tab hidden" id="teacher-tab-classes" role="tabpanel">
+          <section class="teacher-v5-grid">
+            <article class="teacher-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">فصولك</span><h3>إنشاء فصل أو مجموعة</h3></div><span>🏫</span></div>
+              <p class="profile-muted">أنشئ مجموعة مرتبطة بإحدى المواد المسندة إليك. سيحصل الفصل على كود قصير يكتبه الطالب للانضمام.</p>
+              <form id="teacherGroupForm" class="teacher-submit-form teacher-v5-group-form">
+                <label><span>اسم الفصل</span><input id="teacherGroupName" maxlength="80" required placeholder="مثال: الصف الرابع - مجموعة السبت"></label>
+                <label><span>المادة والصف</span><select id="teacherGroupAssignment" required></select></label>
+                <label class="full"><span>وصف اختياري</span><textarea id="teacherGroupDescription" rows="2" maxlength="300" placeholder="ملاحظات تظهر لطلاب المجموعة"></textarea></label>
+                <button type="submit" class="btn btn-primary" id="teacherGroupCreate"><i class="fa-solid fa-plus"></i> إنشاء الفصل وكود الانضمام</button>
+              </form>
+              <div id="teacherGroupsList" class="teacher-v5-groups-list"></div>
+            </article>
+            <article class="teacher-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">تدخل مبكر</span><h3>طلاب يحتاجون متابعة</h3></div><button type="button" class="btn btn-soft" id="teacherRiskRefresh"><i class="fa-solid fa-rotate"></i> تحديث</button></div>
+              <p class="profile-muted">تُحسب التنبيهات من الغياب، نتائج الاختبارات، والتقدم داخل المواد المسندة إليك فقط.</p>
+              <div id="teacherRiskSummary" class="teacher-v5-risk-summary"></div>
+              <div id="teacherAtRiskList" class="teacher-v5-risk-list"></div>
+            </article>
+            <article class="teacher-card teacher-v5-live-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">مسابقة مباشرة</span><h3>غرفة Quiz Live</h3><p>أنشئ غرفة من بنك الأسئلة، شارك الكود مع الطلاب، ثم تحكم في بدء السؤال والانتقال للسؤال التالي.</p></div><span>⚡</span></div>
+              <form id="teacherLiveCompetitionForm" class="teacher-submit-form teacher-v5-group-form">
+                <label><span>عنوان المسابقة</span><input id="teacherLiveCompetitionTitle" maxlength="90" required placeholder="مثال: تحدي النحو السريع"></label>
+                <label><span>المادة والصف</span><select id="teacherLiveCompetitionScope" required></select></label>
+                <label><span>عدد الأسئلة</span><input id="teacherLiveCompetitionCount" type="number" min="3" max="30" value="10" required></label>
+                <button class="btn btn-primary" type="submit" id="teacherLiveCompetitionCreate"><i class="fa-solid fa-bolt"></i> إنشاء الغرفة</button>
+              </form>
+              <div id="teacherLiveCompetitionPanel" class="teacher-live-panel"><p class="profile-muted">أنشئ غرفة جديدة أو افتح غرفة من القائمة.</p></div>
+              <div id="teacherLiveCompetitionList" class="teacher-live-list"></div>
+            </article>
+          </section>
+        </section>
+
+        <section class="teacher-tab hidden" id="teacher-tab-analytics" role="tabpanel">
+          <section class="teacher-grid">
+            <article class="teacher-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">أقوى محتوى</span><h3>أفضل درس حسب المشاهدات</h3></div><span>🏆</span></div>
+              <div id="teacherTopLesson" class="teacher-highlight-metric"></div>
+            </article>
+            <article class="teacher-card">
+              <div class="teacher-card-head"><div><span class="section-kicker">جودة الاستيعاب</span><h3>متوسط نتائج التدريبات</h3></div><span>🎯</span></div>
+              <div id="teacherAverageQuiz" class="teacher-highlight-metric"></div>
+            </article>
+          </section>
+          <article class="teacher-card teacher-spaced-card">
+            <div class="teacher-card-head"><div><span class="section-kicker">تفصيل كل درس</span><h3>تحليلات المحتوى</h3></div><span>📈</span></div>
+            <div class="teacher-analytics-table" id="teacherAnalyticsList"></div>
+          </article>
+          <article class="teacher-card teacher-spaced-card">
+            <div class="teacher-card-head"><div><span class="section-kicker">ما يحتاج شرحًا أكثر</span><h3>الأسئلة الأكثر خطأً</h3></div><span>🧠</span></div>
+            <p class="profile-muted">نتائج مجمعة من محاولات تدريبات دروسك، دون عرض بيانات الطلاب. تُرتب حسب نسبة الخطأ.</p>
+            <div class="teacher-difficult-questions" id="teacherDifficultQuestions"></div>
+          </article>
+        </section>
+      </div>
+    </main>
+    <nav class="teacher-mobile-bottom-nav" id="teacherMobileBottomNav" aria-label="التنقل السريع للمدرس">
+      <button type="button" class="active" data-teacher-tab="home"><i class="fa-solid fa-house"></i><span>الرئيسية</span></button>
+      <button type="button" data-teacher-tab="content"><i class="fa-solid fa-book-open"></i><span>محتواي</span></button>
+      <button type="button" class="teacher-mobile-add" data-open-teacher-submit><i class="fa-solid fa-plus"></i><span>إضافة</span></button>
+      <button type="button" data-teacher-tab="quizzes"><i class="fa-solid fa-brain"></i><span>الاختبارات</span></button>
+      <button type="button" data-teacher-tab="profile"><i class="fa-regular fa-user"></i><span>ملفي</span></button>
+    </nav>
+  </section>
+
+  <div class="modal-backdrop hidden" id="teacherGradeModal" aria-hidden="true">
+    <div class="modal-panel teacher-grade-modal" role="dialog" aria-modal="true" aria-labelledby="gradeModalTitle">
+      <button class="modal-close" id="closeTeacherGradeModal" aria-label="إغلاق نافذة التصحيح"><i class="fa-solid fa-xmark"></i></button>
+      <span class="section-kicker">تصحيح الواجب</span>
+      <h2 id="gradeModalTitle">تسليم الطالب</h2>
+      <div id="gradeSubmissionPreview" class="grade-submission-preview"></div>
+      <form id="teacherGradeForm" class="teacher-submit-form">
+        <label><span id="gradeScoreLabel">الدرجة</span><input id="gradeScore" type="number" min="0" max="100" required></label>
+        <label><span>تعليق للطالب</span><textarea id="gradeFeedback" rows="4" maxlength="2000" placeholder="ملاحظة تشجيعية أو نقاط تحتاج مراجعة..."></textarea></label>
+        <button class="btn btn-primary btn-block" id="teacherGradeSaveBtn" type="submit"><i class="fa-solid fa-check"></i> حفظ التصحيح</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./assets/student-design.js?v=20261010.2"></script>
+<script src="./assets/academy-suite.js?v=20261010.5"></script>
+<script src="./assets/ui-kit.js?v=20261010.5"></script>
+
+  <script src="./assets/backend-config.js?v=20261004.4"></script><script src="./assets/hostinger-backend.js?v=20261010.2"></script>
+  <script src="./assets/rich-editor.js?v=1"></script>
+  <script src="./assets/teacher.js?v=20261010.4"></script>
+<script src="./assets/growth-pack.js?v=1"></script>
+  <script src="./assets/teacher-communications.js?v=1"></script>
+  <script src="./assets/teacher-support.js?v=1"></script>
+
+  <script src="./assets/teacher-v5.js?v=20261004.7"></script>
+  <script src="./assets/teacher-live-v5.js?v=20261004.7"></script>
+  <script src="./assets/teacher-content-v6.js?v=20261005.1"></script>
+<a class="v23-back-link" href="./teacher.html">↩ العودة إلى تصميم V20</a></body>
+</html>

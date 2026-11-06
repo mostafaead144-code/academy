@@ -1,0 +1,11 @@
+/* V92 — registration and guardian contact feedback */
+.v22-auth .v92-hint,.v42-student-profile .v92-hint{display:block;color:var(--text-muted,#637089);font-size:.83rem;line-height:1.75;margin:-.5rem 0 .7rem}
+.v22-auth .v92-feedback{display:block;font-size:.84rem;line-height:1.55;min-height:0;margin:-.55rem 0 .8rem;color:#b42336;font-weight:700}
+.v22-auth .v92-feedback:empty{display:none}
+.v22-auth .v92-feedback.v92-ok{color:#087e63}
+.v22-auth .v92-required{color:#ce3148}
+.v22-auth input:invalid:not(:placeholder-shown):focus{outline:2px solid #d44b54;outline-offset:2px}
+.v42-student-profile .v92-optional{color:var(--text-muted,#637089);font-weight:400}
+[data-theme="dark"] .v22-auth .v92-feedback{color:#ff9ea6}
+[data-theme="dark"] .v22-auth .v92-feedback.v92-ok{color:#65d9b2}
+@media(max-width:600px){.v22-auth .v92-hint,.v22-auth .v92-feedback{font-size:.79rem}.v22-auth input[name="guardianPhone"],.v22-auth input[name="password"]{min-height:44px}}

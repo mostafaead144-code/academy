@@ -1,0 +1,54 @@
+/* Academy Growth Pack — learning path, smart planning, teacher/parent insights */
+.growth-surface{margin:24px auto}
+.growth-card{background:linear-gradient(145deg,#fff,#f8fbff);border:1px solid rgba(148,163,184,.22);border-radius:26px;padding:22px;box-shadow:0 20px 45px rgba(15,23,42,.08);position:relative;overflow:hidden}
+.growth-card:before{content:"";position:absolute;inset:-40% auto auto -10%;width:180px;height:180px;border-radius:999px;background:radial-gradient(circle,rgba(59,130,246,.13),transparent 68%);pointer-events:none}
+.growth-head{display:flex;gap:16px;justify-content:space-between;align-items:flex-start;margin-bottom:18px}
+.growth-head h2,.growth-head h3{margin:4px 0 0;color:#0f172a}
+.growth-kicker{display:block;font-weight:900;font-size:.78rem;letter-spacing:.02em;color:#2563eb}
+.growth-muted{color:#64748b;font-size:.92rem;line-height:1.75}
+.growth-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.growth-metric{background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:16px;display:flex;gap:12px;align-items:center;min-width:0}
+.growth-metric i{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:#eff6ff;color:#2563eb;font-size:1.05rem}
+.growth-metric strong{display:block;font-size:1.35rem;color:#0f172a}
+.growth-metric small{color:#64748b;font-weight:700}
+.growth-action{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-top:16px;padding:16px 18px;border-radius:20px;background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff}
+.growth-action-copy{min-width:0}
+.growth-action-copy small{display:block;color:#bfdbfe;font-weight:800;margin-bottom:4px}
+.growth-action-copy strong{font-size:1.05rem}
+.growth-action a,.growth-action button{border:0;border-radius:14px;padding:11px 16px;font:inherit;font-weight:900;background:#fff;color:#0f172a;text-decoration:none;white-space:nowrap;cursor:pointer}
+.growth-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.growth-pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:8px 11px;background:#f1f5f9;color:#334155;font-size:.82rem;font-weight:800}
+.growth-pill.good{background:#ecfdf5;color:#047857}.growth-pill.warn{background:#fffbeb;color:#b45309}.growth-pill.bad{background:#fff1f2;color:#be123c}
+.growth-progress{height:11px;background:#e2e8f0;border-radius:999px;overflow:hidden;margin-top:12px}.growth-progress>span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#2563eb,#7c3aed)}
+.growth-two{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+.growth-list{display:grid;gap:10px}
+.growth-row{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:13px 14px;border:1px solid #e2e8f0;background:#fff;border-radius:16px}
+.growth-row-main{display:flex;gap:11px;align-items:center;min-width:0}.growth-row-main>span{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#f8fafc;flex:0 0 auto}
+.growth-row-main strong{display:block;color:#0f172a}.growth-row-main small{display:block;color:#64748b;margin-top:3px}
+.growth-row a,.growth-row button{border:0;background:#eff6ff;color:#1d4ed8;padding:9px 12px;border-radius:12px;text-decoration:none;font:inherit;font-weight:900;cursor:pointer}
+.growth-empty{padding:22px;text-align:center;color:#64748b;border:1px dashed #cbd5e1;border-radius:18px;background:#f8fafc}
+.growth-review-banner{display:flex;gap:14px;align-items:center;justify-content:space-between;padding:17px 18px;border-radius:20px;background:linear-gradient(135deg,#fff7ed,#fff);border:1px solid #fed7aa;margin-top:16px}
+.growth-review-banner strong{color:#9a3412}.growth-review-banner a{background:#ea580c;color:#fff;text-decoration:none;padding:10px 14px;border-radius:13px;font-weight:900}
+.auto-plan-box{margin-bottom:18px}
+.auto-plan-form{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.auto-plan-form label{display:grid;gap:7px;font-weight:800;color:#334155}.auto-plan-form input,.auto-plan-form select{width:100%;padding:12px 13px;border:1px solid #cbd5e1;border-radius:14px;background:#fff;font:inherit;color:#0f172a}
+.auto-plan-days{display:flex;gap:7px;flex-wrap:wrap}.auto-plan-days label{display:flex;align-items:center;gap:6px;padding:8px 10px;border-radius:12px;background:#f8fafc;border:1px solid #e2e8f0;font-size:.83rem}
+.auto-plan-actions{grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap}.auto-plan-actions button{border:0;border-radius:14px;padding:12px 16px;font:inherit;font-weight:900;cursor:pointer}.auto-plan-actions .primary{background:#2563eb;color:#fff}.auto-plan-actions .soft{background:#eff6ff;color:#1d4ed8}
+.auto-plan-summary{margin-top:14px}
+.planner-task-auto-link{display:inline-flex;align-items:center;gap:6px;margin-inline-start:8px;padding:7px 10px;border-radius:10px;background:#eff6ff;color:#1d4ed8!important;text-decoration:none;font-size:.78rem;font-weight:900}
+.smart-review-shell{max-width:1180px;margin:0 auto;padding:26px 18px 60px}
+.smart-review-hero{background:linear-gradient(135deg,#111827,#312e81 52%,#7c3aed);color:#fff;border-radius:30px;padding:28px;display:grid;grid-template-columns:1.15fr .85fr;gap:20px;box-shadow:0 24px 55px rgba(49,46,129,.22)}
+.smart-review-hero h1{margin:8px 0 10px;font-size:clamp(1.8rem,4vw,3rem)}.smart-review-hero p{margin:0;color:#ddd6fe;line-height:1.9}
+.smart-review-score{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-self:end}.smart-review-score div{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);padding:15px;border-radius:18px;text-align:center}.smart-review-score strong{display:block;font-size:1.45rem}.smart-review-score small{color:#e9d5ff}
+.smart-review-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}.smart-review-toolbar button,.smart-review-toolbar select,.smart-review-toolbar a{border:1px solid #dbeafe;background:#fff;color:#1e3a8a;border-radius:14px;padding:10px 13px;font:inherit;font-weight:800;text-decoration:none}
+.smart-review-toolbar button.active{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
+.review-question-card{background:#fff;border:1px solid #e2e8f0;border-radius:26px;padding:24px;box-shadow:0 18px 45px rgba(15,23,42,.08)}
+.review-question-card h2{line-height:1.8;color:#0f172a}.review-options{display:grid;gap:10px;margin-top:18px}.review-options button{border:1px solid #cbd5e1;background:#fff;padding:14px 16px;border-radius:16px;text-align:right;font:inherit;font-weight:800;cursor:pointer}.review-options button:hover{border-color:#60a5fa;background:#eff6ff}.review-options button.correct{border-color:#22c55e;background:#ecfdf5;color:#166534}.review-options button.wrong{border-color:#fb7185;background:#fff1f2;color:#9f1239}
+.review-feedback{margin-top:14px;padding:14px 16px;border-radius:16px;font-weight:800}.review-feedback.good{background:#ecfdf5;color:#166534}.review-feedback.bad{background:#fff1f2;color:#9f1239}
+.review-footer{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:18px}.review-footer button{border:0;border-radius:14px;padding:11px 16px;font:inherit;font-weight:900;background:#0f172a;color:#fff;cursor:pointer}
+.teacher-group-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.teacher-group-form .full{grid-column:1/-1}.teacher-group-form input,.teacher-group-form select,.teacher-group-form textarea{width:100%;padding:11px 12px;border:1px solid #cbd5e1;border-radius:13px;font:inherit;background:#fff}.teacher-group-form button{border:0;border-radius:13px;padding:11px 14px;background:#2563eb;color:#fff;font:inherit;font-weight:900;cursor:pointer}
+.teacher-group-list{display:grid;gap:10px;margin-top:14px}.teacher-group-item{border:1px solid #e2e8f0;border-radius:16px;padding:13px;background:#fff;display:flex;justify-content:space-between;gap:12px}.teacher-group-item small{color:#64748b}.teacher-group-item button{border:0;border-radius:10px;padding:8px 10px;background:#fff1f2;color:#be123c;font:inherit;font-weight:800;cursor:pointer}
+.parent-week-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.parent-week-grid div{padding:13px;border-radius:16px;background:#f8fafc;border:1px solid #e2e8f0;text-align:center}.parent-week-grid strong{display:block;font-size:1.25rem;color:#0f172a}.parent-week-grid small{color:#64748b}
+.parent-strengths{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.parent-strengths div{padding:13px;border-radius:16px;border:1px solid #e2e8f0;background:#fff}.parent-strengths strong{display:block;color:#0f172a}.parent-strengths small{color:#64748b}
+@media(max-width:900px){.growth-grid,.parent-week-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.growth-two,.smart-review-hero{grid-template-columns:1fr}.auto-plan-form{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.growth-card{padding:17px;border-radius:22px}.growth-grid,.parent-week-grid,.parent-strengths,.auto-plan-form{grid-template-columns:1fr}.growth-head,.growth-action,.growth-review-banner,.review-footer{align-items:stretch;flex-direction:column}.growth-action a,.growth-action button,.growth-review-banner a{width:100%;text-align:center}.smart-review-shell{padding:18px 12px 44px}.smart-review-hero{padding:20px;border-radius:24px}.smart-review-score{grid-template-columns:1fr 1fr 1fr}.teacher-group-form{grid-template-columns:1fr}.teacher-group-form .full{grid-column:auto}}

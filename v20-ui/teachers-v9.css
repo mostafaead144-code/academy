@@ -1,0 +1,31 @@
+/* V9 – teachers showcase. Additive and scoped; preserves the rest of the design. */
+.academy-teachers{--ts-blue:#1859e9;max-width:1285px;margin:32px auto 0;padding:0 22px;direction:rtl}
+.academy-teachers-student{padding:0;max-width:100%;margin:22px 0 24px}
+.academy-teachers-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 18px}
+.academy-teachers-copy h2{margin:4px 0 2px;color:#132858;font-size:clamp(22px,2.3vw,28px);font-weight:900;display:flex;align-items:center;gap:8px}
+.academy-teachers-copy p{margin:0;font-size:12px;line-height:1.9;color:#7583a0;font-weight:650}
+.academy-teachers-eyebrow{font-size:11px;color:var(--ts-blue);font-weight:900}
+.teachers-head-symbol{display:inline-grid;place-items:center;background:#e9f0ff;color:var(--ts-blue);border-radius:10px;width:34px;height:34px}
+.teachers-head-symbol .icon{height:20px;width:20px}
+.academy-teachers-tools{display:flex;align-items:center;gap:12px}
+.academy-teachers-all{color:var(--ts-blue);font-size:12px;font-weight:900;border:1px solid #dce7fc;background:#f2f6ff;border-radius:11px;padding:10px 14px;display:flex;align-items:center;gap:5px;white-space:nowrap}
+.academy-teachers-arrows{display:flex;gap:8px}
+.academy-teachers-arrows button{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;border:1px solid #dce5f3;background:#fff;color:#496183;box-shadow:0 4px 13px #25366a0e}
+.academy-teachers-arrows button:hover{background:#2059e9;color:white;border-color:#2059e9}
+.academy-teachers-track{display:flex;gap:14px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px 2px 18px;-webkit-overflow-scrolling:touch}
+.academy-teachers-track::-webkit-scrollbar{display:none}
+.academy-teacher-tile{flex:0 0 calc((100% - 56px)/5);min-width:0;scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;gap:5px;min-height:214px;padding:18px 11px 13px;border-radius:20px;border:1px solid #e8eef8;background:linear-gradient(180deg,#fff,#fbfcff);box-shadow:0 8px 22px #18387310;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;text-align:center;cursor:pointer;position:relative}
+.academy-teacher-tile:hover,.academy-teacher-tile:focus-visible{transform:translateY(-5px);border-color:#b4c9ff;box-shadow:0 18px 36px #1945a221;outline-offset:3px}
+.academy-teacher-photo-wrap{height:96px;width:96px;flex-shrink:0;display:grid;place-items:center;border-radius:50%;padding:4px;background:linear-gradient(140deg,#e8efff,#f1e6ff);box-shadow:0 4px 14px #34599b14}
+.academy-teacher-photo{width:100%;height:100%;display:block;border-radius:50%;object-fit:cover;background:#eef3fc}
+.academy-teacher-title{font-size:13px;font-weight:900;color:#19294f;line-height:1.65;margin-top:5px}
+.academy-teacher-subject{font-size:11px;color:#7787a6;font-weight:750;line-height:1.5}
+.academy-teacher-card-link{margin-top:auto;display:inline-flex;align-items:center;gap:4px;color:#1d58de;font-size:10px;font-weight:900;opacity:0;transform:translateY(5px);transition:opacity .2s ease,transform .2s ease}
+.academy-teacher-tile:hover .academy-teacher-card-link,.academy-teacher-tile:focus-visible .academy-teacher-card-link{opacity:1;transform:none}
+.academy-teachers-disclaimer{font-size:10px;color:#98a5b9;margin:0;line-height:1.6}
+.teacher-portrait{overflow:hidden}
+.teacher-photo-round{display:block;width:100%;height:100%;border-radius:inherit;object-fit:cover}
+@media(max-width:1120px){.academy-teacher-tile{flex-basis:calc((100% - 42px)/4)}}
+@media(max-width:840px){.academy-teacher-tile{flex-basis:calc((100% - 28px)/3)}.academy-teachers{margin-top:22px}.academy-teachers-student{margin:20px 0}}
+@media(max-width:590px){.academy-teachers{padding:0 15px}.academy-teachers-student{padding:0}.academy-teachers-heading{align-items:flex-start}.academy-teachers-tools{gap:6px;align-self:center}.academy-teachers-arrows{gap:5px}.academy-teachers-arrows button{width:33px;height:33px}.academy-teachers-all{padding:8px;font-size:10px}.academy-teachers-copy h2{font-size:21px}.academy-teachers-copy p{font-size:10px}.academy-teacher-tile{flex-basis:calc((100% - 14px)/2.2);min-height:195px;padding:15px 8px}.academy-teacher-photo-wrap{width:82px;height:82px}.academy-teacher-title{font-size:12px}.academy-teacher-card-link{opacity:1;transform:none}.academy-teachers-track{padding-bottom:15px}}
+@media(prefers-reduced-motion:reduce){.academy-teacher-tile,.academy-teacher-card-link{transition:none!important}}

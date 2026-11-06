@@ -1,0 +1,107 @@
+/* V20 — Design-system harmonization ONLY. All existing functional views retained. */
+:root{
+  --v20-blue:#2764e8;
+  --v20-indigo:#6956e6;
+  --v20-ink:#172b58;
+  --v20-muted:#687b9e;
+  --v20-border:#e3eaf7;
+  --v20-bg:#f4f7fe;
+  --v20-shadow:0 12px 34px rgba(26,48,100,.065);
+  --v20-shadow-hover:0 19px 42px rgba(26,48,100,.125);
+  --v20-radius:22px;
+}
+html{scroll-padding-top:100px}
+body{background:var(--v20-bg);color:var(--v20-ink);font-family:"Cairo","Tajawal","Segoe UI",Tahoma,Arial,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body:not(.v20-print) .main-shell{min-width:0}
+.main-content{min-width:0}
+.main-content img{max-width:100%;height:auto}
+.topbar{position:sticky;top:0;z-index:75;max-width:none;background:rgba(247,249,255,.93);-webkit-backdrop-filter:blur(17px);backdrop-filter:blur(17px);border-bottom:1px solid var(--v20-border);box-shadow:0 5px 21px rgba(29,50,106,.028)}
+.topbar-text strong{color:#1c315c;letter-spacing:0}
+.topbar-text small{color:var(--v20-muted)}
+.sidebar{scrollbar-width:thin;scrollbar-color:#465184 transparent;overflow-y:auto;background:linear-gradient(172deg,#182653 0%,#172046 55%,#141b3b 100%)}
+.sidebar .logo-symbol{box-shadow:0 12px 23px rgba(91,96,232,.28)}
+.sidebar .nav-item{border-radius:14px;min-height:43px;transition:background .18s,color .18s,transform .18s}
+.sidebar .nav-item.active{background:linear-gradient(110deg,#386ef2,#7457e8);box-shadow:0 9px 22px rgba(13,30,90,.24)}
+.sidebar .nav-item:hover:not(.active){background:rgba(255,255,255,.095)}
+/* Shared headings / panels across the four user roles. */
+.xp-page h1,.t17-root h1,.a18-root h1,.p19-page h1{font-weight:950;line-height:1.4;letter-spacing:-.015em}
+.xp-page h2,.t17-root h2,.a18-root h2,.p19-page h2{font-weight:950;line-height:1.45}
+.xp-page .xp-section-head h2,.t17-root .t17-section-heading h2,.a18-root .a18-head h1,.p19-page .p19-header h1{letter-spacing:-.015em}
+.xp-page .xp-section-head p,.t17-root .t17-section-heading p,.a18-root .a18-head p,.p19-page .p19-header p{line-height:1.95}
+:is(.xp-side-card,.xp-unit,.xp-course,.xp-lesson-tabs,.v16-question-card,.v16-mini-panel,.v16-review-item,.t17-panel,.t17-stat,.t17-quick-card,.a18-panel,.a18-stat,.a18-quick-card,.a18-data-card,.p19-panel,.p19-stat,.p19-child-card){border-color:var(--v20-border);box-shadow:var(--v20-shadow);border-radius:var(--v20-radius)}
+:is(.xp-course,.xp-lesson-row,.t17-quick-card,.a18-quick-card,.p19-child-card){transition:box-shadow .2s ease,transform .2s ease,border-color .2s ease}
+:is(.xp-course,.xp-lesson-row,.t17-quick-card,.a18-quick-card,.p19-child-card):hover{box-shadow:var(--v20-shadow-hover);border-color:#c8d9fc}
+:is(.xp-primary,.xp-outline,.xp-ghost,.v16-btn,.t17-btn,.a18-btn,.p19-btn,.btn){border-radius:14px;min-height:42px;font-weight:850}
+:is(.xp-primary,.t17-btn,.a18-btn,.p19-btn,.btn):focus-visible{outline:3px solid #55a0ff;outline-offset:3px}
+:is(.xp-lesson-row,.xp-teacher-option,.xp-course-main,.t17-content-row,.a18-approval,.p19-homework-row){scroll-margin-top:120px}
+:is(.xp-unit,.xp-lesson-row,.t17-panel,.a18-panel,.p19-panel){background-clip:padding-box}
+/* Inputs and tabular content receive consistent visible boundaries and focus. */
+:is(.t17-root,.a18-root,.p19-page,.xp-page) :is(input,select,textarea){max-width:100%}
+:is(.t17-root,.a18-root,.p19-page,.xp-page) :is(input,select,textarea):focus-visible{outline:3px solid #78a9fb;outline-offset:1px;border-color:#6092e8}
+:is(.t17-root,.a18-root,.p19-page,.xp-page) :is(table){width:100%;border-collapse:separate;border-spacing:0}
+:is(.t17-root,.a18-root,.p19-page,.xp-page) :is(button,[role="button"]):focus-visible{outline:3px solid #78a9fb;outline-offset:3px}
+/* Higher-contrast secondary copy where the original layers were too pale. */
+.xp-unit-title small,.xp-lesson-copy small,.xp-side-card > p,.a18-root .a18-status,.t17-root .t17-status{letter-spacing:0}
+/* Keep the guest/student experience visually aligned with the dashboards. */
+.academy-teacher-tile,.xp-course,.stage-card,.premium-stage-card{box-shadow:var(--v20-shadow)}
+.academy-teacher-tile:hover,.premium-stage-card:hover{box-shadow:var(--v20-shadow-hover)}
+/* Prototype-only role switcher for design reviews. */
+.v20-switcher{position:relative;display:flex;align-items:center;flex:none;font:inherit;z-index:90}
+.v20-switcher-button{display:flex;align-items:center;gap:7px;padding:10px 12px;background:#fff;border:1px solid #dbe6fb;border-radius:14px;font-size:11px;color:#2c5aba;font-weight:900;box-shadow:0 5px 14px rgba(30,63,126,.07);min-height:43px}
+.v20-switcher-button:hover{background:#f0f5ff;border-color:#a9c6ff}
+.v20-switcher-button .icon{width:16px;height:16px}
+.v20-switcher-label{white-space:nowrap}
+.v20-switcher-menu{position:absolute;left:0;top:calc(100% + 10px);width:min(280px,85vw);background:#fff;border:1px solid #dce6f8;border-radius:19px;box-shadow:0 24px 60px rgba(17,41,91,.19);padding:12px;z-index:180;text-align:right}
+.v20-switcher-menu[hidden]{display:none!important}
+.v20-switcher-kicker{display:block;font-size:10px;font-weight:900;color:#7184a7;padding:6px 9px 10px}
+.v20-switcher-menu button{display:flex;align-items:center;gap:11px;text-align:right;color:#253c6b;background:transparent;border:1px solid transparent;border-radius:12px;padding:10px;width:100%;font-size:12px;font-weight:850;min-height:46px}
+.v20-switcher-menu button .icon{height:18px;width:18px;color:#356ee4}
+.v20-switcher-menu button:hover,.v20-switcher-menu button[aria-current="page"]{background:#f0f5ff;border-color:#dae6fd}
+.v20-switcher-foot{font-size:10px;color:#657999;line-height:1.8;background:#f5f8ff;border-radius:11px;padding:10px;margin-top:7px}
+.v20-guest-switcher{margin-inline-start:auto}
+.v20-guest-switcher .v20-switcher-menu{left:0}
+.v20-skip{position:fixed;right:14px;top:-120px;padding:12px 15px;border-radius:12px;background:#163f9d;color:#fff;font-weight:900;z-index:9999}
+.v20-skip:focus{top:12px}
+.v20-preview-note{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;color:#667ba3;margin-inline-start:3px}
+.v20-preview-note .icon{width:14px;height:14px}
+/* Better mobile touch targets, readability, navigation, and overflow. */
+@media(max-width:1000px){.v20-switcher-button{padding:9px 10px}.v20-switcher-label{font-size:10px}}
+@media(max-width:760px){
+  .topbar{padding:0 11px;gap:7px;z-index:78}
+  .topbar-text strong{font-size:15px}.topbar-text small{font-size:10px}
+  .v20-switcher-button{min-width:39px;min-height:39px;justify-content:center;padding:8px}
+  .v20-switcher-label{display:none}
+  .v20-switcher-menu{width:250px;left:0}
+  .v20-guest-switcher{margin:0 6px}
+  .main-content{padding-bottom:104px}
+  .mobile-nav{box-shadow:0 -10px 34px rgba(18,42,91,.075);border-top:1px solid var(--v20-border)}
+  .mobile-nav button{min-width:44px;min-height:46px}
+  :is(.t17-root,.a18-root,.p19-page,.xp-page) :is(button,a){touch-action:manipulation}
+  .xp-course-layout,.xp-lesson-columns,.t17-root,.a18-root,.p19-page{min-width:0}
+}
+@media(max-width:420px){
+ .v20-switcher-menu{width:230px}
+ .topbar-text strong{font-size:13px}
+ .xp-page h1,.t17-root h1,.a18-root h1,.p19-page h1{overflow-wrap:anywhere}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media print{.v20-switcher,.v20-skip,.mobile-nav,.lab-trigger,.lab-drawer{display:none!important}.topbar{position:static!important}body{background:#fff!important}}
+/* Audit fix: the library's two-column mobile cards previously overflowed by 24px. */
+@media(max-width:520px){
+ .library-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .file-card{min-width:0;padding:11px;border-radius:18px}
+ .file-cover{height:112px}
+ .file-cover img{width:94px;height:94px}
+ .file-card h3{font-size:12px;overflow-wrap:anywhere;line-height:1.65}
+ .file-actions{gap:5px;min-width:0}
+ .file-actions .btn{min-width:0;padding:7px 4px;font-size:10px;white-space:normal;line-height:1.45;gap:4px}
+ .file-actions .heart{flex:0 0 32px;width:32px;height:36px}
+}
+
+/* Guest preview button is part of the existing header action row, never a second header line. */
+.launch-head-actions>.v20-switcher{margin-inline-start:6px}
+.launch-head-actions .v20-switcher-label{display:none}
+.launch-head-actions .v20-switcher-button{width:42px;min-width:42px;justify-content:center;padding:8px;box-shadow:none}
+.launch-head-actions .v20-switcher-button .icon:last-child{display:none}
+.launch-head-actions .v20-switcher-menu{inset-inline-end:auto;inset-inline-start:0;left:0}
+@media(max-width:560px){.launch-head-actions>.v20-switcher{margin-inline-start:0}.launch-head-actions .v20-switcher-button{width:36px;min-width:36px;padding:7px}}

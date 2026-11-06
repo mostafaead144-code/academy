@@ -1,0 +1,18 @@
+
+/* V49 — compact, accessible request counts; no changes to V20 layout. */
+.v22 .v49-nav-badge{display:inline-flex;align-items:center;justify-content:center;margin-inline-start:auto;flex:0 0 auto;min-width:23px;height:23px;padding:0 6px;border-radius:100px;background:#eb405d;color:white;font-size:11px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums;box-shadow:0 2px 7px #eb405d4d}
+.v22 .v22-side-link.active .v49-nav-badge{background:white;color:#c92d54;box-shadow:none}
+.v22 .v49-bell{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:45px;min-height:42px;border:1px solid #cbd8f4;border-radius:13px;background:#fff;color:#203e83;font-size:21px;cursor:pointer}
+.v22 .v49-bell b{position:absolute;right:-7px;top:-8px;display:flex;align-items:center;justify-content:center;min-width:23px;height:23px;padding:0 4px;border-radius:50px;background:#ec3e60;color:white;font-size:10px;border:2px solid white}
+.v22 .v49-inbox{max-width:920px;margin:24px auto;padding:28px}
+.v22 .v49-inbox-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.v22 .v49-inbox-heading h2{margin:0 0 8px;font-size:23px}
+.v22 .v49-inbox-heading p{color:#667898;line-height:1.8}
+.v22 .v49-inbox-list{display:grid;gap:10px;margin:18px 0}
+.v22 .v49-inbox-item{display:flex;align-items:center;gap:12px;width:100%;border:1px solid #dee7f7;border-radius:14px;background:#f8faff;padding:15px 18px;text-align:right;font:inherit;color:#273b62;cursor:pointer}
+.v22 .v49-inbox-item:hover{background:#edf3ff}
+.v22 .v49-inbox-item .v49-nav-badge{margin-inline-start:auto}
+.v22 .v49-inbox-empty{margin-top:20px;border:1px dashed #becce5;border-radius:14px;padding:20px;text-align:center}
+.v22 .v49-inbox small{color:#647694;line-height:1.7}
+.v22 [data-action="route"]:focus-visible,.v22 .v49-bell:focus-visible{outline:3px solid #8fb4ff;outline-offset:2px}
+@media(max-width:720px){.v22 .v49-inbox{padding:17px;margin:12px 0}.v22 .v49-inbox-heading h2{font-size:19px}.v22 .v25-role-shell .v22-role-sidebar .v22-side-link .v49-nav-badge{margin-inline-start:auto}}

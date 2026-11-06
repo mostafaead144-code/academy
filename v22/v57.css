@@ -1,0 +1,18 @@
+/* V57: supplementary interactive assessment cards, inheriting existing V20 theme. */
+.v57-editor,.v57-question,.v57-result{border-radius:20px;line-height:1.85}
+.v57-editor form{display:grid;gap:14px;margin-top:16px}
+.v57-editor label,.v57-question label{display:grid;gap:7px;font-weight:700;max-width:100%}
+.v57-editor input,.v57-editor select,.v57-editor textarea,.v57-question input,.v57-question select,.v57-question textarea{width:100%;max-width:100%;min-width:0;box-sizing:border-box;border:1px solid var(--line,#cbd5e1);background:var(--surface,#fff);color:inherit;border-radius:12px;padding:12px;font:inherit}
+.v57-question .v22-answer{display:block;width:100%;margin:10px 0;text-align:right;white-space:normal}
+.v57-order-line{display:grid!important;grid-template-columns:minmax(90px,1fr) minmax(110px,2fr);gap:12px!important;align-items:center;margin:12px 0;min-width:0}
+.v57-order-line span{overflow-wrap:anywhere}
+.v57-small{font-size:.86rem;opacity:.85;line-height:1.9}
+.v57-mark{padding:14px!important;margin:14px 0!important}
+.v57-mark-item{border-top:1px solid #bdc7d4;padding:12px 0;overflow-wrap:anywhere}
+.v57-result h2{font-size:2rem}
+@media(max-width:420px){.v57-order-line{grid-template-columns:1fr;gap:5px!important}.v57-editor,.v57-question{padding:14px!important}}
+
+.v57-editor [hidden]{display:none!important}
+.v57-simple-builder{background:var(--surface-secondary,#f6f8fe);border-radius:15px;padding:12px;margin:14px 0;border:1px solid var(--line,#d7dfea)}
+.v57-simple-builder summary{cursor:pointer;padding:6px 3px}
+.v57-simple-builder label{margin:10px 0}

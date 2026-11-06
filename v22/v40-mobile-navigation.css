@@ -1,0 +1,220 @@
+/* Keep every desktop sidebar's original glyphs and geometry. */
+.v22 .v40-mobile-glyph,.v22 .v40-item-arrow {display:none;}
+@media (min-width:721px) {.v22 .v22-layout>.v22-side .v40-drawer-scroll {display:contents;}}
+/* Egtaz V40 — redesigned MOBILE navigation only. Desktop layout remains V20. */
+@media (max-width:720px) {
+  .v22 .v40-desktop-glyph {display:none!important;}
+  .v22 .v40-mobile-glyph,.v22 .v40-item-arrow {display:grid;place-items:center;}
+  .v22 {
+    --v40-ink:#142c63;
+    --v40-text:#496188;
+    --v40-accent:#4f62ea;
+    --v40-spring:cubic-bezier(.2,.85,.2,1);
+  }
+  body.v39-menu-open {overflow:hidden;}
+  .v22:has(.v40-dock) {padding-bottom:calc(102px + env(safe-area-inset-bottom, 0px));}
+  /* Floating white dock, active blue indicator and gentle entrance animation */
+  .v22 .v39-bottom-nav.v40-dock {
+    position:fixed;left:10px;right:10px;bottom:max(10px,env(safe-area-inset-bottom,0px));
+    inset-block-start:auto;z-index:1002;direction:rtl;
+    display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;
+    padding:8px;min-height:75px;border-radius:25px;
+    background:rgba(255,255,255,.96);color:var(--v40-ink);
+    border:1px solid rgba(202,213,242,.93);
+    box-shadow:0 16px 50px rgba(24,43,96,.20),0 2px 6px rgba(24,43,96,.04);
+    backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+    animation:v40DockEnter .5s var(--v40-spring) both;
+  }
+  .v22 .v40-dock .v39-bottom-link {
+    display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;
+    position:relative;margin:0;min-height:59px;padding:4px 2px;
+    border-radius:17px;background:transparent;box-shadow:none;transform:none;
+    color:#607398;border:0;
+    transition:background .22s ease,color .22s ease,transform .26s var(--v40-spring);
+  }
+  .v22 .v40-dock .v39-bottom-link .v40-dock-icon {
+    display:grid;place-items:center;flex-shrink:0;
+    width:37px;height:34px;min-height:0;border-radius:12px;
+    background:transparent;color:inherit;box-shadow:none;
+    transition:transform .3s var(--v40-spring),background .2s ease;
+  }
+  .v22 .v40-dock .v39-bottom-link .v40-ico {display:block;width:23px;height:23px;stroke-width:2;}
+  .v22 .v40-dock .v39-bottom-link small {color:inherit;font-size:10px;font-weight:850;line-height:1.4;white-space:nowrap;}
+  .v22 .v40-dock .v39-bottom-link.active,
+  .v22 .v40-dock .v39-bottom-link[aria-current="page"] {
+    color:#324be2;background:#eef1ff;box-shadow:inset 0 0 0 1px rgba(86,107,235,.09);
+    transform:translateY(-1px);
+  }
+  .v22 .v40-dock .v39-bottom-link.active::after {
+    content:"";position:absolute;top:3px;left:50%;width:24px;height:3px;
+    transform:translateX(-50%);border-radius:6px;background:#5b61f0;
+    animation:v40Indicator .27s var(--v40-spring) both;
+  }
+  .v22 .v40-dock .v39-bottom-link.active .v40-dock-icon svg{animation:v40Pop .36s var(--v40-spring) both;}
+  .v22 .v40-dock .v39-bottom-menu {
+    background:linear-gradient(145deg,#3067f4,#7054ee);color:#fff;
+    box-shadow:0 5px 14px rgba(62,76,200,.29);border-radius:17px;
+  }
+  .v22 .v40-dock .v39-bottom-menu .v40-dock-icon {color:#fff;background:none;}
+  body.v39-menu-open .v40-dock .v39-bottom-menu .v40-dock-icon {transform:rotate(90deg) scale(.96);}
+  .v22 .v40-dock .v39-bottom-link:active {transform:scale(.94);}
+  .v22 .v40-dock .v39-bottom-link:focus-visible,
+  .v22 .v40-drawer [data-action]:focus-visible,
+  .v22 .v22-role-sidebar [data-action]:focus-visible {outline:3px solid #a4b1ff;outline-offset:2px;}
+  /* Overlay and sidebar: header and actions remain fixed while the links scroll on touch. */
+  .v22 .v39-mobile-overlay {
+    position:fixed;inset:0;z-index:1003;
+    background:rgba(9,17,46,.58);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+    transition:opacity .27s ease,visibility .27s;
+  }
+  .v22 .v22-layout>.v22-side.v40-drawer,
+  .v22 .v39-standalone-drawer.v40-drawer,
+  .v22 .v25-role-shell .v22-role-sidebar {
+    position:fixed;inset-block:0;right:0;left:auto;
+    display:flex!important;flex-direction:column;align-items:stretch;gap:0;
+    width:min(358px,91vw);max-width:91vw;
+    height:100vh;height:100dvh;min-height:0;max-height:100dvh;
+    margin:0;padding:0!important;
+    overflow:hidden!important;overflow-x:hidden!important;overflow-y:hidden!important;
+    border:0;border-radius:28px 0 0 28px;
+    z-index:1004;
+    background:#f5f7fd;color:var(--v40-ink);
+    box-shadow:-18px 0 55px rgba(4,17,60,.24);
+    transform:translate3d(110%,0,0);visibility:hidden;pointer-events:none;
+    transition:transform .4s var(--v40-spring),visibility .4s;
+    overscroll-behavior:contain;
+  }
+  body.v39-menu-open .v22-layout>.v22-side.v40-drawer,
+  body.v39-menu-open .v39-standalone-drawer.v40-drawer,
+  body.v39-menu-open .v25-role-shell .v22-role-sidebar {
+    transform:translate3d(0,0,0);visibility:visible;pointer-events:auto;
+  }
+  .v22 .v40-drawer .v40-drawer-head,
+  .v22 .v25-role-shell .v39-role-drawer-head.v40-drawer-head {
+    display:flex;order:-1;align-items:center;gap:10px;
+    flex:0 0 auto;min-height:124px;padding:34px 16px 19px!important;margin:0!important;
+    background:linear-gradient(132deg,#1e3d90,#355df2 66%,#7459ef);
+    border:0;border-radius:0;box-shadow:0 9px 25px rgba(44,78,170,.14);
+    color:#fff;
+  }
+  .v22 .v40-drawer-badge {
+    display:grid;place-items:center;width:49px;height:49px;flex-shrink:0;
+    background:rgba(255,255,255,.17);border:1px solid rgba(255,255,255,.2);
+    border-radius:17px;box-shadow:0 9px 18px rgba(4,17,80,.12);
+  }
+  .v22 .v40-drawer-badge .v40-ico {width:25px;height:25px;}
+  .v22 .v40-drawer-heading {min-width:0;display:flex;flex:1;flex-direction:column;gap:5px;}
+  .v22 .v40-drawer-heading strong {font-size:19px;line-height:1.35;font-weight:950;color:#fff;}
+  .v22 .v40-drawer-heading small {font-size:11px;line-height:1.5;color:#e1e8ff;}
+  .v22 .v40-drawer-head button[data-action="v39-menu-close"],
+  .v22 .v25-role-shell .v40-drawer-head button[data-action="v39-menu-close"] {
+    display:grid;place-items:center;flex:0 0 auto;
+    width:39px;height:39px;margin:0;padding:0;border:1px solid rgba(255,255,255,.2);
+    border-radius:14px;background:rgba(255,255,255,.15);color:#fff;
+    transition:background .2s ease,transform .2s ease;
+  }
+  .v22 .v40-drawer-head button[data-action="v39-menu-close"]:active{transform:scale(.93);}
+  /* SCROLL FIX: a bounded flex child with native vertical touch scrolling. */
+  .v22 .v40-drawer-scroll,
+  .v22 .v25-role-shell .v22-role-sidebar>.v22-side-links {
+    display:block!important;flex:1 1 auto!important;
+    min-height:0!important;max-height:none!important;
+    overflow-y:auto!important;overflow-x:hidden!important;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-y:contain;touch-action:pan-y;
+    scroll-behavior:smooth;
+    padding:17px 14px 20px!important;
+    margin:0!important;
+    scrollbar-width:thin;scrollbar-color:#bec9e8 transparent;
+  }
+  .v22 .v40-drawer-scroll::-webkit-scrollbar,
+  .v22 .v25-role-shell .v22-role-sidebar>.v22-side-links::-webkit-scrollbar {width:5px;}
+  .v22 .v40-drawer-scroll::-webkit-scrollbar-thumb,
+  .v22 .v25-role-shell .v22-role-sidebar>.v22-side-links::-webkit-scrollbar-thumb {background:#b8c6e6;border-radius:20px;}
+  .v22 .v40-drawer .v40-drawer-item,
+  .v22 .v25-role-shell .v22-role-sidebar .v22-side-link {
+    position:relative;display:flex!important;align-items:center;justify-content:flex-start;
+    gap:12px;flex:0 0 auto;width:100%;min-width:0;min-height:58px;
+    padding:9px 11px!important;margin:0 0 8px!important;
+    background:#fff!important;color:#31466f!important;
+    border:1px solid #e2e9f8!important;border-radius:17px!important;
+    box-shadow:0 3px 10px rgba(31,56,112,.045)!important;
+    text-align:right;font-size:13px;font-weight:850;
+    transition:transform .24s var(--v40-spring),box-shadow .24s ease,border-color .24s ease,background .24s ease;
+  }
+  .v22 .v40-drawer .v40-drawer-item .v40-item-icon,
+  .v22 .v25-role-shell .v22-role-sidebar .v22-side-link .v22-side-glyph {
+    display:grid;place-items:center;flex:0 0 auto;
+    width:40px;height:40px;border-radius:13px;
+    background:#eef2ff;color:#5166dc;box-shadow:none;
+  }
+  .v22 .v40-drawer-item .v40-ico,
+  .v22 .v25-role-shell .v22-side-glyph .v40-ico {width:22px;height:22px;}
+  .v22 .v40-item-label {display:block;flex:1;min-width:0;line-height:1.5;}
+  .v22 .v40-item-arrow {margin-inline-start:auto;font-size:21px;font-weight:400;opacity:.5;}
+  .v22 .v40-drawer .v40-drawer-item.active,
+  .v22 .v25-role-shell .v22-role-sidebar .v22-side-link.active {
+    background:linear-gradient(115deg,#335df0,#6656ea)!important;
+    color:#fff!important;border-color:transparent!important;
+    box-shadow:0 10px 22px rgba(69,83,200,.22)!important;
+  }
+  .v22 .v40-drawer .v40-drawer-item.active .v40-item-icon,
+  .v22 .v25-role-shell .v22-role-sidebar .v22-side-link.active .v22-side-glyph {
+    background:rgba(255,255,255,.2)!important;color:#fff!important;
+  }
+  .v22 .v40-drawer .v40-drawer-item:hover,
+  .v22 .v25-role-shell .v22-role-sidebar .v22-side-link:hover {transform:translateY(-1px);border-color:#b4c4f9!important;box-shadow:0 8px 16px rgba(46,68,132,.09)!important;}
+  .v22 .v40-drawer .v40-drawer-item:active,
+  .v22 .v25-role-shell .v22-role-sidebar .v22-side-link:active {transform:scale(.985);}
+  .v22 .v25-role-shell .v22-role-sidebar .v22-side-link::after {display:none!important;}
+  .v22 .v25-role-shell .v22-role-sidebar>.v22-side-brand {display:none!important;}
+  .v22 .v25-role-shell .v22-side-links>.v25-nav-group {
+    display:grid!important;gap:0;min-width:0;flex:none!important;margin:0 0 13px!important;padding:0!important;
+    border:0!important;background:transparent!important;box-shadow:none!important;
+  }
+  .v22 .v25-role-shell .v22-side-links .v25-nav-caption {
+    display:block!important;font-size:11px;color:#7284a6!important;
+    padding:8px 8px 11px;font-weight:900;
+  }
+  .v22 .v40-drawer .v40-drawer-footer,
+  .v22 .v25-role-shell .v22-role-sidebar>.v39-drawer-utilities {
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    flex:0 0 auto;gap:9px;min-height:78px;margin:0!important;
+    padding:14px 13px calc(14px + env(safe-area-inset-bottom,0px))!important;
+    border:0;border-top:1px solid #e4eaf7;background:#fff;
+    box-shadow:0 -9px 19px rgba(38,63,125,.045);
+  }
+  .v22 .v40-drawer-footer .v22-btn,
+  .v22 .v25-role-shell .v22-role-sidebar>.v39-drawer-utilities .v22-btn,
+  .v22 .v25-role-shell .v22-role-sidebar>.v39-drawer-utilities a.v22-btn {
+    display:grid;place-items:center;min-width:0;min-height:43px;padding:8px 7px;
+    border-radius:14px;border:1px solid #d9e3fa;background:#f0f4ff;
+    color:#3453a4!important;box-shadow:none;white-space:normal;
+    text-align:center;font-size:11px;font-weight:850;
+  }
+  .v22 .v25-role-shell .v22-role-sidebar>.v39-drawer-utilities a.v22-btn {grid-column:1/-1;}
+  .v22 .v25-role-shell .v22-role-sidebar>.v22-side-tail {display:none!important;}
+  /* Animation, only while the drawer is visible */
+  body.v39-menu-open .v40-drawer-scroll>.v40-drawer-item {
+    animation:v40LinkIn .34s var(--v40-spring) backwards;
+    animation-delay:calc(min(var(--v40-order,0),9)*25ms);
+  }
+}
+@media (max-width:360px) {
+  .v22 .v39-bottom-nav.v40-dock {left:6px;right:6px;padding:6px;gap:2px;}
+  .v22 .v40-dock .v39-bottom-link small {font-size:9px;}
+  .v22 .v40-dock .v39-bottom-link .v40-dock-icon {width:31px;height:31px;}
+  .v22 .v40-dock .v39-bottom-link .v40-ico {width:20px;height:20px;}
+}
+@keyframes v40DockEnter{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes v40Indicator{from{width:8px;opacity:0}to{width:24px;opacity:1}}
+@keyframes v40Pop{0%{transform:scale(.84)}70%{transform:scale(1.13)}100%{transform:scale(1)}}
+@keyframes v40LinkIn{from{opacity:0;transform:translateX(15px)}to{opacity:1;transform:translateX(0)}}
+@media (prefers-reduced-motion:reduce) {
+  .v22 .v39-bottom-nav.v40-dock,
+  .v22 .v40-dock .v39-bottom-link.active svg,
+  .v22 .v40-drawer-scroll>.v40-drawer-item {animation:none!important;}
+  .v22 .v40-dock .v39-bottom-link,
+  .v22 .v40-dock .v39-bottom-link .v40-dock-icon,
+  .v22 .v40-drawer .v40-drawer-item {transition:none!important;scroll-behavior:auto!important;}
+}

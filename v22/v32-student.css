@@ -1,0 +1,35 @@
+/* EGTAZ M8 — restore missing V32 student presentation, scoped to the V20 portal. */
+.v22 .v32-result-row{display:flex;align-items:center;justify-content:space-between;gap:15px;min-width:0;padding:16px 7px;border-bottom:1px solid #e7edfa}
+.v22 .v32-result-row:last-child{border-bottom:0}
+.v22 .v32-result-row>div:first-child{flex:1;min-width:0}
+.v22 .v32-result-row strong,.v22 .v32-result-row small{display:block;overflow-wrap:anywhere}
+.v22 .v32-result-row strong{font-size:14px;color:#1f3a70;font-weight:900}
+.v22 .v32-result-row small{margin-top:7px;color:#7184a3;font-size:12px;line-height:1.7}
+.v22 .v32-row-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+.v22 .v32-subject-progress{display:grid;grid-template-columns:minmax(150px,1fr) minmax(100px,2fr) auto auto;gap:14px;align-items:center;padding:15px 8px;border-bottom:1px solid #edf1fa;min-width:0}
+.v22 .v32-subject-progress:last-child{border-bottom:0}
+.v22 .v32-subject-progress>div:first-child{min-width:0}
+.v22 .v32-subject-progress strong{display:block;color:#1c376e;font-size:14px;overflow-wrap:anywhere}
+.v22 .v32-subject-progress small{display:block;margin-top:5px;font-size:12px;color:#667c9f}
+.v22 .v32-subject-progress>b{color:#405cbd;font-weight:950;font-size:15px;min-width:50px;text-align:center}
+.v22 .v32-mistake-card{margin-top:15px;min-width:0}
+.v22 .v32-mistake-title{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:16px}
+.v22 .v32-mistake-title>div{flex:1;min-width:0}
+.v22 .v32-mistake-title h3{margin:0;color:#1c376e;font-size:18px}
+.v22 .v32-mistake-title p,.v22 .v32-mistake-title small{display:block;color:#7485a6;font-size:12px;line-height:1.9;margin:8px 0 0}
+.v22 .v32-mistake-preview{padding:13px 16px;margin-top:8px;background:#f5f8ff;border:1px solid #e2e9fa;border-radius:14px;color:#36517d;line-height:1.9;font-size:13px;overflow-wrap:anywhere}
+.v22 .v32-practice .v32-meter{margin-bottom:20px}
+.v22 .v32-practice h2{color:#193665;font-size:22px;line-height:1.7}
+.v22 .v32-practice .v22-answer{width:100%;text-align:right;display:block;margin-top:10px;border-radius:14px}
+.v22 .v32-practice .v22-answer.correct{background:#e8f9f0;border-color:#61c58e}
+.v22 .v32-practice .v22-answer.wrong{background:#fff1f1;border-color:#ed8a8a}
+.v22 .v32-notification{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-top:14px;border-inline-start:4px solid #596cef}
+.v22 .v32-notification.read{border-inline-start-color:#c8d2e4;opacity:.88}
+.v22 .v32-notification>div{flex:1;min-width:0}
+.v22 .v32-notification h3{color:#183a76;margin:0 0 6px}
+.v22 .v32-notification p{white-space:pre-wrap;overflow-wrap:anywhere;color:#536b94;line-height:1.9}
+.v22 .v32-notification small{font-size:12px;color:#7b8ba8}
+.v22 .v32-lesson-tools{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:15px}
+@media(max-width:820px){.v22 .v32-subject-progress{grid-template-columns:minmax(0,1fr) auto;gap:10px}.v22 .v32-subject-progress .v32-meter{grid-column:1/-1;grid-row:2}.v22 .v32-subject-progress .v22-btn{grid-column:1/-1;justify-self:start}}
+@media(max-width:600px){.v22 .v32-result-row{align-items:flex-start;flex-direction:column;padding:13px 5px}.v22 .v32-row-actions{justify-content:flex-start;width:100%}.v22 .v32-mistake-title{align-items:stretch;flex-direction:column}.v22 .v32-mistake-title .v22-btn,.v22 .v32-notification .v22-btn{width:100%}.v22 .v32-notification{flex-direction:column}.v22 .v32-subject-progress{grid-template-columns:minmax(0,1fr) auto}.v22 .v32-practice h2{font-size:18px}}
+@media(prefers-reduced-motion:reduce){.v22 .v32-mistake-card,.v22 .v32-practice{animation:none!important;transition:none!important}}
