@@ -1,0 +1,7 @@
+# أسرار السيرفر - لا ترفع أبدا
+api/config.local.php
+*.sql
+*.zip
+*.bak
+*.log
+node_modules/
