@@ -59,6 +59,7 @@ require __DIR__.'/v90-journey.php';
 require __DIR__.'/v91-hardening.php';
 require __DIR__.'/v95-read.php';
 require __DIR__.'/v97-student-ui.php';
+require __DIR__.'/v101-maintenance.php';
 // Security headers for API JSON responses (no impact on HTML/CSS theme).
 header('X-Content-Type-Options: nosniff');
 header('Referrer-Policy: no-referrer');
@@ -70,6 +71,7 @@ try{
  $method=$_SERVER['REQUEST_METHOD']??'GET';if($method==='OPTIONS'){http_response_code(204);exit;}
  $uri=parse_url($_SERVER['REQUEST_URI']??'/',PHP_URL_PATH)?:'/';$pos=strpos($uri,'/api');$route='/'.trim($pos===false?$uri:substr($uri,$pos+4),'/');
  $pdo=academy_db();
+ academy_v101_housekeeping($pdo);
  // V60 delegated accounts must be constrained before any legacy V40-V59 route executes.
  academy_v60_guard_delegated($route,$method);
  academy_v97_route($route,$method,$pdo);

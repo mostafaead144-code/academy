@@ -431,15 +431,18 @@ function academy_role_allows(?array $user,string $method,string $path): bool {
         foreach(["studentSubscriptionsV1/$uid","subscriptionRequestsV1/$uid","learningV4/diagnostics/$uid","learningV4/recommendations/$uid"]as$r)if($read&&academy_path_is($path,$r))return true;
         foreach(['assignments','scheduleEvents','leaderboardV3','notificationBroadcasts','community','lessonDiscussionsV1']as$r)if($read&&academy_path_is($path,$r))return true;
         if(!$read&&($parts[0]??'')==='community'){
-            // Students may create a new forum post, or only mutate their own per-user reaction/report/membership leaves.
-            if(($parts[1]??'')==='forums'&&isset($parts[2])&&!isset($parts[3]))return academy_read_node('community/forums/'.$parts[2])===null;
-            if(($parts[1]??'')==='forums'&&isset($parts[2],$parts[3],$parts[4])&&in_array($parts[3],['likesBy','reports'],true)&&$parts[4]===$uid)return true;
+            // Students may only mutate their own per-user reaction/report/membership leaves.
+            // V101: new forum posts go through communicationSubmissionsV1 and admin review.
+            // A direct write let a student publish unreviewed posts under any author name.
+            // Reactions must target an existing post, so they cannot create placeholder posts either.
+            if(($parts[1]??'')==='forums'&&isset($parts[2],$parts[3],$parts[4])&&!isset($parts[5])&&in_array($parts[3],['likesBy','reports'],true)&&$parts[4]===$uid)return academy_read_node('community/forums/'.$parts[2].'/createdAt')!==null;
             if(($parts[1]??'')==='studyGroups'&&isset($parts[2],$parts[3],$parts[4])&&$parts[3]==='members'&&$parts[4]===$uid)return true;
             return false;
         }
         if($read&&($parts[0]??'')==='assignmentSubmissions'&&isset($parts[2])&&$parts[2]===$uid)return true;
-        if(($parts[0]??'')==='lessonDiscussionsV1'&&isset($parts[3])&&$parts[3]===$uid)return true;
-        if(($parts[0]??'')==='attendanceV4'&&isset($parts[2])&&$parts[2]===$uid)return true;
+        // V101: discussions are written by the reviewed submission flow; legacy attendance is teacher-owned.
+        // Students keep read access to their own records but can no longer self-mark or self-publish.
+        if($read&&($parts[0]??'')==='attendanceV4'&&isset($parts[2])&&$parts[2]===$uid)return true;
         if(($parts[0]??'')==='lessonRatingsV4'&&isset($parts[2])&&$parts[2]===$uid)return true;
         if($read&&($parts[0]??'')==='certificatesV4'&&isset($parts[1])){$c=academy_read_node('certificatesV4/'.$parts[1]);return is_array($c)&&($c['studentId']??'')===$uid;}
     }

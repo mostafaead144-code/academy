@@ -1,0 +1,10 @@
+# Production secrets: keep only on the server
+api/config.local.php
+# Build tooling
+node_modules/
+# Local/OS noise
+.DS_Store
+Thumbs.db
+*.log
+*.sql.gz
+/release/
