@@ -120,10 +120,10 @@ function academy_v57_route(string $route,string $method,PDO $pdo):void {
     academy_json(['ok'=>true,'reused'=>true,'result'=>$existing,'review'=>$review,'pendingEssays'=>(int)($existing['pendingEssays']??0)]);
    }
    $lesson=academy_read_node('lessons/'.$lessonId);$profile=academy_read_node('studentProfilesV3/'.$uid);
-   if(!is_array($lesson)||!academy_content_visible_to_reader($user,$lesson)||!academy_student_can_access_content($user,$lesson))academy_v57_fail('lesson_not_found',404);
+   if(!is_array($lesson)||!academy_content_visible_to_reader($user,$lesson)||!academy_student_can_access_content($user,$lesson,'lessons/'.$lessonId))academy_v57_fail('lesson_not_found',404);
    if(!is_array($profile)||!academy_scope_matches($lesson,$profile))academy_v57_fail('lesson_scope_mismatch',403);
    $source=null;$owner='';
-   if($sourceType==='standalone'){$source=academy_read_node('quizzes/'.$quizId);if(!is_array($source)||($source['lessonId']??'')!==$lessonId||!academy_content_visible_to_reader($user,$source)||!academy_student_can_access_content($user,$source))academy_v57_fail('quiz_not_found',404);}
+   if($sourceType==='standalone'){$source=academy_read_node('quizzes/'.$quizId);if(!is_array($source)||($source['lessonId']??'')!==$lessonId||!academy_content_visible_to_reader($user,$source)||!academy_student_can_access_content($user,$source,'quizzes/'.$quizId))academy_v57_fail('quiz_not_found',404);}
    else{
     if(!preg_match('/^[a-zA-Z0-9_-]{2,120}$/D',$teacherId)||$quizId!=='teacher_'.$teacherId.'_'.$lessonId)academy_v57_fail('quiz_not_found',404);
     $pack=academy_read_node('teacherContentsV6/'.$lessonId.'/'.$teacherId);

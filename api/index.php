@@ -60,6 +60,7 @@ require __DIR__.'/v91-hardening.php';
 require __DIR__.'/v95-read.php';
 require __DIR__.'/v97-student-ui.php';
 require __DIR__.'/v101-maintenance.php';
+require __DIR__.'/v101-courses.php';
 // Security headers for API JSON responses (no impact on HTML/CSS theme).
 header('X-Content-Type-Options: nosniff');
 header('Referrer-Policy: no-referrer');
@@ -102,6 +103,7 @@ try{
  if(academy_bearer()&&!in_array($route,['/auth/me','/auth/logout','/auth/password','/auth/reauth','/auth/password-reset','/auth/password-reset-request'],true)){
   $authUser=academy_current_user(false);if($authUser&&$authUser['primary_role']==='student'&&academy_v50_force_reset_required($authUser['id']))academy_json(['ok'=>false,'error'=>'v50_password_change_required'],403);
  }
+ academy_v101_route($route,$method,$pdo);
  academy_v54_route($route,$method,$pdo);
  academy_v55_route($route,$method,$pdo);
  academy_v56_route($route,$method,$pdo);
@@ -275,7 +277,7 @@ try{
    if(!preg_match('/^[a-zA-Z0-9_-]{2,120}$/D',$lessonId)||!in_array($sourceType,['teacher','standalone','embedded'],true)||!preg_match('/^[a-zA-Z0-9_-]{2,180}$/D',$quizId)||!preg_match('/^[a-zA-Z0-9_-]{8,80}$/D',$attemptId))academy_json(['ok'=>false,'error'=>'quiz_request_invalid'],422);
    $lesson=academy_read_node('lessons/'.$lessonId);
    if(!is_array($lesson)||!academy_content_visible_to_reader($u,$lesson))academy_json(['ok'=>false,'error'=>'lesson_not_found'],404);
-   if(!academy_student_can_access_content($u,$lesson))academy_json(['ok'=>false,'error'=>'content_locked'],403);
+   if(!academy_student_can_access_content($u,$lesson,'lessons/'.$lessonId))academy_json(['ok'=>false,'error'=>'content_locked'],403);
    $profile=academy_read_node('studentProfilesV3/'.$u['id']);if(!is_array($profile))academy_json(['ok'=>false,'error'=>'profile_missing'],422);
    $historyPath='studentProfilesV3/'.$u['id'].'/quizHistory/'.$attemptId;
    // A confirmed retry must return the original result even if the quiz changed meanwhile.
@@ -295,7 +297,7 @@ try{
       $source=$lesson;$sourceVersion=(int)($lesson['updatedAt']??0);
    }elseif($sourceType==='standalone'){
       $quiz=academy_read_node('quizzes/'.$quizId);
-      if(is_array($quiz)&&($quiz['lessonId']??'')===$lessonId&&academy_content_visible_to_reader($u,$quiz)&&academy_student_can_access_content($u,$quiz)){$source=$quiz;$sourceVersion=(int)($quiz['updatedAt']??0);}
+      if(is_array($quiz)&&($quiz['lessonId']??'')===$lessonId&&academy_content_visible_to_reader($u,$quiz)&&academy_student_can_access_content($u,$quiz,'quizzes/'.$quizId)){$source=$quiz;$sourceVersion=(int)($quiz['updatedAt']??0);}
    }else{
       if(!preg_match('/^[a-zA-Z0-9_-]{2,120}$/D',$teacherId)||$quizId!=='teacher_'.$teacherId.'_'.$lessonId)academy_json(['ok'=>false,'error'=>'quiz_not_found'],404);
       $package=academy_read_node('teacherContentsV6/'.$lessonId.'/'.$teacherId);
@@ -652,7 +654,7 @@ try{
    $admin=academy_current_user(true);if($admin['primary_role']!=='admin')academy_json(['ok'=>false,'error'=>'forbidden'],403);$b=academy_body();$lessonId=trim((string)($b['lessonId']??''));$teacherId=trim((string)($b['teacherId']??''));$active=($b['active']??true)===true;$pkg=academy_read_node('teacherContentsV6/'.$lessonId.'/'.$teacherId);if(!is_array($pkg))academy_json(['ok'=>false,'error'=>'teacher_package_not_found'],404);academy_write_node('teacherContentsV6/'.$lessonId.'/'.$teacherId.'/active',$active,$admin['id']);academy_write_node('teacherContentsV6/'.$lessonId.'/'.$teacherId.'/visibilityUpdatedAt',academy_now_ms(),$admin['id']);academy_write_node('teacherContentsV6/'.$lessonId.'/'.$teacherId.'/visibilityUpdatedBy',$admin['id'],$admin['id']);if(!$active){$default=academy_read_node('lessons/'.$lessonId.'/defaultTeacherId');if((string)$default===$teacherId)academy_write_node('lessons/'.$lessonId.'/defaultTeacherId',null,$admin['id']);}academy_audit($admin['id'],$active?'teacher_content.show':'teacher_content.hide',$lessonId,['teacherId'=>$teacherId]);academy_json(['ok'=>true,'lessonId'=>$lessonId,'teacherId'=>$teacherId,'active'=>$active]);
  }
  if($route==='/admin/teachers/permissions'&&$method==='POST'){
-   $admin=academy_current_user(true);if($admin['primary_role']!=='admin')academy_json(['ok'=>false,'error'=>'forbidden'],403);$b=academy_body();$uid=trim((string)($b['teacherId']??''));$profile=academy_read_node('teacherProfiles/'.$uid);if(!is_array($profile))academy_json(['ok'=>false,'error'=>'teacher_not_found'],404);$allowed=['publishLessons','publishQuizzes','publishFiles','publishProfile','publishEdits','createGroups','shareContent','createChallenges','publishChallenges','publishQuestions','createTournaments','publishTournaments','createLiveSessions','publishLiveSessions'];$next=academy_teacher_permissions($uid);foreach($allowed as$k)if(array_key_exists($k,$b))$next[$k]=(bool)$b[$k];academy_write_node('teacherProfiles/'.$uid.'/permissions',$next,$admin['id']);academy_audit($admin['id'],'teacher.permissions.update',$uid,$next);academy_json(['ok'=>true,'permissions'=>$next]);
+   $admin=academy_current_user(true);if($admin['primary_role']!=='admin')academy_json(['ok'=>false,'error'=>'forbidden'],403);$b=academy_body();$uid=trim((string)($b['teacherId']??''));$profile=academy_read_node('teacherProfiles/'.$uid);if(!is_array($profile))academy_json(['ok'=>false,'error'=>'teacher_not_found'],404);$allowed=['publishLessons','publishQuizzes','publishFiles','publishProfile','publishEdits','createGroups','shareContent','createChallenges','publishChallenges','publishQuestions','createTournaments','publishTournaments','createLiveSessions','publishLiveSessions','createCourses','publishCourses'];$next=academy_teacher_permissions($uid);foreach($allowed as$k)if(array_key_exists($k,$b))$next[$k]=(bool)$b[$k];academy_write_node('teacherProfiles/'.$uid.'/permissions',$next,$admin['id']);academy_audit($admin['id'],'teacher.permissions.update',$uid,$next);academy_json(['ok'=>true,'permissions'=>$next]);
  }
  if($route==='/admin/teachers/archive'&&$method==='POST'){
    $admin=academy_current_user(true);if($admin['primary_role']!=='admin')academy_json(['ok'=>false,'error'=>'forbidden'],403);$b=academy_body();$uid=trim((string)($b['teacherId']??''));$reason=mb_substr(trim((string)($b['reason']??'')),0,500);$profile=academy_read_node('teacherProfiles/'.$uid);if(!is_array($profile))academy_json(['ok'=>false,'error'=>'teacher_not_found'],404);$now=academy_now_ms();$pdo->prepare("UPDATE academy_users SET status='disabled' WHERE id=? AND primary_role='teacher'")->execute([$uid]);$pdo->prepare('UPDATE academy_sessions SET revoked_at=UTC_TIMESTAMP() WHERE user_id=?')->execute([$uid]);academy_write_node('teacherProfiles/'.$uid.'/isActive',false,$admin['id']);academy_write_node('teacherProfiles/'.$uid.'/accountState','archived',$admin['id']);academy_write_node('teacherProfiles/'.$uid.'/isArchived',true,$admin['id']);academy_write_node('teacherProfiles/'.$uid.'/archiveInfo',['archivedAt'=>$now,'archivedBy'=>$admin['id'],'reason'=>$reason],$admin['id']);$public=academy_read_node('settings/publicTeachers/'.$uid);if(is_array($public))academy_write_node('settings/publicTeachers/'.$uid.'/active',false,$admin['id']);academy_audit($admin['id'],'teacher.archive',$uid,['reason'=>$reason]);academy_json(['ok'=>true,'teacherId'=>$uid,'state'=>'archived']);

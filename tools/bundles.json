@@ -22,7 +22,8 @@
       "v22/v86-private-live.js",
       "v22/v87-teacher-directory.js",
       "v22/v89-quality.js",
-      "v22/v90-journey.js"
+      "v22/v90-journey.js",
+      "v22/v101-courses.js"
     ],
     "admin-features": [
       "v22/v57.js",
@@ -45,7 +46,8 @@
       "v22/v88-finance.js",
       "v22/v89-quality.js",
       "v22/v90-journey.js",
-      "v22/v100-admin.js"
+      "v22/v100-admin.js",
+      "v22/v101-courses.js"
     ],
     "teacher-features": [
       "v22/v57.js",
@@ -64,7 +66,8 @@
       "v22/v89-quality.js",
       "v22/v90-journey.js",
       "v22/v98-teacher.js",
-      "v22/v99-teacher-quizzes.js"
+      "v22/v99-teacher-quizzes.js",
+      "v22/v101-courses.js"
     ],
     "parent-features": [
       "v22/v68-followups.js",
@@ -139,7 +142,8 @@
       "v22/v90-journey.css",
       "v22/v92-registration.css",
       "v22/v94-student-profile.css",
-      "v22/v96-curriculum.css"
+      "v22/v96-curriculum.css",
+      "v22/v101-courses.css"
     ],
     "admin": [
       "v22/v39-mobile.css",
@@ -184,7 +188,8 @@
       "v22/v88-finance.css",
       "v22/v89-quality.css",
       "v22/v90-journey.css",
-      "v22/v100-admin.css"
+      "v22/v100-admin.css",
+      "v22/v101-courses.css"
     ],
     "teacher": [
       "v22/v39-mobile.css",
@@ -225,7 +230,8 @@
       "v22/v89-quality.css",
       "v22/v90-journey.css",
       "v22/v98-teacher.css",
-      "v22/v99-teacher-quizzes.css"
+      "v22/v99-teacher-quizzes.css",
+      "v22/v101-courses.css"
     ],
     "parent": [
       "v22/v33-hub.css",

@@ -10,6 +10,7 @@ const svg={home:'<path d="m3 11 9-8 9 8v10h-6v-7H9v7H3z"/>',book:'<path d="M12 6
 const icon=k=>`<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${svg[k]||svg.book}</svg>`;
 const tabs=[['الرئيسية','home','home'],['دروسي','v98-lessons','book'],['فصولي','v98-classes','users'],['حصصي','v98-sessions','calendar'],['المزيد','v98-more','more']];
 const groups=[
+ ['الكورسات',[['v101-teacher-courses','كورساتي']]],
  ['الحساب والتواصل',[['teacher-profile','ملفي الشخصي'],['v87-teacher','بياناتي وحجوزاتي'],['v72-center','الإشعارات'],['teacher-communications','أسئلة الطلاب ورسائل الإدارة'],['teacher-notifications','أرشيف الإشعارات']]],
  ['المتابعة والتقارير',[['v67-assignments','الواجبات والتصحيح'],['v66-gradebook','دفتر الدرجات'],['v68-teacher','تقارير متابعة الطلاب'],['v71-performance','تحليل أداء فصولي'],['teacher-analytics','إحصائياتي'],['v64-teacher-students','طلابي المسجلون'],['teacher-students','المتابعة التفصيلية']]],
  ['الحجوزات والطلبات',[['v84-teacher','عروض التدريس'],['v90-teacher','الحجوزات ورسائل الأكاديمية'],['v89-teacher','تقييم حصصي']]],

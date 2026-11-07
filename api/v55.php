@@ -22,11 +22,11 @@ function academy_v55_is_available(array $card,array $profile,array $user): bool 
   return is_array($q)&&($q['status']??'')==='approved'&&academy_v54_scoped($q,$profile);
  }
  $lessonId=(string)($card['lessonId']??'');$lesson=academy_read_node('lessons/'.$lessonId);
- if(!is_array($lesson)||!academy_v54_scoped($lesson,$profile)||!academy_content_visible_to_reader($user,$lesson)||!academy_student_can_access_content($user,$lesson))return false;
+ if(!is_array($lesson)||!academy_v54_scoped($lesson,$profile)||!academy_content_visible_to_reader($user,$lesson)||!academy_student_can_access_content($user,$lesson,'lessons/'.$lessonId))return false;
  $quizId=(string)($card['quizId']??'');
  if($quizId==='lesson_'.$lessonId)return true;
  $quiz=academy_read_node('quizzes/'.$quizId);
- if(is_array($quiz)&&($quiz['lessonId']??'')===$lessonId)return academy_content_visible_to_reader($user,$quiz)&&academy_student_can_access_content($user,$quiz);
+ if(is_array($quiz)&&($quiz['lessonId']??'')===$lessonId)return academy_content_visible_to_reader($user,$quiz)&&academy_student_can_access_content($user,$quiz,'quizzes/'.$quizId);
  $suffix='_'.$lessonId;
  if(str_starts_with($quizId,'teacher_')&&str_ends_with($quizId,$suffix)){
   $teacherId=substr($quizId,8,-strlen($suffix));
@@ -54,7 +54,7 @@ function academy_v55_sync_quiz_mistakes(PDO $pdo,string $uid,array $profile,arra
   $added=0;$seen=0;
   foreach($history as $attempt=>$item){if(++$seen>200||count($rows)>=450)break;if(!is_array($item))continue;
    $lessonId=(string)($item['lessonId']??'');$lesson=academy_read_node('lessons/'.$lessonId);
-   if(!is_array($lesson)||!academy_v54_scoped($lesson,$profile)||!academy_content_visible_to_reader($user,$lesson)||!academy_student_can_access_content($user,$lesson))continue;
+   if(!is_array($lesson)||!academy_v54_scoped($lesson,$profile)||!academy_content_visible_to_reader($user,$lesson)||!academy_student_can_access_content($user,$lesson,'lessons/'.$lessonId))continue;
    foreach(array_slice($item['wrong']??[],0,60) as $idx=>$wrong){if(!is_array($wrong))continue;
     $card=academy_v55_card($wrong,'quiz',$uid,(string)$attempt,(string)$idx,(string)($lesson['subject']??''),academy_v55_scope($profile),$lessonId);
     if($card){$card['quizId']=(string)($item['quizId']??'');if(!academy_v55_is_available($card,$profile,$user))continue;}

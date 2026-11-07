@@ -105,7 +105,7 @@ function academy_teacher_permissions(string $uid): array {
     $profile=academy_read_node('teacherProfiles/'.$uid);$raw=is_array($profile)?($profile['permissions']??[]):[];if(!is_array($raw))$raw=[];
     return array_merge([
         'publishLessons'=>false,'publishQuizzes'=>false,'publishFiles'=>false,'publishProfile'=>false,
-        'publishQuestions'=>false,'publishEdits'=>false,'createGroups'=>true,'shareContent'=>true,'createChallenges'=>true,'publishChallenges'=>false,'createTournaments'=>false,'publishTournaments'=>false,'createLiveSessions'=>true,'publishLiveSessions'=>false
+        'publishQuestions'=>false,'publishEdits'=>false,'createGroups'=>true,'shareContent'=>true,'createChallenges'=>true,'publishChallenges'=>false,'createTournaments'=>false,'publishTournaments'=>false,'createLiveSessions'=>true,'publishLiveSessions'=>false,'createCourses'=>true,'publishCourses'=>false
     ],$raw);
 }
 function academy_teacher_is_archived(string $uid): bool {
@@ -138,7 +138,7 @@ function academy_public_teacher_package(string $lessonId,string $teacherId,array
     if(academy_teacher_is_archived($teacherId)||!academy_teacher_is_active_profile($teacherId))return null;
     $package['teacherId']=$teacherId;$package['lessonId']=$lessonId;
     if(!academy_v36_can_read_quiz_keys($user)&&academy_v36_exam_quiz($package['quiz']??null))$package['quiz']=academy_v36_public_quiz($package['quiz']);
-    if(!academy_student_can_access_content($user,$lesson)){
+    if(!academy_student_can_access_content($user,$lesson,'lessons/'.$lessonId)){
         $package['accessLocked']=true;$package['videosCount']=count(academy_list_values($package['videos']??[]));$package['questionsCount']=count(academy_list_values($package['practiceQuestions']??$package['questions']??[]));
         foreach(['content','videos','practiceQuestions','questions','quiz','files','imageUrl']as$k)unset($package[$k]);
     }
@@ -217,7 +217,14 @@ function academy_plan_has_subject(array $plan,string $subject): bool {
     if(is_array($subjects)&&array_is_list($subjects))return in_array($subject,array_map('strval',$subjects),true);
     return is_array($subjects)&&!empty($subjects[$subject]);
 }
-function academy_student_can_access_content(?array $user,array $item): bool {
+// V101: $ref is the optional content path ("lessons/ID", "quizzes/ID", "files/ID").
+// When given, an active course enrollment that includes that item also grants access.
+// Callers that do not pass $ref keep exactly the previous behaviour.
+function academy_student_can_access_content(?array $user,array $item,string $ref=''): bool {
+    if(academy_student_can_access_content_base($user,$item))return true;
+    return $ref!==''&&function_exists('academy_v101_enrollment_grants')&&academy_v101_enrollment_grants($user,$ref);
+}
+function academy_student_can_access_content_base(?array $user,array $item): bool {
     if(($user['primary_role']??'')==='admin'||($user['primary_role']??'')==='teacher')return true;
     $settings=academy_read_node('subscriptionSettingsV1');if(!is_array($settings)||($settings['enforceAccess']??false)!==true)return true;
     if(($item['isFree']??false)===true)return true;
@@ -231,8 +238,8 @@ function academy_student_can_access_content(?array $user,array $item): bool {
     if(!empty($plan['targetGrade'])&&(string)$plan['targetGrade']!==(string)($profile['grade']??''))return false;
     return academy_plan_has_subject($plan,(string)($item['subject']??''));
 }
-function academy_sanitize_content_item(string $root,array $item,?array $user): array {
-    if(academy_student_can_access_content($user,$item))return$item;
+function academy_sanitize_content_item(string $root,array $item,?array $user,string $id=''): array {
+    if(academy_student_can_access_content($user,$item,$id!==''?$root.'/'.$id:''))return$item;
     $item['accessLocked']=true;
     if($root==='lessons'){$item['questionsCount']=is_array($item['questions']??null)?count($item['questions']):0;$item['videosCount']=is_array($item['videos']??null)?count($item['videos']):0;foreach(['content','questions','videos','videoUrl','attachments']as$k)unset($item[$k]);}
     elseif($root==='quizzes'){$item['questionsCount']=is_array($item['questions']??null)?count($item['questions']):0;unset($item['questions']);}
@@ -347,16 +354,16 @@ function academy_filter_read_response(?array $user,string $path,mixed $value): m
         }
     }
     if(in_array($root,['lessons','quizzes','files','simulations','liveSessions'],true)){
-        if(count($parts)===1&&is_array($value)){foreach($value as$id=>$item)if(is_array($item)){if(!academy_content_visible_to_reader($user,$item)){unset($value[$id]);continue;}$_clean=academy_strip_archived_teacher_content($root,$item,$user);if($_clean===null){unset($value[$id]);continue;}$result=academy_sanitize_content_item($root,$_clean,$user);if($root==='quizzes'&&!academy_v36_can_read_quiz_keys($user))$result=academy_v36_public_quiz($result);$value[$id]=$result;}return$value;}
+        if(count($parts)===1&&is_array($value)){foreach($value as$id=>$item)if(is_array($item)){if(!academy_content_visible_to_reader($user,$item)){unset($value[$id]);continue;}$_clean=academy_strip_archived_teacher_content($root,$item,$user);if($_clean===null){unset($value[$id]);continue;}$result=academy_sanitize_content_item($root,$_clean,$user,(string)$id);if($root==='quizzes'&&!academy_v36_can_read_quiz_keys($user))$result=academy_v36_public_quiz($result);$value[$id]=$result;}return$value;}
         if(count($parts)>=2){$item=academy_read_node($root.'/'.$parts[1]);if(is_array($item)){if(!academy_content_visible_to_reader($user,$item))return null;$clean=academy_strip_archived_teacher_content($root,$item,$user);if($clean===null)return null;$item=$clean;if(count($parts)===2)$value=$clean;}
           // Reading quizzes/ID/questions/... directly must not bypass full-quiz redaction.
           if($root==='quizzes'&&academy_v36_exam_quiz($item)&&!academy_v36_can_read_quiz_keys($user)){
              if(count($parts)>2)return null;
              if(count($parts)===2&&is_array($value))$value=academy_v36_public_quiz($value);
           }
-          if(is_array($item)&&!academy_student_can_access_content($user,$item)){
+          if(is_array($item)&&!academy_student_can_access_content($user,$item,$root.'/'.$parts[1])){
             $sensitive=['lessons'=>['content','questions','videos','videoUrl','attachments'],'quizzes'=>['questions'],'files'=>['url','fileUrl','downloadUrl','storageUrl'],'simulations'=>['questions','content','launchUrl','url','answers'],'liveSessions'=>['joinUrl','streamUrl','replayUrl','meetingUrl','password']][$root]??[];
-            if(count($parts)===2)return academy_sanitize_content_item($root,$item,$user);
+            if(count($parts)===2)return academy_sanitize_content_item($root,$item,$user,(string)$parts[1]);
             if(in_array($parts[2]??'',$sensitive,true))return null;
         }}
     }
